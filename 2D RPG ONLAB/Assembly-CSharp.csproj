@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Camera\CameraControll.cs" />
      <Compile Include="Assets\Scripts\Items\Equippable.cs" />
      <Compile Include="Assets\Scripts\Items\Items.cs" />
      <Compile Include="Assets\Scripts\Items\Potions.cs" />
@@ -65,6 +66,7 @@
      <Compile Include="Assets\Scripts\Player_Heroes\Hero.cs" />
      <Compile Include="Assets\Scripts\Player_Heroes\Mage.cs" />
      <Compile Include="Assets\Scripts\Player_Heroes\Player.cs" />
+     <Compile Include="Assets\Scripts\Player_Heroes\Player2D.cs" />
      <Compile Include="Assets\Scripts\Player_Heroes\Ranger.cs" />
      <Compile Include="Assets\Scripts\Player_Heroes\Warrior.cs" />
      <Compile Include="Assets\Scripts\Quests\MainQuest.cs" />
