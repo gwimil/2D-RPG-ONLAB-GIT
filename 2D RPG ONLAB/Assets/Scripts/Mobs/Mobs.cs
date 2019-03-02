@@ -5,7 +5,8 @@ using UnityEngine;
 public abstract class Mobs : MonoBehaviour
 {
     public bool m_Aura;
-    public float m_EXP;
+    public int m_Level;
+    public int m_EXP;
     public float m_HP;
     public float m_Mana;
     public float m_Armor;

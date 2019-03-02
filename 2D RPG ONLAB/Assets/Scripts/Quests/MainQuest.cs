@@ -4,23 +4,20 @@ using UnityEngine;
 
 public class MainQuest : MonoBehaviour
 {
-    private static int questNumber = 1;
-    Items[] rewards;
-    string description;
-    public int questID;
-
-    public MainQuest(string desc, Items[] rew)
-    {
-        rewards = rew;
-        description = desc;
-        questID = questNumber;
-        questNumber++;
-
-    }
+    public Items[] m_Rewards;
+    public string m_Description;
+    public int m_QuestID;
+    public int m_Exp;
+    public int m_SuggestedLevel;
 
     public string GetDestription()
     {
-        return description;
+        return m_Description;
+    }
+
+    public Items[] GetItems()
+    {
+        return m_Rewards;
     }
 
 

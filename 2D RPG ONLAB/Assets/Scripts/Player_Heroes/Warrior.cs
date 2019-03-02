@@ -4,14 +4,29 @@ using UnityEngine;
 
 public class Warrior : Hero
 {
-    override public void Move()
-    {
 
+    void Start()
+    {
+        rigidbody = GetComponent<Rigidbody2D>();
     }
+
+    void Update()
+    {
+        Quaternion q = transform.rotation;
+        q.eulerAngles = new Vector3(q.eulerAngles.x, q.eulerAngles.y, 0);
+        transform.rotation = q;
+    }
+
+    override public void Move(Vector2 position)
+    {
+        rigidbody.MovePosition(rigidbody.position + position);
+    }
+
     override public void Attack()
     {
 
     }
+
     override public void UseSkill(int i)
     {
 

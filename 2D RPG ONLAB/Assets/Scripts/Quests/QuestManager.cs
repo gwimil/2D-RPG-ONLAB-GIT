@@ -2,36 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+
+
 public class QuestManager : MonoBehaviour
 {
 
-    MainQuest currentmainQuest;
-    MainQuest[] mainQuestsDone;
+    int currentMainquestNumber = 0;
+    MainQuest currentMainQuest;
+    public MainQuest[] MainQuests;
+    public MainQuest[] mainQuestsDone;
+    
+
     SideQuest[] sideQuests;
     SideQuest[] sideQuestsDone;
-
-    public QuestManager()
-    {
-        currentmainQuest = new MainQuest("Move your character", null);
-    }
     
+    public void AddMainQuest(MainQuest mq)
+    {
+        //TODO
+    }
 
     public void AddsideQuests(SideQuest sq)
     {
         //TODO
     }
 
-    public MainQuest GetMainQuest()
-    {
-        return currentmainQuest;
-    }
-
-    public void ChangeMainQuest(MainQuest mq)
+    public MainQuest MainQuestDone()
     {
         //TODO
+        //next mainquest
+        return currentMainQuest;
     }
+
+    public SideQuest SideQuestDone()
+    {
+        //TODO
+        //next mainquest
+        return sideQuests[0];
+    }
+
     
-
-
-
 }
+
