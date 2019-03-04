@@ -9,15 +9,14 @@ public class Items : MonoBehaviour
     public Sprite m_sprite;
 
     // if quest item use ID-s normally
-    // if not quest item: 0-100000 equippable, 100001-200000 potions, 200001-300000 normal items
-    public int m_ID;
+    // if not quest item: 0-99999 equippable, 100000-199999 potions, 200000-299999 normal items
+    [HideInInspector] public int m_ID;
     public bool m_isQuestItem;
     public int m_Quantity;
     public string m_name;
     public string m_description;
     public float m_sellingPrice;
     public float m_buyingPrice;
-
 
     public virtual void Use()
     {

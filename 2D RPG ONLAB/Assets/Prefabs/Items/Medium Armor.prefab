@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hero: {fileID: 0}
-  m_img: {fileID: 0}
   m_sprite: {fileID: 21300000, guid: dff0a89593f9aa74199fe7aacd4d2880, type: 3}
-  m_ID: 0
-  isQuestItem: 0
+  m_ID: 1
+  m_isQuestItem: 0
+  m_Quantity: 1
   m_name: Medium Armor
   m_description: 
   m_sellingPrice: 10

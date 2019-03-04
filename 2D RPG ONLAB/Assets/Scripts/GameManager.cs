@@ -44,7 +44,8 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            Items item = m_ItemManager.GiveItem(1);
+            Items item = m_ItemManager.GiveItem(0);
+            item.m_Quantity = 1;
             m_Players[0].m_hero.AddItemToInventory(item);
         }
     }

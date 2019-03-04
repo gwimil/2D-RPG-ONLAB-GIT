@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Items\ItemManager.cs" />
     <Compile Include="Assets\Scripts\Items\Items.cs" />
     <Compile Include="Assets\Scripts\Items\Potions.cs" />
+    <Compile Include="Assets\Scripts\Items\Slot.cs" />
     <Compile Include="Assets\Scripts\Mobs\AgressiveMageEnemy.cs" />
     <Compile Include="Assets\Scripts\Mobs\AgressiveMeleeEnemy.cs" />
     <Compile Include="Assets\Scripts\Mobs\AgressiveRangerEnemy.cs" />

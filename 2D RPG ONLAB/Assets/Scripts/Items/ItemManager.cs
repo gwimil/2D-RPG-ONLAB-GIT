@@ -12,20 +12,17 @@ public class ItemManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_EquippableItems = new List<Items>();
-        for (int i = 1; i < m_EquippableItems.Count; i++)
+        for (int i = 0; i < m_EquippableItems.Count; i++)
         {
             m_EquippableItems[i].m_ID = i;
         }
-
-        m_Potions = new List<Items>();
-        for (int i = 1; i < m_Potions.Count; i++)
+        
+        for (int i = 0; i < m_Potions.Count; i++)
         {
             m_Potions[i].m_ID = i + 100000;
         }
-
-        m_NormalItems = new List<Items>();
-        for (int i = 1; i < m_NormalItems.Count; i++)
+        
+        for (int i = 0; i < m_NormalItems.Count; i++)
         {
             m_NormalItems[i].m_ID = i + 2000000;
         }
@@ -41,7 +38,7 @@ public class ItemManager : MonoBehaviour
 
     public Items GiveItem(int i)
     {
-        if (i < 100001) return m_EquippableItems[i];
+        if (i < 100000) return m_EquippableItems[i];
         else if (i < 200000) return m_Potions[i];
         else return m_NormalItems[i];
     } 

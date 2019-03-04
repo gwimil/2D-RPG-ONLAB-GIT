@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -36,9 +37,24 @@ public class Inventory : MonoBehaviour
         else m_inventory.SetActive(false);
     }
 
-    public void AddItem(Items i)
+    public void AddItem(Items item)
     {
-        // adds the item to the slot
+
+        for (int i = 0; i < m_allSlots; i++)
+        {
+            if (m_slots[i].transform.childCount == 0)
+            {
+                m_slots[i].GetComponent<Slot>().AddItemToSlot(item);
+                return;
+            }
+            else if (item.m_ID == m_slots[i].GetComponent<Slot>().m_item.m_ID)
+            {
+                m_slots[i].GetComponent<Slot>().SumItemsQuantities(item);
+                return;
+            }
+        }
+
+        // no room in inventory
     }
         
 
