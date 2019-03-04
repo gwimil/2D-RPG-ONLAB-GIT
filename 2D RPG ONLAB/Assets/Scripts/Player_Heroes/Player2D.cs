@@ -6,23 +6,13 @@ public class Player2D : MonoBehaviour
 {
 
     // GAME MANAGER SETS THE HERO
-    public Hero m_hero;
+    [HideInInspector] public Hero m_hero;
 
     
     Vector2 velocity;
     public float m_MovementSpeed;
     public int m_PlayerID = 0;
     
-    public Hero m_Hero
-    {
-        get { return m_hero; }
-        set { m_hero = value; }
-    }
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {

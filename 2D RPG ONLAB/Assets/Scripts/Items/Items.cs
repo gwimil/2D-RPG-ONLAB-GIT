@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class Items : MonoBehaviour
 {
     public Hero m_hero;
-    public Image m_img;
     public Sprite m_sprite;
 
     // if quest item use ID-s normally
     // if not quest item: 0-100000 equippable, 100001-200000 potions, 200001-300000 normal items
     public int m_ID;
-    public bool isQuestItem;
+    public bool m_isQuestItem;
+    public int m_Quantity;
     public string m_name;
     public string m_description;
     public float m_sellingPrice;

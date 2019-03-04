@@ -7,6 +7,7 @@ public class Mage : Hero
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        inventory = GetComponent<Inventory>();
     }
 
     void Update()
@@ -28,5 +29,9 @@ public class Mage : Hero
     override public void UseSkill(int i)
     {
 
+    }
+    override public void AddItemToInventory(Items i)
+    {
+        inventory.AddItem(i);
     }
 }
