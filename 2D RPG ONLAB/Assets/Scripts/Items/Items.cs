@@ -17,6 +17,7 @@ public class Items : MonoBehaviour
     public string m_description;
     public float m_sellingPrice;
     public float m_buyingPrice;
+    
 
     public virtual void Use()
     {
