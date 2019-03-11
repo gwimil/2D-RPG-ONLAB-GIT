@@ -3234,7 +3234,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1251465668
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6018,7 +6018,7 @@ GameObject:
   - component: {fileID: 8522494524430776057}
   - component: {fileID: 1190666726723295654}
   m_Layer: 0
-  m_Name: HP
+  m_Name: HPSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6325,7 +6325,7 @@ GameObject:
   - component: {fileID: 4058704012928351873}
   - component: {fileID: 4132056778022961092}
   m_Layer: 0
-  m_Name: Mana
+  m_Name: ManaSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

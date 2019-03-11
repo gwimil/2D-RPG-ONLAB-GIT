@@ -6054,7 +6054,7 @@ GameObject:
   - component: {fileID: 1618234772913813847}
   - component: {fileID: 3953805655144727238}
   m_Layer: 0
-  m_Name: HP
+  m_Name: HPSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6215,7 +6215,7 @@ GameObject:
   - component: {fileID: 2222968880755494307}
   - component: {fileID: 6137388370116994816}
   m_Layer: 0
-  m_Name: Mana
+  m_Name: ManaSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

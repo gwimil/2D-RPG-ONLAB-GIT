@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
@@ -15,6 +16,8 @@ public class Menu : MonoBehaviour
     public Button m_PlayerNumber3;
     public Text m_ChooseHeroText;
 
+    public Image m_BlackGround;
+
     public GameObject m_WarriorHero;
     public GameObject m_RangerHero;
     public GameObject m_MageHero;
@@ -22,8 +25,7 @@ public class Menu : MonoBehaviour
     private Button m_RangerButton;
     private Button m_MageButton;
 
-
-    private int m_HeroSelectNumber;
+    
     private int m_PlayerChoosing;
 
     void Start()
@@ -58,8 +60,7 @@ public class Menu : MonoBehaviour
         m_MageHero.SetActive(false);
         m_ChooseHeroText.gameObject.SetActive(false);
 
-        m_PlayButton.Select();
-
+        m_BlackGround.gameObject.SetActive(false);
     }
 
     void ClickOnPlay()
@@ -124,11 +125,13 @@ public class Menu : MonoBehaviour
 
     void PlayersSelected()
     {
-        m_HeroSelectNumber = MenuData.m_playerNumber;
         m_PlayerChoosing = 1;
         m_WarriorHero.SetActive(true);
         m_RangerHero.SetActive(true);
         m_MageHero.SetActive(true);
+        m_PlayerNumber1.gameObject.SetActive(false);
+        m_PlayerNumber2.gameObject.SetActive(false);
+        m_PlayerNumber3.gameObject.SetActive(false);
         m_ChooseHeroText.text = "Player "+ m_PlayerChoosing + "choosing";
         m_ChooseHeroText.gameObject.SetActive(true);
     }
@@ -137,18 +140,18 @@ public class Menu : MonoBehaviour
     {
         switch(m_PlayerChoosing){
             case 1:
-                MenuData.m_Player1Character = "Mage";
+                MenuData.m_PlayerCharacters[0] = "Mage";
                 break;
             case 2:
-                MenuData.m_Player2Character = "Mage";
+                MenuData.m_PlayerCharacters[1] = "Mage";
                 break;
             case 3:
-                MenuData.m_Player3Character = "Mage";
+                MenuData.m_PlayerCharacters[2] = "Mage";
                 break;
             default: break;
         }
         m_PlayerChoosing++;
-
+        m_MageHero.SetActive(false);
         CheckToStartGame();
     }
 
@@ -157,18 +160,18 @@ public class Menu : MonoBehaviour
         switch (m_PlayerChoosing)
         {
             case 1:
-                MenuData.m_Player1Character = "Ranger";
+                MenuData.m_PlayerCharacters[0] = "Ranger";
                 break;
             case 2:
-                MenuData.m_Player2Character = "Ranger";
+                MenuData.m_PlayerCharacters[1] = "Ranger";
                 break;
             case 3:
-                MenuData.m_Player3Character = "Ranger";
+                MenuData.m_PlayerCharacters[2] = "Ranger";
                 break;
             default: break;
         }
         m_PlayerChoosing++;
-
+        m_RangerHero.SetActive(false);
         CheckToStartGame();
     }
 
@@ -178,16 +181,17 @@ public class Menu : MonoBehaviour
         switch (m_PlayerChoosing)
         {
             case 1:
-                MenuData.m_Player1Character = "Warrior";
+                MenuData.m_PlayerCharacters[0] = "Warrior";
                 break;
             case 2:
-                MenuData.m_Player2Character = "Warrior";
+                MenuData.m_PlayerCharacters[1] = "Warrior";
                 break;
             case 3:
-                MenuData.m_Player3Character = "Warrior";
+                MenuData.m_PlayerCharacters[2] = "Warrior";
                 break;
             default: break;
         }
+        m_WarriorHero.SetActive(false);
         m_PlayerChoosing++;
 
         CheckToStartGame();
@@ -195,10 +199,18 @@ public class Menu : MonoBehaviour
 
     void CheckToStartGame()
     {
-        if (m_PlayerChoosing >= m_HeroSelectNumber)
+        if (m_PlayerChoosing > MenuData.m_playerNumber)
         {
-            //load SCENE
+            SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
+            m_BlackGround.gameObject.SetActive(true);
         }
+        else
+        {
+            m_ChooseHeroText.text = "Player " + m_PlayerChoosing + "choosing";
+        }
+
+
+        
     }
 
 }

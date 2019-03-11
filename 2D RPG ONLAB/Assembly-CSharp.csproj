@@ -62,12 +62,13 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Camera\CameraControll.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Items\Equippable.cs" />
+    <Compile Include="Assets\Scripts\Items\Inventory.cs" />
     <Compile Include="Assets\Scripts\Items\ItemManager.cs" />
     <Compile Include="Assets\Scripts\Items\Items.cs" />
     <Compile Include="Assets\Scripts\Items\Potions.cs" />
     <Compile Include="Assets\Scripts\Items\Slot.cs" />
+    <Compile Include="Assets\Scripts\Menu\Menu.cs" />
     <Compile Include="Assets\Scripts\Mobs\AgressiveMageEnemy.cs" />
     <Compile Include="Assets\Scripts\Mobs\AgressiveMeleeEnemy.cs" />
     <Compile Include="Assets\Scripts\Mobs\AgressiveRangerEnemy.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Assets\Scripts\Quests\MainQuest.cs" />
     <Compile Include="Assets\Scripts\Quests\QuestManager.cs" />
     <Compile Include="Assets\Scripts\Quests\SideQuest.cs" />
+    <Compile Include="Assets\Scripts\Static\MenuData.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>E:/UNITY/temalab/Onlab/2D RPG ONLAB/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

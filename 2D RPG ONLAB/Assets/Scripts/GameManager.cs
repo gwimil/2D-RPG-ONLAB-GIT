@@ -13,23 +13,16 @@ public class GameManager : MonoBehaviour
     public GameObject[] m_SlotHolders;
     public CameraControll m_Camera;
 
+   
+
 
     // Start is called before the first frame update
     void Start()
     {
-
         //later the player can choose his hero, sets camera
+        m_Camera.m_Targets = new Transform[MenuData.m_playerNumber];
 
-        m_Camera.m_Targets = new Transform[2];
-
-        //number of players
-        for (int i = 0; i < 2; i++)
-        {
-            m_Players[i].m_hero = m_Heroes[i];
-            m_Players[i].m_hero.transform.parent = m_Players[i].transform;
-            m_Camera.m_Targets[i] = m_Players[i].m_hero.transform;
-        }
-        
+        BindHeroesToPlayers();
         
         for (int i = 0; i < 3; i++)
         {
@@ -38,6 +31,36 @@ public class GameManager : MonoBehaviour
         }
 
     }
+    
+
+    private void BindHeroesToPlayers()
+    {
+        for (int i = 0; i < MenuData.m_playerNumber; i++)
+        {
+            switch (MenuData.m_PlayerCharacters[i])
+            {
+                case "Mage":
+                    SetHeroes(i,2);
+                    break;
+                case "Ranger":
+                    SetHeroes(i,1);
+                    break;
+                case "Warrior":
+                    SetHeroes(i,0);
+                    break;
+                default: break;
+            }
+        }
+    }
+
+    private void SetHeroes(int i, int heronumber)
+    {
+        m_Players[i].m_hero = m_Heroes[heronumber];
+        m_Players[i].m_hero.transform.parent = m_Players[i].transform;
+        m_Camera.m_Targets[i] = m_Players[i].m_hero.transform;
+    }
+
+
 
     // Update is called once per frame
     void Update()
