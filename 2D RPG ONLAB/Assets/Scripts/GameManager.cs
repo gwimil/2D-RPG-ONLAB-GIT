@@ -22,7 +22,11 @@ public class GameManager : MonoBehaviour
         //later the player can choose his hero, sets camera
         m_Camera.m_Targets = new Transform[MenuData.m_playerNumber];
 
+        UnsetHeroes();
         BindHeroesToPlayers();
+
+
+        
         
         for (int i = 0; i < 3; i++)
         {
@@ -51,15 +55,26 @@ public class GameManager : MonoBehaviour
                 default: break;
             }
         }
+        
     }
 
     private void SetHeroes(int i, int heronumber)
     {
         m_Players[i].m_hero = m_Heroes[heronumber];
         m_Players[i].m_hero.transform.parent = m_Players[i].transform;
+        m_Players[i].gameObject.SetActive(true);
+        m_Players[i].m_hero.gameObject.SetActive(true);
         m_Camera.m_Targets[i] = m_Players[i].m_hero.transform;
     }
 
+    private void UnsetHeroes()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+           m_Players[i].gameObject.SetActive(false);
+           m_Heroes[i].gameObject.SetActive(false);
+        }
+    }
 
 
     // Update is called once per frame

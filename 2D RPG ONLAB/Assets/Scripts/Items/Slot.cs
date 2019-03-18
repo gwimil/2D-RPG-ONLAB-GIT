@@ -15,6 +15,7 @@ public class Slot : MonoBehaviour
     {
         GetComponentInChildren<Text>().text = "";
         nullImage = GetComponent<Image>();
+        m_item = null;
     }
 
     public void AddItemToSlot(Items item)

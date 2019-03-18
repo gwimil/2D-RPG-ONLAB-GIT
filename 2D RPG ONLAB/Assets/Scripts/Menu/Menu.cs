@@ -107,18 +107,22 @@ public class Menu : MonoBehaviour
     void ClickOnPlayer1Number()
     {
         MenuData.m_playerNumber = 1;
+        MenuData.m_PlayerCharacters[1] = "null";
+        MenuData.m_PlayerCharacters[2] = "null";
         PlayersSelected();
     }
 
     void ClickOnPlayer2Number()
     {
         MenuData.m_playerNumber = 2;
+        MenuData.m_PlayerCharacters[2] = "null";
         PlayersSelected();
     }
 
     void ClickOnPlayer3Number()
     {
         MenuData.m_playerNumber = 3;
+
         PlayersSelected();
 
     }
@@ -208,9 +212,6 @@ public class Menu : MonoBehaviour
         {
             m_ChooseHeroText.text = "Player " + m_PlayerChoosing + "choosing";
         }
-
-
-        
     }
 
 }

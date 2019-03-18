@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6729422052235457514}
   m_Layer: 0
   m_Name: Medium Armor
-  m_TagString: Untagged
+  m_TagString: Armor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b720570c48ce64db68e43183f92a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_hero: {fileID: 0}
   m_sprite: {fileID: 21300000, guid: dff0a89593f9aa74199fe7aacd4d2880, type: 3}
   m_ID: 1
   m_isQuestItem: 0

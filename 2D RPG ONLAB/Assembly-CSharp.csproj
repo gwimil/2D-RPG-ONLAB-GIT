@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Camera\CameraControll.cs" />
+    <Compile Include="Assets\Scripts\Enums\EItems.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Items\Equippable.cs" />
     <Compile Include="Assets\Scripts\Items\Inventory.cs" />

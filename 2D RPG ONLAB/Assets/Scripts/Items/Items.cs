@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Items : MonoBehaviour
 {
-    public Hero m_hero;
+
     public Sprite m_sprite;
 
     // if quest item use ID-s normally
@@ -17,11 +17,9 @@ public class Items : MonoBehaviour
     public string m_description;
     public float m_sellingPrice;
     public float m_buyingPrice;
-    
 
-    public virtual void Use()
+    virtual public void Use()
     {
-        // nothing
     }
     public virtual void Drop()
     {

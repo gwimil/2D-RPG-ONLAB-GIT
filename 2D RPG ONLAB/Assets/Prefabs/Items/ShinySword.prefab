@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4371883177981189713}
   m_Layer: 0
   m_Name: ShinySword
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b720570c48ce64db68e43183f92a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_hero: {fileID: 0}
   m_sprite: {fileID: 21300000, guid: 303c368077941e7428e2d237a2d6fe32, type: 3}
   m_ID: 0
   m_isQuestItem: 0

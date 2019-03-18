@@ -86,6 +86,11 @@ public class Inventory : MonoBehaviour
 
         // no room in inventory
     }
+
+    public void UseItem(int i)
+    {
+      // return m_slots[i].GetComponent<Slot>().m_item.Use();
+    }
         
 
 }
