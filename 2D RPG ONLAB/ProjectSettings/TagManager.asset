@@ -57,6 +57,9 @@ TagManager:
   - name: Buldings
     uniqueID: 3560985423
     locked: 0
-  - name: Player
+  - name: SmallObjects
     uniqueID: 2376920091
+    locked: 0
+  - name: BigObject
+    uniqueID: 3548454529
     locked: 0
