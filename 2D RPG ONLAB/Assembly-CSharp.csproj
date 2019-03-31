@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\Mobs\AgressiveMeleeEnemy.cs" />
     <Compile Include="Assets\Scripts\Mobs\AgressiveRangerEnemy.cs" />
     <Compile Include="Assets\Scripts\Mobs\Bosses.cs" />
+    <Compile Include="Assets\Scripts\Mobs\MobManager.cs" />
     <Compile Include="Assets\Scripts\Mobs\Mobs.cs" />
     <Compile Include="Assets\Scripts\Mobs\Non_AgressiveEnemy.cs" />
     <Compile Include="Assets\Scripts\Player_Heroes\Hero.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Assets\Scripts\Player_Heroes\Player2D.cs" />
     <Compile Include="Assets\Scripts\Player_Heroes\Ranger.cs" />
     <Compile Include="Assets\Scripts\Player_Heroes\Warrior.cs" />
+    <Compile Include="Assets\Scripts\Projectiles\Fireball.cs" />
     <Compile Include="Assets\Scripts\Quests\MainQuest.cs" />
     <Compile Include="Assets\Scripts\Quests\QuestManager.cs" />
     <Compile Include="Assets\Scripts\Quests\SideQuest.cs" />

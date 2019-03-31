@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public abstract class Hero : MonoBehaviour
 {
 
+    protected Vector2 m_NormalizedMovement;
+
     public Slider m_HpSlider;
     public Slider m_ManaSlider;
     public Color m_FullHealthColor = Color.green;
@@ -55,6 +57,7 @@ public abstract class Hero : MonoBehaviour
         SetHealthUI();
         SetStats();
         SetOnClicks();
+        m_NormalizedMovement = new Vector2(1, 0);
     }
 
     void Update()
@@ -68,6 +71,9 @@ public abstract class Hero : MonoBehaviour
     public void Move(Vector2 position)
     {
         rigidbody.MovePosition(rigidbody.position + position);
+        if (position.x!=0||position.y!=0) m_NormalizedMovement = position.normalized;
+
+        Debug.Log(m_NormalizedMovement);
     }
 
     public void TakeDamage(float amount)

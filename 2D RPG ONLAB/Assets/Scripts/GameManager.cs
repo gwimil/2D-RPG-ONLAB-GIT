@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
     public ItemManager m_ItemManager;
     public QuestManager m_QuestManager;
     public Player2D[] m_Players;
@@ -24,8 +25,6 @@ public class GameManager : MonoBehaviour
 
         UnsetHeroes();
         BindHeroesToPlayers();
-
-
         
         
         for (int i = 0; i < 3; i++)
@@ -33,6 +32,8 @@ public class GameManager : MonoBehaviour
             m_Inventories[i].m_inventory = m_UIInventories[i];
             m_Inventories[i].m_SlotHolder = m_SlotHolders[i];
         }
+
+
 
     }
     
@@ -92,5 +93,15 @@ public class GameManager : MonoBehaviour
             item.m_Quantity = 1;
             m_Players[0].m_hero.AddItemToInventory(item);
         }
+
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            m_Players[0].m_hero.UseSkill(1);
+        }
+
     }
+   
+
+
+
 }

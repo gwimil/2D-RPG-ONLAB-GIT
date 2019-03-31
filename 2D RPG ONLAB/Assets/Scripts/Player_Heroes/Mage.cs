@@ -4,14 +4,30 @@ using UnityEngine;
 
 public class Mage : Hero
 {
-  
+
+    public Fireball m_FireBall;  
+
     override public void Attack()
     {
 
     }
+
+
     override public void UseSkill(int i)
     {
-        // do it with enum / switch case
+        switch (i) { 
+            case 1:
+                Fireball fb = Instantiate(m_FireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
+                fb.setDirection(m_NormalizedMovement);
+                m_CurrentMana -= 10;
+                break;
+            case 2:
+                break;
+                
+        default: break;
+        }
+
+        SetHealthUI();
     }
 
     override public void AddItemToInventory(Items i)
