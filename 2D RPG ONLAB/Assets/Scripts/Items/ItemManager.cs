@@ -28,11 +28,17 @@ public class ItemManager : MonoBehaviour
         }
     }
     
+
+    // TODO give an enum parameter to this function
     public List<Items> DropItemsFromEnemies()
     {
         List<Items> items = new List<Items>();
         // drops a list of items from enemies
         // different enemies-> different Items ->enum/tags -> switch-case
+
+        items.Add(m_EquippableItems[0]);
+
+
         return items;
     }
 

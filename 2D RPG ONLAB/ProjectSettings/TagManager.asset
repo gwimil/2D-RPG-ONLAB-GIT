@@ -16,6 +16,7 @@ TagManager:
   - Armor
   - PlayerProjectile
   - EnemyProjectile
+  - Enemy
   layers:
   - Default
   - TransparentFX

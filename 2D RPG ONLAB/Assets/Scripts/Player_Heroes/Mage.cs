@@ -5,7 +5,8 @@ using UnityEngine;
 public class Mage : Hero
 {
 
-    public Fireball m_FireBall;  
+    public Fireball m_FireBall;
+   
 
     override public void Attack()
     {
@@ -13,8 +14,10 @@ public class Mage : Hero
     }
 
 
+
     override public void UseSkill(int i)
     {
+        Debug.Log(7);
         switch (i) { 
             case 1:
                 Fireball fb = Instantiate(m_FireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));

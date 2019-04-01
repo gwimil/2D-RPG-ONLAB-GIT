@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public abstract class Hero : MonoBehaviour
 {
 
+    public Boolean SpellOneOnCooldown;
+
     protected Vector2 m_NormalizedMovement;
 
     public Slider m_HpSlider;
@@ -72,8 +74,6 @@ public abstract class Hero : MonoBehaviour
     {
         rigidbody.MovePosition(rigidbody.position + position);
         if (position.x!=0||position.y!=0) m_NormalizedMovement = position.normalized;
-
-        Debug.Log(m_NormalizedMovement);
     }
 
     public void TakeDamage(float amount)
