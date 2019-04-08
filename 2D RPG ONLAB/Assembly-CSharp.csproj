@@ -84,6 +84,8 @@
     <Compile Include="Assets\Scripts\Player_Heroes\Ranger.cs" />
     <Compile Include="Assets\Scripts\Player_Heroes\Warrior.cs" />
     <Compile Include="Assets\Scripts\Projectiles\Fireball.cs" />
+    <Compile Include="Assets\Scripts\Projectiles\MageBasicAttack.cs" />
+    <Compile Include="Assets\Scripts\Projectiles\Projectile.cs" />
     <Compile Include="Assets\Scripts\Quests\MainQuest.cs" />
     <Compile Include="Assets\Scripts\Quests\QuestManager.cs" />
     <Compile Include="Assets\Scripts\Quests\SideQuest.cs" />

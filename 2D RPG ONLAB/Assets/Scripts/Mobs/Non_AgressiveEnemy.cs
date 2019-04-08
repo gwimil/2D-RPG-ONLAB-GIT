@@ -8,18 +8,19 @@ public class Non_AgressiveEnemy : Mobs
 
     override public void ManageMovement()
     {
-
+        rigidbody.MovePosition(startPosition);
     }
 
-    override public void Movement()
+    protected override void Movement(Vector2 Dir)
     {
 
     }
 
-    override public void Attack()
+    override public void Attack(Vector2 Dir)
     {
 
     }
+
     override public void Die()
     {
         GameObject droppedBag = Instantiate(m_Drop, transform.position, Quaternion.Euler(0, 0, 0));

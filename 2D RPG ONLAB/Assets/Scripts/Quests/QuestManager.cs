@@ -9,13 +9,13 @@ using UnityEngine;
 public class QuestManager : MonoBehaviour
 {
 
-    int currentMainquestNumber = 0;
-    MainQuest currentMainQuest;
+   // int currentMainquestNumber = 0;
+   // MainQuest currentMainQuest;
     public MainQuest[] MainQuests;
     public MainQuest[] mainQuestsDone;
     
 
-    SideQuest[] sideQuests;
+   // SideQuest[] sideQuests;
     SideQuest[] sideQuestsDone;
     
     public void AddMainQuest(MainQuest mq)
@@ -28,7 +28,7 @@ public class QuestManager : MonoBehaviour
         //TODO
     }
 
-    public MainQuest MainQuestDone()
+   /* public MainQuest MainQuestDone()
     {
         //TODO
         //next mainquest
@@ -40,7 +40,7 @@ public class QuestManager : MonoBehaviour
         //TODO
         //next mainquest
         return sideQuests[0];
-    }
+    }*/
 
     
 }

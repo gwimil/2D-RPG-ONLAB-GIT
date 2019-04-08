@@ -47,7 +47,8 @@ public class ItemManager : MonoBehaviour
         if (i < 100000) return m_EquippableItems[i];
         else if (i < 200000) return m_Potions[i];
         else return m_NormalItems[i];
-    } 
+    }
+    
 
 
 

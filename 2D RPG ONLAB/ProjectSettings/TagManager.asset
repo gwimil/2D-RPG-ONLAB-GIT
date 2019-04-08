@@ -17,6 +17,7 @@ TagManager:
   - PlayerProjectile
   - EnemyProjectile
   - Enemy
+  - Hero
   layers:
   - Default
   - TransparentFX
@@ -30,9 +31,9 @@ TagManager:
   - Buildings
   - 
   - Player
-  - Projectile
-  - 
-  - 
+  - PlayerProjectile
+  - Enemy
+  - EnemyProjectile
   - 
   - 
   - 

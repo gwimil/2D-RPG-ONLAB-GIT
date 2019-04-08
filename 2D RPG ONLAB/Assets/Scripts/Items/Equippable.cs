@@ -5,6 +5,7 @@ using UnityEngine;
 //enum for equippabletypes
 public class Equippable : Items
 {
+    public float Quality;
     public float m_plusHP;
     public float m_plusMana;
     public float m_plusArmor;

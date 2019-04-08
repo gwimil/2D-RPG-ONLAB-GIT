@@ -5,24 +5,30 @@ using UnityEngine;
 public class Mage : Hero
 {
 
-    public Fireball m_FireBall;
-   
+    public Projectile m_FireBall;
+    public Projectile m_BaseAttack;
 
     override public void Attack()
     {
-
+        if (m_BasicAttackCooldown <= basicAttackCooldownATM)
+        {
+            Projectile p = Instantiate(m_BaseAttack, transform.position, Quaternion.Euler(0, 0, transform.rotation.z +180));
+            p.setDirection(m_NormalizedMovement);
+            p.m_damage += m_BaseDMG / 15;
+        }
     }
-
-
 
     override public void UseSkill(int i)
     {
-        Debug.Log(7);
         switch (i) { 
             case 1:
-                Fireball fb = Instantiate(m_FireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
-                fb.setDirection(m_NormalizedMovement);
-                m_CurrentMana -= 10;
+                if (m_SpellOneCooldown<=spellOneCooldownATM && m_CurrentMana >= m_SpellOneManaCost)
+                {
+                    Projectile fb = Instantiate(m_FireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
+                    fb.setDirection(m_NormalizedMovement);
+                    fb.m_damage += m_BaseDMG / 10;
+                    m_CurrentMana -= 10;
+                }
                 break;
             case 2:
                 break;

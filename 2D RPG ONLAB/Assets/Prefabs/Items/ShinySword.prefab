@@ -51,6 +51,7 @@ MonoBehaviour:
   m_description: 
   m_sellingPrice: 10
   m_buyingPrice: 30
+  Quality: 7
   m_plusHP: 50
   m_plusMana: 0
   m_plusArmor: 10

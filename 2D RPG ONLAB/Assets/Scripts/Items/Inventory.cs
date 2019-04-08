@@ -5,23 +5,21 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    bool m_inventoryEnabled;
+    public bool m_inventoryEnabled;
     public GameObject m_inventory;
-
-    private int m_allSlots;
-    private GameObject[] m_slots;
+    private int m_SlotNumber;
+    [HideInInspector] public GameObject[] m_slots;
 
     public GameObject m_SlotHolder;
-
 
 
     private void Start()
     {
         m_inventory.SetActive(false);
-        m_allSlots = 25;
-        m_slots = new GameObject[m_allSlots];
+        m_SlotNumber = m_SlotHolder.transform.childCount;
+        m_slots = new GameObject[m_SlotNumber];
 
-        for (int i = 0; i < m_allSlots; i++)
+        for (int i = 0; i < m_SlotNumber; i++)
         {
             m_slots[i] = m_SlotHolder.transform.GetChild(i).gameObject;
         }
@@ -42,7 +40,7 @@ public class Inventory : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.N))
             {
                 List<Items> sortedItems = new List<Items>();
-                for (int i = 0; i < m_allSlots; i++)
+                for (int i = 0; i < m_SlotNumber; i++)
                 {
                     if (m_slots[i].transform.childCount == 2)
                     {
@@ -56,13 +54,45 @@ public class Inventory : MonoBehaviour
                     m_slots[i].GetComponent<Slot>().AddItemToSlot(sortedItems[i]);
                 }
             }
+            
         }
+
     }
+
+    public Slot GetSlot(int i)
+    {
+        Debug.Log(i);
+        Debug.Log(m_SlotNumber);
+        return m_slots[i].GetComponent<Slot>();
+    }
+
+    public int GetBestItemByTag(string tag)
+    {
+        int numberOfBestItem = -1;
+        float bestQuality = 0;
+        for (int i = 0; i < m_SlotNumber; i++)
+        {
+            if (m_slots[i].transform.childCount == 2)
+            {
+                Items item = m_slots[i].GetComponent<Slot>().m_item;
+                float itemQuality = item.gameObject.GetComponent<Equippable>().Quality;
+                if (item.tag == tag && itemQuality > bestQuality)
+                {
+                    bestQuality = itemQuality;
+                    numberOfBestItem = i;
+                }
+
+            }
+        }
+        return numberOfBestItem;
+    }
+
+
 
     public void AddItem(Items item)
     {
 
-        for (int i = 0; i < m_allSlots; i++)
+        for (int i = 0; i < m_SlotNumber; i++)
         {
             if (m_slots[i].transform.childCount == 2)
             {
@@ -74,7 +104,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < m_allSlots; i++)
+        for (int i = 0; i < m_SlotNumber; i++)
         {
             if (m_slots[i].transform.childCount == 1)
             {
@@ -84,7 +114,7 @@ public class Inventory : MonoBehaviour
         }
         
 
-        // no room in inventory
+        // TODO no room in inventory
     }
 
     public void UseItem(int i)

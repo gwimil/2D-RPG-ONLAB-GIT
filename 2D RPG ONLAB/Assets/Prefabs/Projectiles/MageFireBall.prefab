@@ -142,5 +142,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_damage: 20
-  m_movemenetSpeed: 5
-  m_LifeTime: 500
+  m_MovemenetSpeed: 50

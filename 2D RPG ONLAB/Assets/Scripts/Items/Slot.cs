@@ -7,31 +7,43 @@ public class Slot : MonoBehaviour
 {
     [HideInInspector] public Items m_item;
     [HideInInspector] public int m_ID;
-    private Image nullImage;
+    private Sprite nullSprite;
     private string m_Quantity;
 
 
     private void Start()
     {
-        GetComponentInChildren<Text>().text = "";
-        nullImage = GetComponent<Image>();
+        if (gameObject.GetComponentInChildren<Text>() == null) ;
+        else GetComponentInChildren<Text>().text = "";
+        nullSprite = GetComponent<Image>().sprite;
         m_item = null;
     }
 
-    public void AddItemToSlot(Items item)
+    public void AddItemToSlot(Items item, bool b = true)
     {
         m_item = Instantiate(item, this.transform);
         m_item.name = m_item.m_name;
-        GetComponentInChildren<Text>().text = m_item.m_Quantity.ToString();
+        if (b) GetComponentInChildren<Text>().text = m_item.m_Quantity.ToString();
         GetComponent<Image>().sprite = item.m_sprite;
     }
 
-    public void RemoveItemFromSlot()
+    public void RemoveItemFromSlot(bool b = true)
     {
-        GetComponentInChildren<Text>().text = "";
-        GetComponent<Image>().sprite = nullImage.sprite;
-        Destroy(m_item.gameObject);
-        m_item = null;
+        if (m_item.m_Quantity > 1) m_item.m_Quantity--;
+        else
+        {
+            if (b) GetComponentInChildren<Text>().text = "";
+            Debug.Log(nullSprite.name);
+            GetComponent<Image>().sprite = nullSprite;
+            Destroy(m_item.gameObject);
+            m_item = null;
+        }
+    }
+
+    public void AddToEmptyEqupmentSlot(Slot s)
+    {
+        AddItemToSlot(s.m_item, false);
+        s.RemoveItemFromSlot();
     }
 
     public void SumItemsQuantities(Items item)

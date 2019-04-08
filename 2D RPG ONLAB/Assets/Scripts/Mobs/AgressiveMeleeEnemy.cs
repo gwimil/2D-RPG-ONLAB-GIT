@@ -10,12 +10,12 @@ public class AgressiveMeleeEnemy : Mobs
 
     }
 
-    override public void Movement()
+    protected override void Movement(Vector2 Dir)
     {
 
     }
 
-    override public void Attack()
+    override public void Attack(Vector2 Dir)
     {
 
     }

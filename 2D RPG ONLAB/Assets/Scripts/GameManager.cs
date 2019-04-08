@@ -96,9 +96,14 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            Debug.Log(8);
             m_Players[0].m_hero.UseSkill(1);
         }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            m_Players[0].m_hero.Attack();
+        }
+
 
     }
    

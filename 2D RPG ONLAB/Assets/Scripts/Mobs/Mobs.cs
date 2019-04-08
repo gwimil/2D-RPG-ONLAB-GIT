@@ -4,6 +4,10 @@ using UnityEngine;
 
 public abstract class Mobs : MonoBehaviour
 {
+    public float M_AttackCooldown;
+    protected float AttackCooldownATM;
+    public float m_MovementSpeed;
+
     public ItemManager itemManager;
     public GameObject m_Drop;
 
@@ -11,22 +15,41 @@ public abstract class Mobs : MonoBehaviour
     public int m_Level;
     public int m_EXP;
     public float m_MaxHP;
-    public float m_MaxMana;
     public float m_HP;
-    public float m_Mana;
     public float m_Armor;
     public float m_MagicResist;
-    public float m_Damage;
 
     private Color originalColor;
-    private SpriteRenderer renderer;
+    private new SpriteRenderer renderer;
+    protected new Rigidbody2D rigidbody;
+
+    protected Vector3 startPosition;
 
     private void Start()
     {
         renderer = GetComponentInChildren<SpriteRenderer>();
         originalColor = renderer.color;
+        rigidbody = GetComponent<Rigidbody2D>();
+        startPosition = rigidbody.position;
+        AttackCooldownATM = 0.0f;
+        m_MovementSpeed = m_MovementSpeed / 1000;
+    }
+    
+    private void Update()
+    {
+        if (M_AttackCooldown > AttackCooldownATM) AttackCooldownATM++;
+        ManageMovement();
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+    }
 
     public void TakeDamage(float dmg)
     {
@@ -48,8 +71,8 @@ public abstract class Mobs : MonoBehaviour
     }
 
     abstract public void ManageMovement();
-    abstract public void Movement();
-    abstract public void Attack();
+    abstract protected void Movement(Vector2 Dir);
+    abstract public void Attack(Vector2 Dir);
     abstract public void Die();
     
 
