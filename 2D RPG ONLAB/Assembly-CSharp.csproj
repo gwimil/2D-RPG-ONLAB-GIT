@@ -61,8 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Camera\CameraControll.cs" />
-    <Compile Include="Assets\Scripts\Enums\EItems.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Items\Bag.cs" />
     <Compile Include="Assets\Scripts\Items\Equippable.cs" />
     <Compile Include="Assets\Scripts\Items\Inventory.cs" />
     <Compile Include="Assets\Scripts\Items\ItemManager.cs" />
@@ -86,9 +86,11 @@
     <Compile Include="Assets\Scripts\Projectiles\Fireball.cs" />
     <Compile Include="Assets\Scripts\Projectiles\MageBasicAttack.cs" />
     <Compile Include="Assets\Scripts\Projectiles\Projectile.cs" />
-    <Compile Include="Assets\Scripts\Quests\MainQuest.cs" />
+    <Compile Include="Assets\Scripts\Quests\EventInfo.cs" />
+    <Compile Include="Assets\Scripts\Quests\EventSystem.cs" />
+    <Compile Include="Assets\Scripts\Quests\KillNumberOfEnemiesQuest.cs" />
+    <Compile Include="Assets\Scripts\Quests\Quest.cs" />
     <Compile Include="Assets\Scripts\Quests\QuestManager.cs" />
-    <Compile Include="Assets\Scripts\Quests\SideQuest.cs" />
     <Compile Include="Assets\Scripts\Static\MenuData.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>E:/UNITY/temalab/Onlab/2D RPG ONLAB/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

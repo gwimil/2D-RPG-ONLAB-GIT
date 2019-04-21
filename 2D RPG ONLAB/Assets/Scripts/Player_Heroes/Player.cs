@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+namespace EventCallbacks
 {
+    public class Player : MonoBehaviour
+    {
 
+    }
 }

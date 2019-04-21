@@ -2,54 +2,68 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemManager : MonoBehaviour
+
+namespace EventCallbacks
 {
-    public List<Items> m_EquippableItems;
-    public List<Items> m_Potions;
-    public List<Items> m_NormalItems;
-
-
-    // Start is called before the first frame update
-    void Start()
+    public class ItemManager : MonoBehaviour
     {
-        for (int i = 0; i < m_EquippableItems.Count; i++)
+        public List<Items> m_EquippableItems;
+        public List<Items> m_Potions;
+        public List<Items> m_NormalItems;
+
+
+        // Start is called before the first frame update
+        void Start()
         {
-            m_EquippableItems[i].m_ID = i;
+            for (int i = 0; i < m_EquippableItems.Count; i++)
+            {
+                m_EquippableItems[i].m_ID = i;
+            }
+
+            for (int i = 0; i < m_Potions.Count; i++)
+            {
+                m_Potions[i].m_ID = i + 100000;
+            }
+
+            for (int i = 0; i < m_NormalItems.Count; i++)
+            {
+                m_NormalItems[i].m_ID = i + 2000000;
+            }
         }
-        
-        for (int i = 0; i < m_Potions.Count; i++)
+
+
+        // TODO give an enum parameter to this function
+        public List<Items> DropItemsFromEnemies(int numberOfItems = -1)
         {
-            m_Potions[i].m_ID = i + 100000;
+            List<Items> items = new List<Items>();
+            // drops a list of items from enemies
+            // different enemies-> different Items ->enum/tags -> switch-case
+            if (numberOfItems == -1)
+            {
+                //addRandomNumberOfItems
+
+            }
+            else
+            {
+                for (int i = 0; i < numberOfItems; i++)
+                {
+                    items.Add(m_EquippableItems[0]);
+                    //addSPecificNumberOfItems
+                }
+            }
+
+            return items;
         }
-        
-        for (int i = 0; i < m_NormalItems.Count; i++)
+
+        public Items GiveItem(int i)
         {
-            m_NormalItems[i].m_ID = i + 2000000;
+            if (i < 100000) return m_EquippableItems[i];
+            else if (i < 200000) return m_Potions[i];
+            else return m_NormalItems[i];
         }
+
+
+
+
     }
-    
-
-    // TODO give an enum parameter to this function
-    public List<Items> DropItemsFromEnemies()
-    {
-        List<Items> items = new List<Items>();
-        // drops a list of items from enemies
-        // different enemies-> different Items ->enum/tags -> switch-case
-
-        items.Add(m_EquippableItems[0]);
-
-
-        return items;
-    }
-
-    public Items GiveItem(int i)
-    {
-        if (i < 100000) return m_EquippableItems[i];
-        else if (i < 200000) return m_Potions[i];
-        else return m_NormalItems[i];
-    }
-    
-
-
-
 }

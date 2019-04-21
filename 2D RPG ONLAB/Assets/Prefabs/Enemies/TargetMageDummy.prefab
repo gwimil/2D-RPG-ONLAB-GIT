@@ -93,21 +93,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e06590c2a991b745911a0e496df3eee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  M_AttackCooldown: 30
+  M_AttackCooldown: 2
   m_MovementSpeed: 30
   itemManager: {fileID: 3598175360063590323, guid: 93c60e29b66c1cd44940f1161c2ab25c,
     type: 3}
-  m_Drop: {fileID: 5619642912695419275, guid: 2e96a9d33c97afb418c255a77b4defb3, type: 3}
+  m_Drop: {fileID: 2000113474268897348, guid: 23977f84c79b8cb449d22b6e1b934d62, type: 3}
   m_Aura: 0
   m_Level: 1
   m_EXP: 20
   m_MaxHP: 100
-  m_MaxMana: 30
   m_HP: 100
-  m_Mana: 30
   m_Armor: 10
   m_MagicResist: 10
-  m_Damage: 20
   m_EnemyFireBall: {fileID: 6408037483312034111, guid: b775150cab1547b4a9287a9e0373d147,
     type: 3}
 --- !u!1 &8872428909357409784

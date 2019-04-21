@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Bosses : Mobs
+namespace EventCallbacks
 {
+    public abstract class Bosses : Mobs
+    {
 
+    }
 }

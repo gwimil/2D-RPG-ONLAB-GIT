@@ -125,19 +125,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50727b395fd922c4cad249de23fa9d0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  M_AttackCooldown: 0
+  m_MovementSpeed: 0
   itemManager: {fileID: 3598175360063590323, guid: 93c60e29b66c1cd44940f1161c2ab25c,
     type: 3}
-  m_Drop: {fileID: 3948345068189862578, guid: 23977f84c79b8cb449d22b6e1b934d62, type: 3}
+  m_Drop: {fileID: 2000113474268897348, guid: 23977f84c79b8cb449d22b6e1b934d62, type: 3}
   m_Aura: 0
   m_Level: 1
   m_EXP: 10
   m_MaxHP: 0
-  m_MaxMana: 0
   m_HP: 200
-  m_Mana: 0
   m_Armor: 0
   m_MagicResist: 0
-  m_Damage: 0
 --- !u!61 &3451256116118997820
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -2,28 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AgressiveRangerEnemy : Mobs
+namespace EventCallbacks
 {
-
-    override public void ManageMovement()
+    public abstract class AgressiveRangerEnemy : Mobs
     {
 
+        override public void ManageMovement()
+        {
+
+        }
+
+        protected override void Movement(Vector2 Dir)
+        {
+
+        }
+
+        override public void Attack(Vector2 Dir)
+        {
+
+        }
+
     }
-
-    protected override void Movement(Vector2 Dir)
-    {
-
-    }
-
-    override public void Attack(Vector2 Dir)
-    {
-
-    }
-
-    override public void Die()
-    {
-
-    }
-
-
 }
