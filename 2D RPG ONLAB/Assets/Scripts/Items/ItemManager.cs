@@ -40,7 +40,9 @@ namespace EventCallbacks
             // different enemies-> different Items ->enum/tags -> switch-case
             if (numberOfItems == -1)
             {
-                //addRandomNumberOfItems
+                items.Add(m_EquippableItems[0]);
+
+                    //addRandomNumberOfItems
 
             }
             else
@@ -61,9 +63,6 @@ namespace EventCallbacks
             else if (i < 200000) return m_Potions[i];
             else return m_NormalItems[i];
         }
-
-
-
 
     }
 }

@@ -7,17 +7,41 @@ namespace EventCallbacks
     public class Ranger : Hero
     {
 
+        public Projectile m_SpellOne;
+        public Projectile m_BaseAttack;
+
         override public void Attack()
         {
-
+            if (m_BasicAttackCooldown <= basicAttackCooldownATM)
+            {
+                Projectile p = Instantiate(m_BaseAttack, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 180));
+                p.setDirection(m_NormalizedMovement);
+                p.m_damage += m_BaseDMG / 15;
+                basicAttackCooldownATM = 0.0f;
+            }
         }
         override public void UseSkill(int i)
         {
+            switch (i)
+            {
+                case 1:
+                    if (m_SpellOneCooldown == spellOneCooldownATM && m_CurrentMana >= m_SpellOneManaCost && m_SpellOne != null)
+                    {
+                        Projectile fb = Instantiate(m_SpellOne, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
+                        fb.setDirection(m_NormalizedMovement);
+                        fb.m_damage += m_BaseDMG / 10;
+                        fb.user = gameObject.name;
+                        m_CurrentMana -= m_SpellOneManaCost;
+                        spellOneCooldownATM = 0.0f;
+                    }
+                    break;
+                case 2:
+                    break;
 
-        }
-        override public void AddItemToInventory(Items i)
-        {
-            inventory.AddItem(i);
+                default: break;
+            }
+
+            SetHealthUI();
         }
 
         public override void GetExp(int exp)

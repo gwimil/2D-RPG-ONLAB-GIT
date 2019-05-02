@@ -52,10 +52,8 @@ MonoBehaviour:
   m_sellingPrice: 10
   m_buyingPrice: 30
   Quality: 7
-  m_plusHP: 50
-  m_plusMana: 0
-  m_plusArmor: 10
-  m_plusmagicResist: 10
-  m_plusMeleeDMG: 0
-  m_plusArrowDMG: 0
-  m_plusMagicDMG: 0
+  m_plusHP: 40
+  m_plusMana: 20
+  m_plusArmor: 0
+  m_plusmagicResist: 0
+  m_plusDMG: 10

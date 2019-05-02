@@ -13,8 +13,7 @@ namespace EventCallbacks
         public float m_MovementSpeed;
 
         [HideInInspector] public string killer;
-
-        public ItemManager itemManager;
+        
         public Bag m_Drop;
 
         public bool m_Aura;
@@ -34,12 +33,18 @@ namespace EventCallbacks
         private float timer;
         private int previousSecond;
 
-        private void Start()
+        private void Awake()
         {
             renderer = GetComponentInChildren<SpriteRenderer>();
             originalColor = renderer.color;
             rigidbody = GetComponent<Rigidbody2D>();
             startPosition = rigidbody.position;
+
+            
+        }
+
+        private void Start()
+        {
             AttackCooldownATM = 0.0f;
             m_MovementSpeed = m_MovementSpeed / 1000;
             previousSecond = 0;
@@ -50,7 +55,7 @@ namespace EventCallbacks
         {
             // FRAMES
 
-            ManageMovement();
+            
             timer += Time.deltaTime;
             int second = Convert.ToInt32(timer % 60);
 
@@ -68,6 +73,11 @@ namespace EventCallbacks
             }
         }
 
+        private void FixedUpdate()
+        {
+            ManageMovement();
+        }
+
 
         public void TakeDamage(float dmg)
         {
@@ -75,8 +85,6 @@ namespace EventCallbacks
             renderer.color = Color.red;
             Invoke("ResetColor", 0.2f);
             CheckIfDeath();
-
-
         }
         void ResetColor()
         {
@@ -95,11 +103,7 @@ namespace EventCallbacks
         public void Die()
         {
             Bag droppedBag = Instantiate(m_Drop, transform.position, Quaternion.Euler(0, 0, 0));
-            List<Items> items = itemManager.DropItemsFromEnemies();
-            for (int i = 0; i < items.Count; i++)
-            {
-                Instantiate(items[i], droppedBag.gameObject.transform);
-            }
+            droppedBag.gameObject.name = "Bag";
 
 
             UnitDeathEventInfo udei = new UnitDeathEventInfo();

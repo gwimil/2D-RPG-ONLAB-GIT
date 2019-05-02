@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,13 +13,23 @@ namespace EventCallbacks
         public Mobs[] m_MobsToKillInQuests;
         public Items[] m_ItemsToCollectInQuests;
 
+        private Guid QuestEventGuid;
+
+        void Awake()
+        {
+            QuestEventGuid = new Guid();
+        }
+
         private void Start()
         {
             if (m_Quests.Count >= 1)
             {
-                m_CurrentQuest = m_Quests[0];
-                Debug.Log(m_CurrentQuest.name);
-                EventSystem.Current.RegisterListener<QuestDoneEventInfo>(QuestDone);
+                m_CurrentQuest = Instantiate(m_Quests[0], this.transform);
+                m_CurrentQuest.gameObject.name = "Quest " + m_CurrentQuest.m_QuestId;
+                Debug.Log(m_CurrentQuest.gameObject.name);
+                Debug.Log(EventSystem.Current);
+                Debug.Log("init2");
+                EventSystem.Current.RegisterListener<QuestDoneEventInfo>(QuestDone, ref QuestEventGuid);
             }
             else
             {
@@ -30,12 +41,11 @@ namespace EventCallbacks
         private void QuestDone(QuestDoneEventInfo qd)
         {
             string questDesc = qd.EventDescription;
-            Debug.Log("Quest N.o." + qd.QuestID + " is completed");
-            m_Quests.Remove(m_CurrentQuest);
+            m_Quests.RemoveAt(0);
             if (m_Quests.Count >= 1)
             {
                 Debug.Log(m_CurrentQuest.name);
-                m_CurrentQuest = m_Quests[0];
+                m_CurrentQuest = Instantiate(m_Quests[0], this.transform);
             }
         }
 

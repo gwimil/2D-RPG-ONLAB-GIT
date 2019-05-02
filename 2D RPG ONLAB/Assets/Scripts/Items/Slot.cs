@@ -25,22 +25,33 @@ namespace EventCallbacks
         public void AddItemToSlot(Items item, bool b = true)
         {
             m_item = Instantiate(item, this.transform);
-            m_item.name = m_item.m_name;
+            m_item.name = m_item.gameObject.name;
             if (b) GetComponentInChildren<Text>().text = m_item.m_Quantity.ToString();
             GetComponent<Image>().sprite = item.m_sprite;
         }
 
         public void RemoveItemFromSlot(bool b = true)
         {
-            if (m_item.m_Quantity > 1) m_item.m_Quantity--;
+            if (m_item.m_Quantity > 1)
+            {
+                m_item.m_Quantity--;
+                GetComponentInChildren<Text>().text = m_item.m_Quantity.ToString();
+            }
             else
             {
                 if (b) GetComponentInChildren<Text>().text = "";
-                Debug.Log(nullSprite.name);
                 GetComponent<Image>().sprite = nullSprite;
                 Destroy(m_item.gameObject);
                 m_item = null;
             }
+        }
+
+        public void RemoveAllItemsFromSlot(bool b = true)
+        {
+            if (b) GetComponentInChildren<Text>().text = "";
+            GetComponent<Image>().sprite = nullSprite;
+            Destroy(m_item.gameObject);
+            m_item = null;
         }
 
         public void AddToEmptyEqupmentSlot(Slot s)

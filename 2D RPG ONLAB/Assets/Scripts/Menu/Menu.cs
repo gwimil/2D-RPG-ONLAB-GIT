@@ -28,6 +28,8 @@ public class Menu : MonoBehaviour
     
     private int m_PlayerChoosing;
 
+    GameObject go;
+
     void Start()
     {
         m_PlayButton.gameObject.SetActive(true);
@@ -61,6 +63,20 @@ public class Menu : MonoBehaviour
         m_ChooseHeroText.gameObject.SetActive(false);
 
         m_BlackGround.gameObject.SetActive(false);
+
+        go = new GameObject();
+        go = EventSystem.current.currentSelectedGameObject;
+    }
+
+
+
+    private void Update()
+    {
+        if (EventSystem.current.currentSelectedGameObject != null) go = EventSystem.current.currentSelectedGameObject;
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(go);
+        }
     }
 
     void ClickOnPlay()

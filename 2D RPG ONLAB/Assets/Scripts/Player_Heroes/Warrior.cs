@@ -18,10 +18,6 @@ namespace EventCallbacks
         {
 
         }
-        override public void AddItemToInventory(Items i)
-        {
-            inventory.AddItem(i);
-        }
 
         public override void GetExp(int exp)
         {

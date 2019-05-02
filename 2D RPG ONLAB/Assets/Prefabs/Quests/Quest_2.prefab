@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bd2ff63117e6cd4eb0f7996e9876c67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_QuestId: 1
+  m_QuestId: 2
   m_QuestName: Kill 5 wild NonAgressvieDummies
   m_EnemyToKill: {fileID: 3451256116118997821, guid: cd3cb52c115efe248a3fe8c2021730a9,
     type: 3}

@@ -12,9 +12,29 @@ namespace EventCallbacks
         public float m_plusMana;
         public float m_plusArmor;
         public float m_plusmagicResist;
-        public float m_plusMeleeDMG;
-        public float m_plusArrowDMG;
-        public float m_plusMagicDMG;
+        public float m_plusDMG;
+
+
+        override public void UpdateStatsWithItem(Hero h, bool add)
+        {
+            if (add)
+            {
+                h.m_Armor += m_plusArmor;
+                h.m_BaseDMG += m_plusDMG;
+                h.m_MaxHP += m_plusHP;
+                h.m_MaxMana += m_plusMana;
+                h.m_MagicResist += m_plusmagicResist;
+            }
+            else
+            {
+                h.m_Armor -= m_plusArmor;
+                h.m_BaseDMG -= m_plusDMG;
+                h.m_MaxHP -= m_plusHP;
+                h.m_MaxMana -= m_plusMana;
+                h.m_MagicResist -= m_plusmagicResist;
+            }
+            
+        }
 
         override public void Use()
         {

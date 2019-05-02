@@ -21,6 +21,13 @@ namespace EventCallbacks
         public float m_sellingPrice;
         public float m_buyingPrice;
 
+
+        virtual public void UpdateStatsWithItem(Hero h, bool add)
+        {
+
+        }
+
+
         virtual public void Use()
         {
 

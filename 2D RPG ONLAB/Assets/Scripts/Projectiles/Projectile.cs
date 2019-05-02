@@ -35,9 +35,13 @@ namespace EventCallbacks
 
         private void Update()
         {
-            rigidbody.MovePosition(rigidbody.position + m_Direction * m_MovemenetSpeed);
             m_LifeTime++;
             if (m_LifeTime > m_MaxLifeTime) Destroy(this.gameObject);
+        }
+
+        private void FixedUpdate()
+        {
+            rigidbody.MovePosition(rigidbody.position + m_Direction * m_MovemenetSpeed);
         }
 
         private void OnTriggerEnter2D(Collider2D other)

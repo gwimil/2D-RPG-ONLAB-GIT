@@ -348,3 +348,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items: []
   image: {fileID: 2058489082}
+  m_lootImage: {fileID: 2058489082}
+  m_ItemManager: {fileID: 3598175360063590323, guid: 93c60e29b66c1cd44940f1161c2ab25c,
+    type: 3}

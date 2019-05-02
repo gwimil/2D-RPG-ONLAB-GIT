@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,23 +11,106 @@ namespace EventCallbacks
         // GAME MANAGER SETS THE HERO
         [HideInInspector] public Hero m_hero;
 
-
+        private MyEventSystemProvider me;
+        private bool inventoryEnabled;
         Vector2 velocity;
         public float m_MovementSpeed;
         public int m_PlayerID = 0;
+        public UnityEngine.EventSystems.EventSystem eventSystem;
+        private GameObject go;
+
+        private void Awake()
+        {
+            go = new GameObject();
+            
+        }
+
+
+        private void Start()
+        {
+            inventoryEnabled = false;
+            go = m_hero.m_FirstInventorySlot;
+            eventSystem.SetSelectedGameObject(go);
+        }
 
 
         void Update()
         {
-            if (m_PlayerID == 0)
-                Debug.Log("You forgot to give your players ID-s");
+           
+
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                m_hero.inventory.m_inventoryEnabled = !m_hero.inventory.m_inventoryEnabled;
+                if (m_hero.inventory.m_inventoryEnabled)
+                {
+                    m_hero.inventory.m_inventory.SetActive(true);
+                    inventoryEnabled = true;
+                    eventSystem.SetSelectedGameObject(m_hero.m_FirstInventorySlot);
+                }
+                else
+                {
+                    m_hero.inventory.m_inventory.SetActive(false);
+                    inventoryEnabled = false;
+                }
+            }
+
+            if (Input.GetButtonDown("UseP" + m_PlayerID))
+            {
+                ItemPickupEventInfo ipei = new ItemPickupEventInfo();
+                ipei.EventDescription = "your hero picked up an item";
+                ipei.HeroName = this.m_hero.gameObject.name;
+                EventSystem.Current.FireEvent(ipei);
+            }
+
+
+                if (!inventoryEnabled)
+            {
+                if (m_PlayerID == 0)
+                {
+                    Debug.Log("You forgot to give your players ID-s");
+                }
+                else
+                {
+                    velocity = new Vector2(Input.GetAxisRaw("Horizontal" + m_PlayerID), Input.GetAxisRaw("Vertical" + m_PlayerID)).normalized * m_MovementSpeed;
+                }
+
+                if (Input.GetButtonDown("BasicAttackP" + m_PlayerID))
+                {
+                    m_hero.Attack();
+                }
+
+                if (Input.GetButtonDown("SpellOneP" + m_PlayerID))
+                {
+                    m_hero.UseSkill(1);
+                }
+            }
             else
-                velocity = new Vector2(Input.GetAxisRaw("Horizontal" + m_PlayerID), Input.GetAxisRaw("Vertical" + m_PlayerID)).normalized * m_MovementSpeed;
+            {
+                if (eventSystem.currentSelectedGameObject != null)
+                {
+                      go = eventSystem.currentSelectedGameObject;
+                }
+                if (eventSystem.currentSelectedGameObject == null)
+                {
+                    eventSystem.SetSelectedGameObject(go);
+                }
+            }
+
+
         }
 
         void FixedUpdate()
         {
-            m_hero.Move(velocity * Time.fixedDeltaTime);
+            if (!inventoryEnabled)
+            {
+                m_hero.Move(velocity * Time.fixedDeltaTime);
+            }
+            else
+            {
+
+            }
+
+            
         }
     }
 }

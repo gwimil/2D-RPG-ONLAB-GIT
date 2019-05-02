@@ -53,15 +53,16 @@ namespace EventCallbacks
         public Text m_StatText;
 
         protected new Rigidbody2D rigidbody;
-        protected Inventory inventory;
+        public GameObject m_FirstInventorySlot;
+        [HideInInspector] public Inventory inventory;
 
         public int m_Lvl = 1;
         protected int m_Exp = 0;
         protected int m_ExpNeeded = 100;
 
         // change the maxmana and maxhp different for each hero
-        protected float m_MaxHP = 100f;
-        protected float m_MaxMana = 100f;
+        public float m_MaxHP = 100f;
+        public float m_MaxMana = 100f;
 
         public float m_BaseDMG;
         protected float m_CurrentHP;
@@ -76,30 +77,17 @@ namespace EventCallbacks
         private int previousSecond;
 
         private string heroObjectName;
+        
 
-        private Boolean overBag;
-        private Bag bag;
+        private Guid UnitDeathEventGuid;
 
-        void Start()
+
+        protected void Awake()
         {
             rigidbody = GetComponent<Rigidbody2D>();
             inventory = GetComponent<Inventory>();
-
             heroObjectName = this.gameObject.name;
-
-            EventSystem.Current.RegisterListener<UnitDeathEventInfo>(EnemyKilled);
-
-            m_CurrentHP = m_MaxHP;
-            m_CurrentMana = m_MaxMana;
-
-            SetHealthUI();
-            SetStats();
-            SetOnClicks();
-
             m_NormalizedMovement = new Vector2(1, 0);
-
-            spellOneCooldownATM = m_SpellOneCooldown;
-            basicAttackCooldownATM = m_BasicAttackCooldown;
 
             m_ImageCooldownBasic.fillAmount = 0;
             m_ImageCooldownSpellOne.fillAmount = 0;
@@ -107,11 +95,29 @@ namespace EventCallbacks
             m_TextCooldownBasic.text = "";
             m_TextCooldownSpellOne.text = "";
             m_TextCooldownSpellTwo.text = "";
+            
 
-            overBag = false;
+           
+
+        }
+
+        protected void Start()
+        {
+            Debug.Log(gameObject.name);
+
+            m_CurrentHP = m_MaxHP;
+            m_CurrentMana = m_MaxMana;
+
+            SetHealthUI();
+            SetStats();
+            SetOnClicks();
+            spellOneCooldownATM = m_SpellOneCooldown;
+            basicAttackCooldownATM = m_BasicAttackCooldown;
 
             previousSecond = 0;
             timer = 0.0f;
+
+            EventSystem.Current.RegisterListener<UnitDeathEventInfo>(EnemyKilled, ref UnitDeathEventGuid);
         }
 
         void Update()
@@ -127,23 +133,7 @@ namespace EventCallbacks
                     EquipBestItems();
                 }
 
-            if (overBag)
-            {
-                if (bag != null && bag.gameObject != null)
-                    if (Input.GetKeyDown(KeyCode.F))
-                    {
-                        for (int i = 0; i < bag.items.Count; i++)
-                        {
-                            inventory.AddItem(bag.items[i]);
-                        }
-                        overBag = false;
-                        Destroy(bag.gameObject);
-                        bag = null;
-
-                    }
-            }
-
-
+           
 
 
             m_ImageCooldownBasic.fillAmount = (m_BasicAttackCooldown - basicAttackCooldownATM) / m_BasicAttackCooldown;
@@ -177,11 +167,7 @@ namespace EventCallbacks
             }
         }
 
-        protected void setSpellTextOnCD(Text cText, float cooldownMax, float cooldownATM)
-        {
-            if (cooldownMax <= basicAttackCooldownATM) cText.text = "";
-            else cText.text = ((int)(cooldownMax - cooldownATM)).ToString();
-        }
+        // MOVING AND UI ---------------------------------------MOVING AND UI---------------------------------------------MOVING AND UI
 
 
         public void Move(Vector2 position)
@@ -190,12 +176,14 @@ namespace EventCallbacks
             if (position.x != 0 || position.y != 0) m_NormalizedMovement = position.normalized;
         }
 
-        public void TakeDamage(float amount)
+        protected void setSpellTextOnCD(Text cText, float cooldownMax, float cooldownATM)
         {
-            m_CurrentHP -= amount;
-            SetHealthUI();
-            if (m_CurrentHP <= 0) Die();
+            if (cooldownMax <= basicAttackCooldownATM) cText.text = "";
+            else cText.text = ((int)(cooldownMax - cooldownATM)).ToString();
         }
+        
+
+       
 
         protected void SetHealthUI()
         {
@@ -218,12 +206,37 @@ namespace EventCallbacks
             for (int i = 0; i < 25; i++)
             {
                 int x = i;
-                inventory.m_SlotHolder.transform.GetChild(i).GetComponent<Button>().onClick.AddListener(() => UseItem(x));
+                inventory.m_SlotHolder.transform.GetChild(i).GetComponent<MyButton>().onClick.AddListener(() => UseItem(x));
+            }
+            m_HelmetSlot.gameObject.GetComponent<MyButton>().onClick.AddListener(() => UnEquipItem(m_HelmetSlot));
+            m_ArmorSlot.gameObject.GetComponent<MyButton>().onClick.AddListener(() => UnEquipItem(m_ArmorSlot));
+            m_GlovesSlot.gameObject.GetComponent<MyButton>().onClick.AddListener(() => UnEquipItem(m_GlovesSlot));
+            m_LeggingSlot.gameObject.GetComponent<MyButton>().onClick.AddListener(() => UnEquipItem(m_LeggingSlot));
+            m_WeaponSlot.gameObject.GetComponent<MyButton>().onClick.AddListener(() => UnEquipItem(m_WeaponSlot));
+        }
+
+
+        public void TakeDamage(float amount)
+        {
+            m_CurrentHP -= amount;
+            SetHealthUI();
+            if (m_CurrentHP <= 0) Die();
+        }
+
+        private void UnEquipItem(Slot slot)
+        {
+            if (slot.m_item != null)
+            {
+                Items item = slot.m_item;
+                inventory.AddItem(item);
+                item.UpdateStatsWithItem(this, false);
+                slot.RemoveAllItemsFromSlot(false);
             }
         }
 
         private void UseItem(int i)
         {
+            Debug.Log("CLICKED");
             Slot currSlot = inventory.GetSlot(i);
             Items currentItem = currSlot.m_item;
             if (currentItem == null) return;
@@ -232,19 +245,19 @@ namespace EventCallbacks
             {
                 //CHECK IF QUANTITY >1 THEN OTHER THINGS HAPPEN
                 case "Helmet":
-                    ChangeItemsInInventory(m_HelmetSlot, currSlot);
+                    EquipItemByLocation(i, m_HelmetSlot);
                     break;
                 case "Armor":
-                    ChangeItemsInInventory(m_ArmorSlot, currSlot);
+                    EquipItemByLocation(i, m_ArmorSlot);
                     break;
                 case "Gloves":
-                    ChangeItemsInInventory(m_GlovesSlot, currSlot);
+                    EquipItemByLocation(i, m_GlovesSlot);
                     break;
                 case "Legging":
-                    ChangeItemsInInventory(m_LeggingSlot, currSlot);
+                    EquipItemByLocation(i, m_LeggingSlot);
                     break;
                 case "Weapon":
-                    ChangeItemsInInventory(m_WeaponSlot, currSlot);
+                    EquipItemByLocation(i, m_WeaponSlot);
                     break;
                 case "SpeedPotion":
                     // TODO
@@ -261,83 +274,49 @@ namespace EventCallbacks
                 default:
                     break;
             }
-            UpdateStats();
+            SetStats();
         }
+        
 
-        private void ChangeItemsInInventory(Slot profSlot, Slot currSlot)
-        {
-            if (profSlot.m_item == null)
-            {
-                profSlot.AddToEmptyEqupmentSlot(currSlot);
-            }
-            else
-            {
-                Items item = profSlot.GetComponent<Slot>().m_item;
-                profSlot.RemoveItemFromSlot(false);
-                profSlot.AddToEmptyEqupmentSlot(currSlot);
-                item.m_Quantity = 1;
-                inventory.AddItem(item);
-            }
-        }
-
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.tag == "ItemHolder")
-            {
-                overBag = true;
-                bag = collision.GetComponent<Bag>();
-                bag.image.gameObject.SetActive(true);
-            }
-        }
-
-        private void OnTriggerExit2D(Collider2D collision)
-        {
-            if (collision.tag == "ItemHolder")
-            {
-                if (overBag && bag != null)
-                {
-                    overBag = false;
-                    bag.image.gameObject.SetActive(false);
-                    bag = null;
-                }
-
-            }
-        }
+        
 
         public void EquipBestItems()
         {
-            int locationInInventory = inventory.GetBestItemByTag("Weapon");
+            EquipItemByLocation(inventory.GetBestItemByTag("Weapon"), m_WeaponSlot);
+            EquipItemByLocation(inventory.GetBestItemByTag("Helmet"), m_HelmetSlot);
+            EquipItemByLocation(inventory.GetBestItemByTag("Gloves"), m_GlovesSlot);
+            EquipItemByLocation(inventory.GetBestItemByTag("Legging"), m_LeggingSlot);
+            EquipItemByLocation(inventory.GetBestItemByTag("Armor"), m_ArmorSlot);
+        }
+
+        private void EquipItemByLocation(int locationInInventory, Slot slotToEquiep)
+        {
             if (locationInInventory != -1)
             {
                 Slot CurrentSlot = inventory.m_slots[locationInInventory].GetComponent<Slot>();
 
-
-                if (m_WeaponSlot.m_item == null)
+                if (slotToEquiep.m_item == null)
                 {
-                    m_WeaponSlot.AddToEmptyEqupmentSlot(CurrentSlot);
+                    slotToEquiep.AddToEmptyEqupmentSlot(CurrentSlot);
+                    slotToEquiep.m_item.UpdateStatsWithItem(this, true);
                 }
                 else
                 {
-                    Items item = m_WeaponSlot.GetComponent<Slot>().m_item;
-                    m_WeaponSlot.RemoveItemFromSlot(false);
-                    m_WeaponSlot.AddToEmptyEqupmentSlot(CurrentSlot);
+                    Items item = slotToEquiep.GetComponent<Slot>().m_item;
+                    slotToEquiep.RemoveItemFromSlot(false);
+                    item.UpdateStatsWithItem(this, false);
+                    slotToEquiep.AddToEmptyEqupmentSlot(CurrentSlot);
+                    CurrentSlot.m_item.UpdateStatsWithItem(this, true);
                     item.m_Quantity = 1;
                     inventory.AddItem(item);
                 }
-
             }
-
-            // TODO
-
-
+            SetStats();
         }
 
 
-
-        private void UpdateStats()
-        {
-            //if (m_ArmorSlot.m_item != null) ; TODO change stats 
-        }
+        
+        
 
         private void EnemyKilled(UnitDeathEventInfo udei)
         {
@@ -348,7 +327,12 @@ namespace EventCallbacks
 
         abstract public void Attack();
         abstract public void UseSkill(int i);
-        abstract public void AddItemToInventory(Items i);
+
+        public void AddItemToInventory(Items i)
+        {
+            inventory.AddItem(i);
+        }
+
         abstract public void GetExp(int exp);
 
         private void Die()
@@ -356,10 +340,5 @@ namespace EventCallbacks
             // FIRE EVENT TO GAME MANAGER, IN GAME MANAGER IF ALL THE PLAYERS ARE DEAD, THEN DO THIS
             SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
         }
-
-
-
-
-
     }
 }

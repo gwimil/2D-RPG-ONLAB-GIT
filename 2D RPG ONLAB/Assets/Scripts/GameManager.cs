@@ -14,16 +14,28 @@ namespace EventCallbacks
         public GameObject[] m_UIInventories;
         public GameObject[] m_SlotHolders;
         public CameraControll m_Camera;
+        public UnityEngine.EventSystems.EventSystem[] m_HeroInventoryEventSystem;
 
+        public GameObject m_ProceduralCave;
 
-
+        private List<Vector2> placesToSpawn;
+        private bool spawnHeroes;
+        private Vector2 placeToSpawnHeroes;
 
         // Start is called before the first frame update
+
+        private void Awake()
+        {
+            placesToSpawn = new List<Vector2>();
+            m_Camera.m_Targets = new Transform[MenuData.m_playerNumber];
+            spawnHeroes = false;
+        }
+
+
         void Start()
         {
             //later the player can choose his hero, sets camera
-            m_Camera.m_Targets = new Transform[MenuData.m_playerNumber];
-
+            Debug.Log(MenuData.m_playerNumber);
             UnsetHeroes();
             BindHeroesToPlayers();
 
@@ -33,12 +45,8 @@ namespace EventCallbacks
                 m_Inventories[i].m_inventory = m_UIInventories[i];
                 m_Inventories[i].m_SlotHolder = m_SlotHolders[i];
             }
-
-
-
-
         }
-
+        
 
         private void BindHeroesToPlayers()
         {
@@ -68,6 +76,8 @@ namespace EventCallbacks
             m_Players[i].gameObject.SetActive(true);
             m_Players[i].m_hero.gameObject.SetActive(true);
             m_Camera.m_Targets[i] = m_Players[i].m_hero.transform;
+            m_Players[i].eventSystem = m_HeroInventoryEventSystem[i];
+           
         }
 
         private void UnsetHeroes()
@@ -96,14 +106,27 @@ namespace EventCallbacks
                 m_Players[0].m_hero.AddItemToInventory(item);
             }
 
-            if (Input.GetKeyDown(KeyCode.L))
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                m_Players[0].m_hero.UseSkill(1);
-            }
+                placesToSpawn = m_ProceduralCave.GetComponent<MapGenerator>().GenerateMapFromManager();
 
-            if (Input.GetKeyDown(KeyCode.E))
+                int num = Random.Range(0, placesToSpawn.Count);
+                placeToSpawnHeroes = placesToSpawn[num];
+                spawnHeroes = true;
+
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (spawnHeroes)
             {
-                m_Players[0].m_hero.Attack();
+                for (int i = 0; i < MenuData.m_playerNumber; i++)
+                {
+                    m_Players[i].m_hero.transform.position = new Vector3(placeToSpawnHeroes.x,placeToSpawnHeroes.y, 0);
+                }
+
+                spawnHeroes = false;
             }
         }
     }

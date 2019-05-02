@@ -62,6 +62,9 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Camera\CameraControll.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Inventory\MyButton.cs" />
+    <Compile Include="Assets\Scripts\Inventory\MyEventSystem.cs" />
+    <Compile Include="Assets\Scripts\Inventory\MyEventSystemProvider.cs" />
     <Compile Include="Assets\Scripts\Items\Bag.cs" />
     <Compile Include="Assets\Scripts\Items\Equippable.cs" />
     <Compile Include="Assets\Scripts\Items\Inventory.cs" />
@@ -83,6 +86,8 @@
     <Compile Include="Assets\Scripts\Player_Heroes\Player2D.cs" />
     <Compile Include="Assets\Scripts\Player_Heroes\Ranger.cs" />
     <Compile Include="Assets\Scripts\Player_Heroes\Warrior.cs" />
+    <Compile Include="Assets\Scripts\ProceduralCave\MapGenerator.cs" />
+    <Compile Include="Assets\Scripts\ProceduralCave\MeshGenerator.cs" />
     <Compile Include="Assets\Scripts\Projectiles\Fireball.cs" />
     <Compile Include="Assets\Scripts\Projectiles\MageBasicAttack.cs" />
     <Compile Include="Assets\Scripts\Projectiles\Projectile.cs" />

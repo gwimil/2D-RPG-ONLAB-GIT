@@ -41,7 +41,8 @@ namespace EventCallbacks
                     Vector2 plusPosition;
                     plusPosition.x = Random.Range(0.0f, 1.0f) > 0.5 ? Random.Range(6.0f, 10.0f) : Random.Range(-6.0f, -10.0f);
                     plusPosition.y = Random.Range(0.0f, 1.0f) > 0.5 ? Random.Range(6.0f, 10.0f) : Random.Range(-6.0f, -10.0f);
-                    Instantiate(m_EnemyTypes[numberOfSpawns], playerPos + plusPosition, Quaternion.Euler(0, 0, 0), this.transform);
+                    Mobs mobSpawned = Instantiate(m_EnemyTypes[numberOfSpawns], playerPos + plusPosition, Quaternion.Euler(0, 0, 0), this.transform);
+                    mobSpawned.gameObject.name = m_EnemyTypes[numberOfSpawns].gameObject.name;
                 }
 
 

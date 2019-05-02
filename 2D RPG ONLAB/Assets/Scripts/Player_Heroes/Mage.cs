@@ -26,13 +26,12 @@ namespace EventCallbacks
             switch (i)
             {
                 case 1:
-                    if (m_SpellOneCooldown == spellOneCooldownATM && m_CurrentMana >= m_SpellOneManaCost)
+                    if (m_SpellOneCooldown == spellOneCooldownATM && m_CurrentMana >= m_SpellOneManaCost && m_FireBall != null)
                     {
                         Projectile fb = Instantiate(m_FireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
                         fb.setDirection(m_NormalizedMovement);
                         fb.m_damage += m_BaseDMG / 10;
                         fb.user = gameObject.name;
-                        Debug.Log(gameObject.name + " used fireball!");
                         m_CurrentMana -= m_SpellOneManaCost;
                         spellOneCooldownATM = 0.0f;
                     }
@@ -45,11 +44,7 @@ namespace EventCallbacks
 
             SetHealthUI();
         }
-
-        override public void AddItemToInventory(Items i)
-        {
-            inventory.AddItem(i);
-        }
+        
 
 
         public override void GetExp(int exp)

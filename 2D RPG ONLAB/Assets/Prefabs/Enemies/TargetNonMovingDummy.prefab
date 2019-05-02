@@ -88,9 +88,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3451256116118997810}
-  - component: {fileID: 3451256116118997821}
   - component: {fileID: 3451256116118997820}
   - component: {fileID: 3451256116118997811}
+  - component: {fileID: 3451256116118997821}
   m_Layer: 13
   m_Name: TargetNonMovingDummy
   m_TagString: Enemy
@@ -113,30 +113,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3451256116118997821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3451256116118997809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50727b395fd922c4cad249de23fa9d0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  M_AttackCooldown: 0
-  m_MovementSpeed: 0
-  itemManager: {fileID: 3598175360063590323, guid: 93c60e29b66c1cd44940f1161c2ab25c,
-    type: 3}
-  m_Drop: {fileID: 2000113474268897348, guid: 23977f84c79b8cb449d22b6e1b934d62, type: 3}
-  m_Aura: 0
-  m_Level: 1
-  m_EXP: 10
-  m_MaxHP: 0
-  m_HP: 200
-  m_Armor: 0
-  m_MagicResist: 0
 --- !u!61 &3451256116118997820
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -184,3 +160,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &3451256116118997821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3451256116118997809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50727b395fd922c4cad249de23fa9d0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  M_AttackCooldown: 0
+  m_MovementSpeed: 0
+  killer: 
+  itemManager: {fileID: 3598175360063590323, guid: 93c60e29b66c1cd44940f1161c2ab25c,
+    type: 3}
+  m_Drop: {fileID: 2000113474268897348, guid: 23977f84c79b8cb449d22b6e1b934d62, type: 3}
+  m_Aura: 0
+  m_Level: 1
+  m_EXP: 10
+  m_MaxHP: 0
+  m_HP: 200
+  m_Armor: 0
+  m_MagicResist: 0

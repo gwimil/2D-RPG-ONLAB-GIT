@@ -14,6 +14,7 @@ namespace EventCallbacks
         private int m_CurrentNumber;
         private string m_EnemyName;
 
+        private Guid DeathEventGuid;
 
         // Start is called before the first frame update
         void Start()
@@ -21,7 +22,7 @@ namespace EventCallbacks
             Debug.Log("Quest listens");
             m_CurrentNumber = 0;
             m_EnemyName = m_EnemyToKill.gameObject.name;
-            EventSystem.Current.RegisterListener<UnitDeathEventInfo>(OnUnitDied);
+            EventSystem.Current.RegisterListener<UnitDeathEventInfo>(OnUnitDied, ref DeathEventGuid);
         }
 
 
@@ -42,14 +43,9 @@ namespace EventCallbacks
                 qd.UnitName = m_EnemyName;
                 qd.QuestID = m_QuestId;
                 EventSystem.Current.FireEvent(qd);
-
-                EventSystem.Current.UnregisterListener<UnitDeathEventInfo>(Finished);
+                m_CurrentNumber = -1;
+                EventSystem.Current.UnregisterListener<UnitDeathEventInfo>(DeathEventGuid);
             }
-        }
-
-        private void Finished(UnitDeathEventInfo obj)
-        {
-            //finished
         }
 
     }

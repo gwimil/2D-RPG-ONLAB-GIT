@@ -18,6 +18,11 @@ namespace EventCallbacks
         public int VerbosityLevel;
     }
 
+    public class ItemPickupEventInfo : EventInfo
+    {
+        public string HeroName;
+    }
+
     public class UnitDeathEventInfo : EventInfo
     {
         public Mobs Unit;
@@ -29,6 +34,8 @@ namespace EventCallbacks
         Could be a struct, readonly, etc...
         */
     }
+
+
 
 
     public class QuestDoneEventInfo : EventInfo

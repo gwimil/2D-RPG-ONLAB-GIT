@@ -31,13 +31,6 @@ namespace EventCallbacks
         void Update()
         {
 
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                m_inventoryEnabled = !m_inventoryEnabled;
-                if (m_inventoryEnabled) m_inventory.SetActive(true);
-                else m_inventory.SetActive(false);
-            }
-
             if (m_inventoryEnabled)
             {
                 if (Input.GetKeyDown(KeyCode.N))
@@ -45,10 +38,11 @@ namespace EventCallbacks
                     List<Items> sortedItems = new List<Items>();
                     for (int i = 0; i < m_SlotNumber; i++)
                     {
-                        if (m_slots[i].transform.childCount == 2)
+                        Items myItem = m_slots[i].GetComponent<Slot>().m_item;
+                        if (myItem != null)
                         {
-                            sortedItems.Add(m_slots[i].GetComponent<Slot>().m_item);
-                            m_slots[i].GetComponent<Slot>().RemoveItemFromSlot();
+                            sortedItems.Add(myItem);
+                            m_slots[i].GetComponent<Slot>().RemoveAllItemsFromSlot();
                         }
                     }
                     sortedItems.Sort((x, y) => x.m_ID.CompareTo(y.m_ID));
@@ -77,8 +71,8 @@ namespace EventCallbacks
             {
                 if (m_slots[i].transform.childCount == 2)
                 {
-                    Items item = m_slots[i].GetComponent<Slot>().m_item;
-                    float itemQuality = item.gameObject.GetComponent<Equippable>().Quality;
+                    Equippable item = m_slots[i].gameObject.GetComponentInChildren<Equippable>();
+                    float itemQuality = item.Quality;
                     if (item.tag == tag && itemQuality > bestQuality)
                     {
                         bestQuality = itemQuality;
@@ -87,6 +81,8 @@ namespace EventCallbacks
 
                 }
             }
+
+            Debug.Log(numberOfBestItem);
             return numberOfBestItem;
         }
 
