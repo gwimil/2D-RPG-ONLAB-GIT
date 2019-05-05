@@ -85,6 +85,9 @@ namespace EventCallbacks
         private Guid MobDeathEventGuid;
         
         [HideInInspector] public int bags;
+        [HideInInspector] public bool overTeleport;
+        [HideInInspector] public string teleportName;
+
 
 
 
@@ -333,10 +336,13 @@ namespace EventCallbacks
 
         public void AddItemToInventory(Items i)
         {
+            Debug.Log(i);
             inventory.AddItem(i);
         }
 
         abstract public void GetExp(int exp);
+
+
 
         private void Die()
         {

@@ -7,5 +7,4 @@ public static class MenuData
     public static int m_playerNumber = 0;
     public static string[] m_PlayerCharacters = new string[3];
 
-
 }

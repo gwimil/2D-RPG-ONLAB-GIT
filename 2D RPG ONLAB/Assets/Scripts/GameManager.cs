@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,21 +18,27 @@ namespace EventCallbacks
 
         public GameObject m_ProceduralCave;
 
+        public GameObject CaveTeleporterOut;
+
         private List<Vector2> placesToSpawn;
-        private bool spawnHeroes;
         private Vector2 placeToSpawnHeroes;
 
         private UIManager uiManager;
 
         private int numberOfPlayers;
 
+        [HideInInspector] public int heroesInCave;
+
+
+        private System.Guid TeleportEventGuid;
+
         // Start is called before the first frame update
 
         private void Awake()
         {
+            heroesInCave = 0;
             placesToSpawn = new List<Vector2>();
             m_Camera.m_Targets = new Transform[MenuData.m_playerNumber];
-            spawnHeroes = false;
             numberOfPlayers = MenuData.m_playerNumber;
             uiManager = GetComponentInChildren<UIManager>();
         }
@@ -41,6 +47,7 @@ namespace EventCallbacks
         void Start()
         {
             //later the player can choose his hero, sets camera
+            CaveTeleporterOut.SetActive(false);
             Debug.Log(MenuData.m_playerNumber);
             UnsetHeroes();
             BindHeroesToPlayers();
@@ -56,8 +63,12 @@ namespace EventCallbacks
             for (int i = 0; i < 3; i++)
             {
                 m_Inventories[i].m_inventory = m_UIInventories[i];
+                m_Inventories[i].m_inventory.SetActive(false);
                 m_Inventories[i].m_SlotHolder = m_SlotHolders[i];
             }
+
+            EventSystem.Current.RegisterListener<TeleportEventInfo>(TeleportPlayerToNewPlace, ref TeleportEventGuid);
+
         }
         
 
@@ -119,28 +130,49 @@ namespace EventCallbacks
                 m_Players[0].m_hero.AddItemToInventory(item);
             }
 
-            if (Input.GetKeyDown(KeyCode.Q))
+        }
+
+        private void TeleportPlayerToNewPlace(TeleportEventInfo tei)
+        {
+            switch (tei.teleportName)
+            {
+                case "Cave":
+                    TeleportHeroToCave(tei.playerToTeleport.m_PlayerID);
+                    Debug.Log("Teleported");
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+
+        private void TeleportHeroToCave(int id)
+        {
+            int num;
+            if (heroesInCave == 0)
             {
                 placesToSpawn = m_ProceduralCave.GetComponent<MapGenerator>().GenerateMapFromManager();
 
-                int num = Random.Range(0, placesToSpawn.Count);
+                num = Random.Range(0, placesToSpawn.Count);
+                CaveTeleporterOut.transform.position = new Vector3(placesToSpawn[num].x, placesToSpawn[num].y, 0);
+                CaveTeleporterOut.SetActive(true);
+                num = Random.Range(0, placesToSpawn.Count);
                 placeToSpawnHeroes = placesToSpawn[num];
-                spawnHeroes = true;
-
             }
+            heroesInCave++;
+            
+            m_Players[id-1].m_hero.transform.position = new Vector3(placeToSpawnHeroes.x, placeToSpawnHeroes.y, 0);
+
         }
 
-        private void FixedUpdate()
+        public void TeleportPlayerToFixedPosition(string nameOfHero, Vector2 to)
         {
-            if (spawnHeroes)
+            for (int i = 0; i < m_Heroes.Length; i++)
             {
-                for (int i = 0; i < numberOfPlayers; i++)
-                {
-                    m_Players[i].m_hero.transform.position = new Vector3(placeToSpawnHeroes.x,placeToSpawnHeroes.y, 0);
-                }
-
-                spawnHeroes = false;
+                if (m_Heroes[i].gameObject.name.Equals(nameOfHero)) m_Heroes[i].transform.position = new Vector3(to.x, to.y, 0);
             }
         }
+
     }
 }

@@ -19,13 +19,12 @@ namespace EventCallbacks
             if (gameObject.GetComponentInChildren<Text>() == null);
             else GetComponentInChildren<Text>().text = "";
             nullSprite = GetComponent<Image>().sprite;
-            m_item = null;
         }
 
         public void AddItemToSlot(Items item, bool b = true)
         {
             m_item = Instantiate(item, this.transform);
-            m_item.name = m_item.gameObject.name;
+            m_item.gameObject.name = item.gameObject.name;
             if (b) GetComponentInChildren<Text>().text = m_item.m_Quantity.ToString();
             GetComponent<Image>().sprite = item.m_sprite;
         }

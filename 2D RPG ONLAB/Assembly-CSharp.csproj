@@ -74,6 +74,8 @@
     <Compile Include="Assets\Scripts\Items\Potions.cs" />
     <Compile Include="Assets\Scripts\Items\Slot.cs" />
     <Compile Include="Assets\Scripts\Map\ObjectArray.cs" />
+    <Compile Include="Assets\Scripts\Map\SimpleTeleporter.cs" />
+    <Compile Include="Assets\Scripts\Map\Spinner.cs" />
     <Compile Include="Assets\Scripts\Menu\Menu.cs" />
     <Compile Include="Assets\Scripts\Menu\UIManager.cs" />
     <Compile Include="Assets\Scripts\Mobs\AgressiveMageEnemy.cs" />

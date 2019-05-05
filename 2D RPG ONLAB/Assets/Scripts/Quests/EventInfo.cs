@@ -34,6 +34,12 @@ namespace EventCallbacks
         public Mobs Unit;
     }
 
+    public class TeleportEventInfo : EventInfo
+    {
+        public string teleportName;
+        public Player2D playerToTeleport;
+    }
+
 
 
 

@@ -90,7 +90,6 @@ namespace EventCallbacks
 
         public void AddItem(Items item)
         {
-
             for (int i = 0; i < m_SlotNumber; i++)
             {
                 if (m_slots[i].transform.childCount == 2)

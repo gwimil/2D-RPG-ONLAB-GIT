@@ -14,6 +14,7 @@ namespace EventCallbacks
         public ItemManager m_ItemManager;
         private Hero hero;
         private int overlappingHeroes;
+        private bool end;
 
 
         private Guid ItemPickedUpGuid;
@@ -22,6 +23,7 @@ namespace EventCallbacks
 
         private void Awake()
         {
+            end = false;
             ItemPickedUpGuid = new Guid();
             items = new List<Items>();
             heroesOverlapping = new List<Hero>();
@@ -58,15 +60,12 @@ namespace EventCallbacks
             {
                 if (heroesOverlapping[i].gameObject.name == heroName)
                 {
-                    Debug.Log("Item added");
-                    Items item = m_ItemManager.GiveItem(items[0].m_ID);
-                    heroesOverlapping[i].AddItemToInventory(item);
-                    EventSystem.Current.UnregisterListener<ItemPickupEventInfo>(ItemPickedUpGuid);
+                    heroesOverlapping[i].AddItemToInventory(m_ItemManager.GiveItem(items[0].m_ID));
+                    end = true;
                     Destroy(gameObject);
                 }
             }
         }
-
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -91,7 +90,6 @@ namespace EventCallbacks
                 heroesOverlapping.Remove(collision.GetComponent<Hero>());
                 hero = null;
                 image.gameObject.SetActive(false);
-                Debug.Log(overlappingHeroes);
             }
         }
 
