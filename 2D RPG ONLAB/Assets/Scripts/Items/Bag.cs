@@ -61,6 +61,7 @@ namespace EventCallbacks
                     Debug.Log("Item added");
                     Items item = m_ItemManager.GiveItem(items[0].m_ID);
                     heroesOverlapping[i].AddItemToInventory(item);
+                    EventSystem.Current.UnregisterListener<ItemPickupEventInfo>(ItemPickedUpGuid);
                     Destroy(gameObject);
                 }
             }
@@ -71,6 +72,7 @@ namespace EventCallbacks
         {
             if (collision.tag == "Hero")
             {
+                collision.GetComponent<Hero>().CollideWithBag(true);
                 heroesOverlapping.Add(collision.GetComponent<Hero>());
                 Debug.Log(items.Count);
                 overlappingHeroes++;
@@ -85,6 +87,7 @@ namespace EventCallbacks
             overlappingHeroes--;
             if (collision.tag == "Hero" && overlappingHeroes <=0)
             {
+                collision.GetComponent<Hero>().CollideWithBag(false);
                 heroesOverlapping.Remove(collision.GetComponent<Hero>());
                 hero = null;
                 image.gameObject.SetActive(false);

@@ -16,7 +16,7 @@ namespace EventCallbacks
 
         private void Start()
         {
-            if (gameObject.GetComponentInChildren<Text>() == null) Debug.LogWarning("No Text in child");
+            if (gameObject.GetComponentInChildren<Text>() == null);
             else GetComponentInChildren<Text>().text = "";
             nullSprite = GetComponent<Image>().sprite;
             m_item = null;

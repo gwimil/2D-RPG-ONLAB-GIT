@@ -79,8 +79,9 @@ namespace EventCallbacks
         }
 
 
-        public void TakeDamage(float dmg)
+        public void TakeDamage(float dmg, string killer)
         {
+            this.killer = killer;
             m_HP -= dmg;
             renderer.color = Color.red;
             Invoke("ResetColor", 0.2f);
@@ -106,7 +107,7 @@ namespace EventCallbacks
             droppedBag.gameObject.name = "Bag";
 
 
-            UnitDeathEventInfo udei = new UnitDeathEventInfo();
+            MobDeathEventInfo udei = new MobDeathEventInfo();
             udei.EventDescription = "Unit " + this.tag + " has died";
             udei.Unit = this;
             udei.Killer = this.killer;

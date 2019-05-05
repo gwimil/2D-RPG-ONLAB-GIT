@@ -29,7 +29,6 @@ namespace EventCallbacks
             m_Direction = m;
             float angle = Vector2.SignedAngle(m, new Vector2(1, 0));
             transform.Rotate(0, 0, -angle);
-
         }
 
 
@@ -50,8 +49,11 @@ namespace EventCallbacks
             {
                 if (other.tag == "Enemy")
                 {
-                    other.GetComponent<Mobs>().killer = this.user;
-                    other.GetComponent<Mobs>().TakeDamage(m_damage);
+                    other.GetComponent<Mobs>().TakeDamage(m_damage, this.user);
+                }
+                if (other.tag == "EnemySpawner")
+                {
+                    other.GetComponent<EnemySpawner>().TakeDamage(m_damage, this.user);
                 }
             }
             else if (this.tag == "EnemyProjectile")

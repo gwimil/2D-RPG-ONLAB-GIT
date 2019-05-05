@@ -81,11 +81,16 @@ namespace EventCallbacks
         private string heroObjectName;
         
 
-        private Guid UnitDeathEventGuid;
+        private Guid SpawnerDeathEventGuid;
+        private Guid MobDeathEventGuid;
+        
+        [HideInInspector] public int bags;
+
 
 
         protected void Awake()
         {
+            bags = 0;
             rigidbody = GetComponent<Rigidbody2D>();
             inventory = GetComponent<Inventory>();
             heroObjectName = this.gameObject.name;
@@ -97,16 +102,11 @@ namespace EventCallbacks
             m_TextCooldownBasic.text = "";
             m_TextCooldownSpellOne.text = "";
             m_TextCooldownSpellTwo.text = "";
-            
-
-           
 
         }
 
         protected void Start()
         {
-            Debug.Log(gameObject.name);
-
             m_CurrentHP = m_MaxHP;
             m_CurrentMana = m_MaxMana;
 
@@ -119,7 +119,8 @@ namespace EventCallbacks
             previousSecond = 0;
             timer = 0.0f;
 
-            EventSystem.Current.RegisterListener<UnitDeathEventInfo>(EnemyKilled, ref UnitDeathEventGuid);
+            EventSystem.Current.RegisterListener<MobDeathEventInfo>(EnemyKilled, ref MobDeathEventGuid);
+            EventSystem.Current.RegisterListener<SpawnerDeathEventInfo>(EnemyKilled, ref SpawnerDeathEventGuid);
         }
 
         void Update()
@@ -128,15 +129,6 @@ namespace EventCallbacks
             Quaternion q = transform.rotation;
             q.eulerAngles = new Vector3(q.eulerAngles.x, q.eulerAngles.y, 0);
             transform.rotation = q;
-
-            if (inventory.m_inventoryEnabled)
-                if (Input.GetKeyDown(KeyCode.C))
-                {
-                    EquipBestItems();
-                }
-
-           
-
 
             m_ImageCooldownBasic.fillAmount = (m_BasicAttackCooldown - basicAttackCooldownATM) / m_BasicAttackCooldown;
             m_ImageCooldownSpellOne.fillAmount = (m_SpellOneCooldown - spellOneCooldownATM) / m_SpellOneCooldown;
@@ -180,11 +172,17 @@ namespace EventCallbacks
 
         protected void setSpellTextOnCD(Text cText, float cooldownMax, float cooldownATM)
         {
-            if (cooldownMax <= basicAttackCooldownATM) cText.text = "";
+            if (cooldownMax <= cooldownATM) cText.text = "";
             else cText.text = ((int)(cooldownMax - cooldownATM)).ToString();
         }
         
 
+        public void CollideWithBag(bool b)
+        {
+            if (b) bags++;
+            else bags--;
+            if (bags < 0) bags = 0;
+        }
        
 
         protected void SetHealthUI()
@@ -238,7 +236,6 @@ namespace EventCallbacks
 
         private void UseItem(int i)
         {
-            Debug.Log("CLICKED");
             Slot currSlot = inventory.GetSlot(i);
             Items currentItem = currSlot.m_item;
             if (currentItem == null) return;
@@ -320,10 +317,14 @@ namespace EventCallbacks
         
         
 
-        private void EnemyKilled(UnitDeathEventInfo udei)
+        private void EnemyKilled(MobDeathEventInfo mdei)
         {
-            int enemLevel = udei.Level;
-            GetExp(enemLevel * 15);
+           if (mdei.Killer.Equals(gameObject.name)) GetExp(mdei.Level * 15);
+        }
+
+        private void EnemyKilled(SpawnerDeathEventInfo udei)
+        {
+            if (udei.Killer.Equals(gameObject.name)) GetExp(udei.Level * 15);
         }
 
 

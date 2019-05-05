@@ -4,14 +4,9 @@ using UnityEngine;
 
 namespace EventCallbacks
 {
-    enum Fit{
-        left, mid, right
-    };
 
     public class UIManager : MonoBehaviour
     {
-        //jobb
-        Fit mageFit = Fit.right;
         public Hero m_MageHero;
         public RectTransform m_MageInventory;
         public RectTransform m_MageHpSlider;
@@ -20,9 +15,7 @@ namespace EventCallbacks
         public RectTransform m_MageSpell1;
         public RectTransform m_MageSpell2;
 
-
-        // közép
-        Fit rangerFit = Fit.mid;
+        
         public Hero m_RangerHero;
         public RectTransform m_RangerInventory;
         public RectTransform m_RangerHpSlider;
@@ -30,9 +23,7 @@ namespace EventCallbacks
         public RectTransform m_RangerBasicAttack;
         public RectTransform m_RangerSpell1;
         public RectTransform m_RangerSpell2;
-
-        //bal
-        Fit warriorFit = Fit.mid;
+        
         public Hero m_WarriorHero;
         public RectTransform m_WarriorInventory;
         public RectTransform m_WarriorHpSlider;
@@ -125,7 +116,7 @@ namespace EventCallbacks
         }
 
         // change when screen sides are changing
-        public void SetUIToPlayerPosition()
+        private void SetUIToPlayerPosition()
         {
             Vector2 magePos = m_MageHero.transform.position;
             Vector2 warriorPos = m_WarriorHero.transform.position;
@@ -293,7 +284,7 @@ namespace EventCallbacks
                     m_WarriorSpell1.anchoredPosition = new Vector2(-Screen.width / 4 - 100, 15);
                     m_RangerSpell1.anchoredPosition = new Vector2(0, 15);
 
-                    m_MageSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, -30);
+                    m_MageSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, 15);
                     m_WarriorSpell2.anchoredPosition = new Vector2(-Screen.width / 4 - 100 + 30, 15);
                     m_RangerSpell2.anchoredPosition = new Vector2(30, 15);
 
@@ -323,7 +314,7 @@ namespace EventCallbacks
                     m_WarriorSpell1.anchoredPosition = new Vector2(-Screen.width / 4 - 100, 15);
                     m_MageSpell1.anchoredPosition = new Vector2(0, 15);
 
-                    m_RangerSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, -30);
+                    m_RangerSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, 15);
                     m_WarriorSpell2.anchoredPosition = new Vector2(-Screen.width / 4 - 100 + 30, 15);
                     m_MageSpell2.anchoredPosition = new Vector2(30, 15);
 
@@ -331,9 +322,9 @@ namespace EventCallbacks
                 }
                 else if (magePos.x < warriorPos.x && warriorPos.x < rangerPos.x)
                 {
-                    m_RangerInventory.anchoredPosition = new Vector2(Screen.width / 4 + 100, -20);
-                    m_MageInventory.anchoredPosition = new Vector2(-Screen.width / 4 - 100, -20);
-                    m_WarriorInventory.anchoredPosition = new Vector2(0, -20);
+                    m_RangerInventory.anchoredPosition = new Vector2(Screen.width / 4 + 100, 0);
+                    m_MageInventory.anchoredPosition = new Vector2(-Screen.width / 4 - 100, 0);
+                    m_WarriorInventory.anchoredPosition = new Vector2(0, 0);
 
                     m_RangerHpSlider.anchoredPosition = new Vector2(Screen.width / 4 + 100, -20);
                     m_MageHpSlider.anchoredPosition = new Vector2(-Screen.width / 4 - 100, -20);
@@ -351,16 +342,16 @@ namespace EventCallbacks
                     m_MageSpell1.anchoredPosition = new Vector2(-Screen.width / 4 - 100, 15);
                     m_WarriorSpell1.anchoredPosition = new Vector2(0, 15);
 
-                    m_RangerSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, -30);
+                    m_RangerSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, 15);
                     m_MageSpell2.anchoredPosition = new Vector2(-Screen.width / 4 - 100 + 30, 15);
                     m_WarriorSpell2.anchoredPosition = new Vector2(30, 15);
 
                 }
                 else if (magePos.x < rangerPos.x && rangerPos.x < warriorPos.x)
                 {
-                    m_WarriorInventory.anchoredPosition = new Vector2(Screen.width / 4 + 100, -20);
-                    m_MageInventory.anchoredPosition = new Vector2(-Screen.width / 4 - 100, -20);
-                    m_RangerInventory.anchoredPosition = new Vector2(0, -20);
+                    m_WarriorInventory.anchoredPosition = new Vector2(Screen.width / 4 + 100, 0);
+                    m_MageInventory.anchoredPosition = new Vector2(-Screen.width / 4 - 100, 0);
+                    m_RangerInventory.anchoredPosition = new Vector2(0, 0);
 
                     m_WarriorHpSlider.anchoredPosition = new Vector2(Screen.width / 4 + 100, -20);
                     m_MageHpSlider.anchoredPosition = new Vector2(-Screen.width / 4 - 100, -20);
@@ -378,7 +369,7 @@ namespace EventCallbacks
                     m_MageSpell1.anchoredPosition = new Vector2(-Screen.width / 4 - 100, 15);
                     m_RangerSpell1.anchoredPosition = new Vector2(0, 15);
 
-                    m_WarriorSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, -30);
+                    m_WarriorSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, 15);
                     m_MageSpell2.anchoredPosition = new Vector2(-Screen.width / 4 - 100 + 30, 15);
                     m_RangerSpell2.anchoredPosition = new Vector2(30, 15);
 
@@ -407,7 +398,7 @@ namespace EventCallbacks
                     m_RangerSpell1.anchoredPosition = new Vector2(-Screen.width / 4 - 100, 15);
                     m_MageSpell1.anchoredPosition = new Vector2(0, 15);
 
-                    m_WarriorSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, -30);
+                    m_WarriorSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, 15);
                     m_RangerSpell2.anchoredPosition = new Vector2(-Screen.width / 4 - 100 + 30, 15);
                     m_MageSpell2.anchoredPosition = new Vector2(30, 15);
 
@@ -436,7 +427,7 @@ namespace EventCallbacks
                     m_RangerSpell1.anchoredPosition = new Vector2(-Screen.width / 4 - 100, 15);
                     m_WarriorSpell1.anchoredPosition = new Vector2(0, 15);
 
-                    m_MageSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, -30);
+                    m_MageSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, 15);
                     m_RangerSpell2.anchoredPosition = new Vector2(-Screen.width / 4 - 100 + 30, 15);
                     m_WarriorSpell2.anchoredPosition = new Vector2(30, 15);
 

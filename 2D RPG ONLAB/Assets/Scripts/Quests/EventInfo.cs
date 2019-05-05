@@ -23,16 +23,15 @@ namespace EventCallbacks
         public string HeroName;
     }
 
-    public class UnitDeathEventInfo : EventInfo
+    public class SpawnerDeathEventInfo : EventInfo
     {
-        public Mobs Unit;
         public string Killer;
         public int Level;
+    }
 
-        /*
-        Info about cause of death, our killer, etc...
-        Could be a struct, readonly, etc...
-        */
+    public class MobDeathEventInfo : SpawnerDeathEventInfo
+    {
+        public Mobs Unit;
     }
 
 

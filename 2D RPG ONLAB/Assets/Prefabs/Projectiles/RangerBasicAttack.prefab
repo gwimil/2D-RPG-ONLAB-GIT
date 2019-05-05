@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7630944931398355933}
   - component: {fileID: 4090735210710306086}
   - component: {fileID: 4634640070288744683}
-  - component: {fileID: 4232951226162329594}
+  - component: {fileID: 6429506198615752716}
   m_Layer: 12
   m_Name: RangerBasicAttack
   m_TagString: PlayerProjectile
@@ -129,7 +129,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4232951226162329594
+--- !u!114 &6429506198615752716
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,9 +138,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2189946189723621274}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c42c821ea8c1e86479fb4fce2f365a03, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c6c5217162372a4eaa0eee84c98076c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   user: 
   m_damage: 5
-  m_MovemenetSpeed: 260
+  m_MovemenetSpeed: 250

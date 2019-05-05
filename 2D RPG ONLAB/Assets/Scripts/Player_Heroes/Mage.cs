@@ -18,6 +18,7 @@ namespace EventCallbacks
                 p.setDirection(m_NormalizedMovement);
                 p.m_damage += m_BaseDMG / 15;
                 basicAttackCooldownATM = 0.0f;
+                m_TextCooldownBasic.text = ((int)m_BasicAttackCooldown).ToString();
             }
         }
 
@@ -34,6 +35,7 @@ namespace EventCallbacks
                         fb.user = gameObject.name;
                         m_CurrentMana -= m_SpellOneManaCost;
                         spellOneCooldownATM = 0.0f;
+                        m_TextCooldownSpellOne.text = ((int)m_SpellOneCooldown).ToString();
                     }
                     break;
                 case 2:

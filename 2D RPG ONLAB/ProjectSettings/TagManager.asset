@@ -19,6 +19,7 @@ TagManager:
   - Enemy
   - Hero
   - ItemHolder
+  - EnemySpawner
   layers:
   - Default
   - TransparentFX

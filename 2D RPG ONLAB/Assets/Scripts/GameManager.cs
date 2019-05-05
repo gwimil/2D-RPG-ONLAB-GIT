@@ -26,14 +26,10 @@ namespace EventCallbacks
 
         private int numberOfPlayers;
 
-
-        private bool isInventory;
-
         // Start is called before the first frame update
 
         private void Awake()
         {
-            isInventory = false;
             placesToSpawn = new List<Vector2>();
             m_Camera.m_Targets = new Transform[MenuData.m_playerNumber];
             spawnHeroes = false;
@@ -48,7 +44,7 @@ namespace EventCallbacks
             Debug.Log(MenuData.m_playerNumber);
             UnsetHeroes();
             BindHeroesToPlayers();
-            uiManager.SetUIToPlayerPosition();
+            uiManager.changeUI = true;
 
 
             for (int i = 0; i < numberOfPlayers; i++)
@@ -109,19 +105,6 @@ namespace EventCallbacks
         // Update is called once per frame
         void Update()
         {
-
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                if (!isInventory)
-                {
-                    uiManager.SetUIToPlayerPosition();
-                    isInventory = true;
-                }
-                else
-                {
-                    isInventory = false;
-                }
-            }
 
             if (Input.GetKeyDown(KeyCode.M))
             {

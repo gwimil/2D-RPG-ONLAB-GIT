@@ -36,9 +36,9 @@ namespace EventCallbacks
 
         void Update()
         {
-           
+            
 
-            if (Input.GetKeyDown(KeyCode.I))
+            if (Input.GetButtonDown("InventoryP" + m_PlayerID))
             {
                 m_hero.inventory.m_inventoryEnabled = !m_hero.inventory.m_inventoryEnabled;
                 if (m_hero.inventory.m_inventoryEnabled)
@@ -54,17 +54,9 @@ namespace EventCallbacks
                 }
             }
 
-            if (Input.GetButtonDown("UseP" + m_PlayerID))
-            {
-                ItemPickupEventInfo ipei = new ItemPickupEventInfo();
-                ipei.EventDescription = "your hero picked up an item";
-                ipei.HeroName = this.m_hero.gameObject.name;
-                EventSystem.Current.FireEvent(ipei);
-            }
 
-
-                if (!inventoryEnabled)
-            {
+             if (!inventoryEnabled)
+             {
                 if (m_PlayerID == 0)
                 {
                     Debug.Log("You forgot to give your players ID-s");
@@ -74,15 +66,32 @@ namespace EventCallbacks
                     velocity = new Vector2(Input.GetAxisRaw("Horizontal" + m_PlayerID), Input.GetAxisRaw("Vertical" + m_PlayerID)).normalized * m_MovementSpeed;
                 }
 
+                // ATTACK BASIC
                 if (Input.GetButtonDown("BasicAttackP" + m_PlayerID))
                 {
                     m_hero.Attack();
                 }
 
+                //USE SPELL 1
                 if (Input.GetButtonDown("SpellOneP" + m_PlayerID))
                 {
                     m_hero.UseSkill(1);
                 }
+
+                // 
+                if (Input.GetButtonDown("UseP" + m_PlayerID))
+                {
+                    if (m_hero.bags > 0)
+                    {
+                        ItemPickupEventInfo ipei = new ItemPickupEventInfo();
+                        ipei.EventDescription = "your hero wants to pick up an item";
+                        ipei.HeroName = this.m_hero.gameObject.name;
+                        EventSystem.Current.FireEvent(ipei);
+                    }
+                    
+                }
+
+
             }
             else
             {
@@ -94,6 +103,12 @@ namespace EventCallbacks
                 {
                     eventSystem.SetSelectedGameObject(go);
                 }
+
+                if (Input.GetButtonDown("BasicAttackP" + m_PlayerID))
+                {
+                    m_hero.Attack();
+                }
+
             }
 
 
