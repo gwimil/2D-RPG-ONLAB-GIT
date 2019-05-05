@@ -22,13 +22,23 @@ namespace EventCallbacks
         private bool spawnHeroes;
         private Vector2 placeToSpawnHeroes;
 
+        private UIManager uiManager;
+
+        private int numberOfPlayers;
+
+
+        private bool isInventory;
+
         // Start is called before the first frame update
 
         private void Awake()
         {
+            isInventory = false;
             placesToSpawn = new List<Vector2>();
             m_Camera.m_Targets = new Transform[MenuData.m_playerNumber];
             spawnHeroes = false;
+            numberOfPlayers = MenuData.m_playerNumber;
+            uiManager = GetComponentInChildren<UIManager>();
         }
 
 
@@ -38,6 +48,13 @@ namespace EventCallbacks
             Debug.Log(MenuData.m_playerNumber);
             UnsetHeroes();
             BindHeroesToPlayers();
+            uiManager.SetUIToPlayerPosition();
+
+
+            for (int i = 0; i < numberOfPlayers; i++)
+            {
+                m_Players[i].m_hero.GetComponentInChildren<Camera>().gameObject.SetActive(false);
+            }
 
 
             for (int i = 0; i < 3; i++)
@@ -50,7 +67,7 @@ namespace EventCallbacks
 
         private void BindHeroesToPlayers()
         {
-            for (int i = 0; i < MenuData.m_playerNumber; i++)
+            for (int i = 0; i < numberOfPlayers; i++)
             {
                 switch (MenuData.m_PlayerCharacters[i])
                 {
@@ -77,7 +94,6 @@ namespace EventCallbacks
             m_Players[i].m_hero.gameObject.SetActive(true);
             m_Camera.m_Targets[i] = m_Players[i].m_hero.transform;
             m_Players[i].eventSystem = m_HeroInventoryEventSystem[i];
-           
         }
 
         private void UnsetHeroes()
@@ -93,6 +109,20 @@ namespace EventCallbacks
         // Update is called once per frame
         void Update()
         {
+
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                if (!isInventory)
+                {
+                    uiManager.SetUIToPlayerPosition();
+                    isInventory = true;
+                }
+                else
+                {
+                    isInventory = false;
+                }
+            }
+
             if (Input.GetKeyDown(KeyCode.M))
             {
                 Items item = m_ItemManager.GiveItem(1);
@@ -121,7 +151,7 @@ namespace EventCallbacks
         {
             if (spawnHeroes)
             {
-                for (int i = 0; i < MenuData.m_playerNumber; i++)
+                for (int i = 0; i < numberOfPlayers; i++)
                 {
                     m_Players[i].m_hero.transform.position = new Vector3(placeToSpawnHeroes.x,placeToSpawnHeroes.y, 0);
                 }

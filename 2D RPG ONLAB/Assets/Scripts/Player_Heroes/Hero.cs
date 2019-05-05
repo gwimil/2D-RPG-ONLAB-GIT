@@ -9,6 +9,8 @@ namespace EventCallbacks
 {
     public abstract class Hero : MonoBehaviour
     {
+        public Camera m_HeroCamera;
+
         public Image m_ImageCooldownBasic;
         public Image m_ImageCooldownSpellOne;
         public Image m_ImageCooldownSpellTwo;

@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Camera\CameraControll.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Inventory\MyButton.cs" />
     <Compile Include="Assets\Scripts\Inventory\MyEventSystem.cs" />
@@ -72,7 +73,9 @@
     <Compile Include="Assets\Scripts\Items\Items.cs" />
     <Compile Include="Assets\Scripts\Items\Potions.cs" />
     <Compile Include="Assets\Scripts\Items\Slot.cs" />
+    <Compile Include="Assets\Scripts\Map\ObjectArray.cs" />
     <Compile Include="Assets\Scripts\Menu\Menu.cs" />
+    <Compile Include="Assets\Scripts\Menu\UIManager.cs" />
     <Compile Include="Assets\Scripts\Mobs\AgressiveMageEnemy.cs" />
     <Compile Include="Assets\Scripts\Mobs\AgressiveMeleeEnemy.cs" />
     <Compile Include="Assets\Scripts\Mobs\AgressiveRangerEnemy.cs" />
@@ -97,6 +100,7 @@
     <Compile Include="Assets\Scripts\Quests\Quest.cs" />
     <Compile Include="Assets\Scripts\Quests\QuestManager.cs" />
     <Compile Include="Assets\Scripts\Static\MenuData.cs" />
+    <Compile Include="Assets\Scripts\Triggers\TeleportTrigger.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>E:/UNITY/temalab/Onlab/2D RPG ONLAB/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
