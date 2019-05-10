@@ -2670,8 +2670,8 @@ SpriteRenderer:
   m_SortingLayerID: -746512767
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.043704987, g: 1, b: 0, a: 1}
+  m_Sprite: {fileID: 21300002, guid: fac4277e14a271e408934f3c1bc7d3f2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2715,18 +2715,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.0019355714}
   m_SpriteTilingProperty:
-    border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 0.31, y: 0.47}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.15, y: 0.15}
+  m_Size: {x: 0.30097198, y: 0.47129935}
   m_EdgeRadius: 0
 --- !u!114 &299455184286548053
 MonoBehaviour:
@@ -2763,7 +2763,7 @@ MonoBehaviour:
   m_TextCooldownBasic: {fileID: 8945781452951413699}
   m_TextCooldownSpellOne: {fileID: 1845326423722279500}
   m_TextCooldownSpellTwo: {fileID: 434108024435107427}
-  m_SpellOneCooldown: 2
+  m_SpellOneCooldown: 5
   m_SpellOneManaCost: 30
   m_SpellTwoCooldown: 0
   m_SpellTwoManaCost: 0
@@ -2788,6 +2788,13 @@ MonoBehaviour:
   m_MagicResist: 15
   m_HealthRegen: 3
   m_ManaRegen: 5
+  m_MovementSprites:
+  - {fileID: 21300000, guid: fac4277e14a271e408934f3c1bc7d3f2, type: 3}
+  - {fileID: 21300002, guid: fac4277e14a271e408934f3c1bc7d3f2, type: 3}
+  - {fileID: 21300004, guid: fac4277e14a271e408934f3c1bc7d3f2, type: 3}
+  bags: 0
+  overTeleport: 0
+  teleportName: 
   m_FireBall: {fileID: 3326717574125653086, guid: 87c2dc7fd372dea4886733205de8b693,
     type: 3}
   m_BaseAttack: {fileID: 4054737496800662265, guid: c872e406616e2ea46a19df72f27fe5ed,

@@ -14,7 +14,6 @@ namespace EventCallbacks
         public ItemManager m_ItemManager;
         private Hero hero;
         private int overlappingHeroes;
-        private bool end;
 
 
         private Guid ItemPickedUpGuid;
@@ -23,7 +22,6 @@ namespace EventCallbacks
 
         private void Awake()
         {
-            end = false;
             ItemPickedUpGuid = new Guid();
             items = new List<Items>();
             heroesOverlapping = new List<Hero>();
@@ -61,7 +59,6 @@ namespace EventCallbacks
                 if (heroesOverlapping[i].gameObject.name == heroName)
                 {
                     heroesOverlapping[i].AddItemToInventory(m_ItemManager.GiveItem(items[0].m_ID));
-                    end = true;
                     Destroy(gameObject);
                 }
             }

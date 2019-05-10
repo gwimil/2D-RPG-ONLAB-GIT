@@ -74,6 +74,8 @@ namespace EventCallbacks
         public float m_HealthRegen;
         public float m_ManaRegen;
 
+        public Sprite[] m_MovementSprites;
+
 
         private float timer;
         private int previousSecond;
@@ -88,12 +90,15 @@ namespace EventCallbacks
         [HideInInspector] public bool overTeleport;
         [HideInInspector] public string teleportName;
 
+        private SpriteRenderer spriteRenderer;
+
 
 
 
         protected void Awake()
         {
             bags = 0;
+            spriteRenderer = GetComponent<SpriteRenderer>();
             rigidbody = GetComponent<Rigidbody2D>();
             inventory = GetComponent<Inventory>();
             heroObjectName = this.gameObject.name;
@@ -139,6 +144,9 @@ namespace EventCallbacks
 
             timer += Time.deltaTime;
             int second = Convert.ToInt32(timer % 5000);
+
+
+
             // EVERY SECOND
             if (second - previousSecond == 1)
             {
@@ -169,8 +177,25 @@ namespace EventCallbacks
 
         public void Move(Vector2 position)
         {
-            rigidbody.MovePosition(rigidbody.position + position);
-            if (position.x != 0 || position.y != 0) m_NormalizedMovement = position.normalized;
+           rigidbody.MovePosition(rigidbody.position + position);
+           if (position.x != 0 || position.y != 0) m_NormalizedMovement = position.normalized;
+
+            if (m_MovementSprites != null)
+            {
+                if (m_NormalizedMovement.y == 1.0f) spriteRenderer.sprite = m_MovementSprites[2];
+                else if (m_NormalizedMovement.y == -1.0f) spriteRenderer.sprite = m_MovementSprites[0];
+                else if (m_NormalizedMovement.x == 1.0f)
+                {
+                    spriteRenderer.sprite = m_MovementSprites[1];
+                    spriteRenderer.flipX = false;
+                }
+                else if (m_NormalizedMovement.x == -1.0f)
+                {
+                    spriteRenderer.sprite = m_MovementSprites[1];
+                    spriteRenderer.flipX = true;
+                }
+            }
+
         }
 
         protected void setSpellTextOnCD(Text cText, float cooldownMax, float cooldownATM)
@@ -230,6 +255,7 @@ namespace EventCallbacks
         {
             if (slot.m_item != null)
             {
+                slot.m_item.m_Quantity = 1;
                 Items item = slot.m_item;
                 inventory.AddItem(item);
                 item.UpdateStatsWithItem(this, false);

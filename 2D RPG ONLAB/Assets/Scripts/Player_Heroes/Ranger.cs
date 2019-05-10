@@ -40,11 +40,15 @@ namespace EventCallbacks
                             {
                                 multipleArrows[j + 2].setDirection(m_NormalizedMovement + new Vector2(0.2f * j, 0.0f));
                             }
-                            else
+                            else if (m_NormalizedMovement.x == m_NormalizedMovement.y)
                             {
                                 multipleArrows[j + 2].setDirection(m_NormalizedMovement + new Vector2(0.14f * j, -0.14f * j));
                             }
-                            
+                            else 
+                            {
+                                multipleArrows[j + 2].setDirection(m_NormalizedMovement + new Vector2(0.14f * j, 0.14f * j));
+                            }
+
                             multipleArrows[j + 2].m_damage += m_BaseDMG / 10;
                             multipleArrows[j + 2].user = gameObject.name;
                         }
