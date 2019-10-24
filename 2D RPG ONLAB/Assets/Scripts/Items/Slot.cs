@@ -16,8 +16,10 @@ namespace EventCallbacks
 
         private void Start()
         {
-            if (gameObject.GetComponentInChildren<Text>() == null);
-            else GetComponentInChildren<Text>().text = "";
+            if (gameObject.GetComponentInChildren<Text>() != null)
+            {
+                GetComponentInChildren<Text>().text = "";
+            }
             nullSprite = GetComponent<Image>().sprite;
         }
 

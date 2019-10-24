@@ -2607,8 +2607,8 @@ GameObject:
   - component: {fileID: 8790700442368305691}
   - component: {fileID: 861378614811374116}
   - component: {fileID: 6861649953419409417}
-  - component: {fileID: 299455184286548053}
   - component: {fileID: 617549601}
+  - component: {fileID: 8951843723595198991}
   m_Layer: 11
   m_Name: Mage
   m_TagString: Hero
@@ -2728,22 +2728,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.30097198, y: 0.47129935}
   m_EdgeRadius: 0
---- !u!114 &299455184286548053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 617549600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b98c76a224e83e64ebf26a606744e052, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_inventoryEnabled: 0
-  m_inventory: {fileID: 345071033}
-  m_slots: []
-  m_SlotHolder: {fileID: 387336514}
 --- !u!114 &617549601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2799,6 +2783,22 @@ MonoBehaviour:
     type: 3}
   m_BaseAttack: {fileID: 4054737496800662265, guid: c872e406616e2ea46a19df72f27fe5ed,
     type: 3}
+--- !u!114 &8951843723595198991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617549600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92e529d63b283364baef39765c82bb53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_inventoryEnabled: 0
+  m_inventory: {fileID: 345071033}
+  m_slots: []
+  m_SlotHolder: {fileID: 387336514}
 --- !u!1 &639562681
 GameObject:
   m_ObjectHideFlags: 0

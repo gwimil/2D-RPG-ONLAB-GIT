@@ -7443,7 +7443,7 @@ GameObject:
   - component: {fileID: 1092386676415775918}
   - component: {fileID: 1092386676415775919}
   - component: {fileID: 1092386676415775916}
-  - component: {fileID: 1092386676415775917}
+  - component: {fileID: 6930437472236589759}
   m_Layer: 11
   m_Name: Warrior
   m_TagString: Hero
@@ -7512,6 +7512,10 @@ MonoBehaviour:
   m_MagicResist: 15
   m_HealthRegen: 7
   m_ManaRegen: 2
+  m_MovementSprites: []
+  bags: 0
+  overTeleport: 0
+  teleportName: 
 --- !u!212 &1092386676415775918
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7607,7 +7611,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.15, y: 0.15}
   m_EdgeRadius: 0
---- !u!114 &1092386676415775917
+--- !u!114 &6930437472236589759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7616,7 +7620,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1092386676415775915}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b98c76a224e83e64ebf26a606744e052, type: 3}
+  m_Script: {fileID: 11500000, guid: 92e529d63b283364baef39765c82bb53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_inventoryEnabled: 0

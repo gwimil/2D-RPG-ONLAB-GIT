@@ -7142,8 +7142,8 @@ GameObject:
   - component: {fileID: 155503536372610966}
   - component: {fileID: 155503536372610965}
   - component: {fileID: 155503536372610964}
-  - component: {fileID: 155503536372610955}
   - component: {fileID: 1347044518102502746}
+  - component: {fileID: 8424802555693702730}
   m_Layer: 11
   m_Name: Ranger
   m_TagString: Hero
@@ -7318,22 +7318,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3086399, y: 0.46988052}
   m_EdgeRadius: 0
---- !u!114 &155503536372610955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 155503536372610961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b98c76a224e83e64ebf26a606744e052, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_inventoryEnabled: 0
-  m_inventory: {fileID: 1808141453}
-  m_slots: []
-  m_SlotHolder: {fileID: 1312736900}
 --- !u!95 &1347044518102502746
 Animator:
   serializedVersion: 3
@@ -7353,6 +7337,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8424802555693702730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155503536372610961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92e529d63b283364baef39765c82bb53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_inventoryEnabled: 0
+  m_inventory: {fileID: 1808141453}
+  m_slots: []
+  m_SlotHolder: {fileID: 1312736900}
 --- !u!1 &296382423101377508
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SideQuest : MonoBehaviour
+
+namespace EventCallbacks
 {
-    public Items[] rewards;
-    public string description;
-
-    public string GetDestription()
+    public class SideQuest : MonoBehaviour
     {
-        return description;
+        public Items[] rewards;
+        public string description;
+
+        public string GetDestription()
+        {
+            return description;
+        }
+
+        public Items[] GetItems()
+        {
+            return rewards;
+        }
     }
 
-    public Items[] GetItems()
-    {
-        return rewards;
-    }
 }

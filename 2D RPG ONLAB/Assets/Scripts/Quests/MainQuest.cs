@@ -2,24 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainQuest : MonoBehaviour
+namespace EventCallbacks
 {
-    public Items[] m_Rewards;
-    public string m_Description;
-    public int m_QuestID;
-    public int m_Exp;
-    public int m_SuggestedLevel;
 
-    public string GetDestription()
+    public class MainQuest : MonoBehaviour
     {
-        return m_Description;
+        public Items[] m_Rewards;
+        public string m_Description;
+        public int m_QuestID;
+        public int m_Exp;
+        public int m_SuggestedLevel;
+
+        public string GetDestription()
+        {
+            return m_Description;
+        }
+
+        public Items[] GetItems()
+        {
+            return m_Rewards;
+        }
+
+
+
     }
-
-    public Items[] GetItems()
-    {
-        return m_Rewards;
-    }
-
-
-
 }
