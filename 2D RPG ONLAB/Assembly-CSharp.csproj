@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\FantasyIconsPackFree\Demo\IconViewer.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraControll.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraManager.cs" />
     <Compile Include="Assets\Scripts\Enums\EItems.cs" />
@@ -108,6 +109,9 @@
     <Compile Include="Assets\Scripts\Quests\SideQuest.cs" />
     <Compile Include="Assets\Scripts\Static\MenuData.cs" />
     <Compile Include="Assets\Scripts\Triggers\TeleportTrigger.cs" />
+    <None Include="Assets\SpellBookPreface\ReadMe.txt" />
+    <None Include="Assets\FreePixelGear\ReadMe.txt" />
+    <None Include="Assets\Tiny Fantasy Icons\README.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/git repos/LegujabbSzakdolg/2D RPG ONLAB/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

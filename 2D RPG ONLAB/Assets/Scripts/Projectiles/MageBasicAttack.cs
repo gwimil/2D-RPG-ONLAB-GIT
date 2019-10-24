@@ -6,6 +6,11 @@ namespace EventCallbacks
 {
     public class MageBasicAttack : Projectile
     {
+        public Sprite m_Sprite;
 
+        private void Start()
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = m_Sprite;
+        }
     }
 }

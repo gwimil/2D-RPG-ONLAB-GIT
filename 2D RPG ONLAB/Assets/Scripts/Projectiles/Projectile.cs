@@ -16,9 +16,13 @@ namespace EventCallbacks
         private new Rigidbody2D rigidbody;
         private Transform parentTransform;
 
-        private void Start()
+        private void Awake()
         {
             rigidbody = GetComponent<Rigidbody2D>();
+        }
+
+        private void Start()
+        {
             m_LifeTime = 0;
             m_MaxLifeTime = 100;
             m_MovemenetSpeed = m_MovemenetSpeed / 1000;
