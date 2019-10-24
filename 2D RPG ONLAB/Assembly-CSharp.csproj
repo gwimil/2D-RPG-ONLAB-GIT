@@ -63,7 +63,7 @@
     <Compile Include="Assets\FantasyIconsPackFree\Demo\IconViewer.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraControll.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraManager.cs" />
-    <Compile Include="Assets\Scripts\Enums\EItems.cs" />
+    <Compile Include="Assets\Scripts\Enums\IPotions.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Inventory\MyButton.cs" />
     <Compile Include="Assets\Scripts\Inventory\MyEventSystem.cs" />
@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\Items\Potions.cs" />
     <Compile Include="Assets\Scripts\Items\Slot.cs" />
     <Compile Include="Assets\Scripts\Map\ObjectArray.cs" />
+    <Compile Include="Assets\Scripts\Map\RandomObsticleSpawner.cs" />
     <Compile Include="Assets\Scripts\Map\SimpleTeleporter.cs" />
     <Compile Include="Assets\Scripts\Map\Spinner.cs" />
     <Compile Include="Assets\Scripts\Menu\Menu.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="Assets\Scripts\Quests\QuestManager.cs" />
     <Compile Include="Assets\Scripts\Quests\SideQuest.cs" />
     <Compile Include="Assets\Scripts\Static\MenuData.cs" />
+    <Compile Include="Assets\Scripts\Triggers\Teleporter.cs" />
     <Compile Include="Assets\Scripts\Triggers\TeleportTrigger.cs" />
     <None Include="Assets\SpellBookPreface\ReadMe.txt" />
     <None Include="Assets\FreePixelGear\ReadMe.txt" />

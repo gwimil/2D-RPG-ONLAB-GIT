@@ -28,7 +28,7 @@ namespace EventCallbacks
         }
 
 
-        virtual public void Use()
+        virtual public void Use(Hero h)
         {
 
         }

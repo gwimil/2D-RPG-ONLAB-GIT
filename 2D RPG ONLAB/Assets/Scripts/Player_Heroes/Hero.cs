@@ -32,7 +32,6 @@ namespace EventCallbacks
         protected float basicAttackCooldownATM;
 
 
-
         protected Vector2 m_NormalizedMovement;
 
         public Slider m_HpSlider;
@@ -81,14 +80,18 @@ namespace EventCallbacks
         private int previousSecond;
 
         private string heroObjectName;
-        
+
 
         private Guid SpawnerDeathEventGuid;
         private Guid MobDeathEventGuid;
-        
+
         [HideInInspector] public int bags;
         [HideInInspector] public bool overTeleport;
         [HideInInspector] public string teleportName;
+        [HideInInspector] public int buffDuration;
+        [HideInInspector] public int buffStrength;
+        [HideInInspector] public IPotions currentBuff;
+
 
         private SpriteRenderer spriteRenderer;
 
@@ -98,6 +101,8 @@ namespace EventCallbacks
         protected void Awake()
         {
             bags = 0;
+            buffDuration = 0;
+            buffStrength = 0;
             spriteRenderer = GetComponent<SpriteRenderer>();
             rigidbody = GetComponent<Rigidbody2D>();
             inventory = GetComponent<Inventory>();
@@ -129,6 +134,7 @@ namespace EventCallbacks
 
             EventSystem.Current.RegisterListener<MobDeathEventInfo>(EnemyKilled, ref MobDeathEventGuid);
             EventSystem.Current.RegisterListener<SpawnerDeathEventInfo>(EnemyKilled, ref SpawnerDeathEventGuid);
+
         }
 
         void Update()
@@ -144,6 +150,12 @@ namespace EventCallbacks
 
             timer += Time.deltaTime;
             int second = Convert.ToInt32(timer % 5000);
+
+            if (buffDuration > 0)
+            {
+                buffDuration--;
+            }
+
 
 
 
@@ -177,8 +189,13 @@ namespace EventCallbacks
 
         public void Move(Vector2 position)
         {
-           rigidbody.MovePosition(rigidbody.position + position);
-           if (position.x != 0 || position.y != 0) m_NormalizedMovement = position.normalized;
+
+            if (buffDuration > 0)
+            {
+                position = position + position * buffStrength / 100.0f;
+            }
+            rigidbody.MovePosition(rigidbody.position + position);
+            if (position.x != 0 || position.y != 0) m_NormalizedMovement = position.normalized;
 
             if (m_MovementSprites != null)
             {
@@ -203,7 +220,7 @@ namespace EventCallbacks
             if (cooldownMax <= cooldownATM) cText.text = "";
             else cText.text = ((int)(cooldownMax - cooldownATM)).ToString();
         }
-        
+
 
         public void CollideWithBag(bool b)
         {
@@ -211,7 +228,7 @@ namespace EventCallbacks
             else bags--;
             if (bags < 0) bags = 0;
         }
-       
+
 
         protected void SetHealthUI()
         {
@@ -288,34 +305,22 @@ namespace EventCallbacks
                     EquipItemByLocation(i, m_WeaponSlot);
                     break;
                 case "SpeedPotion":
-                    // TODO
+                    inventory.UseItem(this, i);
                     break;
                 case "ManaPotion":
-                    // TODO
+                    inventory.UseItem(this, i);
                     break;
                 case "HPPotion":
-                    // TODO
-                    break;
-                case "DefensePotion":
-                    // TODO
+                    inventory.UseItem(this, i);
                     break;
                 default:
                     break;
             }
             SetStats();
         }
-        
 
-        
 
-        public void EquipBestItems()
-        {
-            EquipItemByLocation(inventory.GetBestItemByTag("Weapon"), m_WeaponSlot);
-            EquipItemByLocation(inventory.GetBestItemByTag("Helmet"), m_HelmetSlot);
-            EquipItemByLocation(inventory.GetBestItemByTag("Gloves"), m_GlovesSlot);
-            EquipItemByLocation(inventory.GetBestItemByTag("Legging"), m_LeggingSlot);
-            EquipItemByLocation(inventory.GetBestItemByTag("Armor"), m_ArmorSlot);
-        }
+
 
         private void EquipItemByLocation(int locationInInventory, Slot slotToEquiep)
         {
@@ -343,12 +348,12 @@ namespace EventCallbacks
         }
 
 
-        
-        
+
+
 
         private void EnemyKilled(MobDeathEventInfo mdei)
         {
-           if (mdei.Killer.Equals(gameObject.name)) GetExp(mdei.Level * 15);
+            if (mdei.Killer.Equals(gameObject.name)) GetExp(mdei.Level * 15);
         }
 
         private void EnemyKilled(SpawnerDeathEventInfo udei)
@@ -367,6 +372,36 @@ namespace EventCallbacks
         }
 
         abstract public void GetExp(int exp);
+
+
+
+
+        private void onTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.tag.Equals("teleport"))
+            {
+                collision.gameObject.GetComponent<Teleporter>().TeleportTo(this);
+            }
+        }
+
+
+        public void HealHero(float heal)
+        {
+            m_CurrentHP += heal;
+            if (m_CurrentHP > m_MaxHP)
+            {
+                m_CurrentHP = m_MaxHP;
+            }
+        }
+
+        public void ManaHero(float mana)
+        {
+            m_CurrentMana += mana;
+            if (m_CurrentMana > m_MaxMana)
+            {
+                m_CurrentMana = m_MaxMana;
+            }
+        }
 
 
 
