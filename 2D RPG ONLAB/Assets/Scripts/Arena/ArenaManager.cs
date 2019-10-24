@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class ArenaManager : MonoBehaviour
 {
 
-
     public GameObject m_NetworkManager;
     public GameObject m_MageHero;
     public GameObject m_RangerHero;
@@ -24,6 +23,7 @@ public class ArenaManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_NetworkManager.SetActive(false);
         m_HeroChooser.gameObject.SetActive(true);
         m_MageButton.onClick.AddListener(MageButtonClicked);
         m_RangerButton.onClick.AddListener(RangerButtonClicked);
@@ -35,14 +35,14 @@ public class ArenaManager : MonoBehaviour
     {
         choosenHero = m_MageHero;
         m_HeroChooser.gameObject.SetActive(false);
-        Instantiate(m_NetworkManager);
+        m_NetworkManager.SetActive(true);
     }
 
     private void RangerButtonClicked()
     {
         choosenHero = m_RangerHero;
         m_HeroChooser.gameObject.SetActive(false);
-        Instantiate(m_NetworkManager);
+        m_NetworkManager.SetActive(true);
 
     }
 
@@ -50,7 +50,7 @@ public class ArenaManager : MonoBehaviour
     {
         choosenHero = m_WarriorHero;
         m_HeroChooser.gameObject.SetActive(false);
-        Instantiate(m_NetworkManager);
+        m_NetworkManager.SetActive(true);
     }
 
 
