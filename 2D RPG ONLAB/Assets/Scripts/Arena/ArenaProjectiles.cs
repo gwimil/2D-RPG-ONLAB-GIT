@@ -8,12 +8,12 @@ namespace EventCallbacks
     public abstract class ArenaProjectiles : NetworkBehaviour
     {
 
-        [SyncVar]
-        public Quaternion direction;
+        [SyncVar(hook = "ChangeRotation")]
+        [HideInInspector] public Quaternion direction;
 
 
         [SyncVar]
-        public int ID;
+        [HideInInspector]public int ID;
 
         public int m_damage;
         private Transform parentTransform;
@@ -24,9 +24,9 @@ namespace EventCallbacks
           //  aut = true;
         }
 
-        void Update()
+        void ChangeRotation(Quaternion dir)
         {
-            this.transform.rotation = direction;
+            this.transform.rotation = dir;
         }
 
 

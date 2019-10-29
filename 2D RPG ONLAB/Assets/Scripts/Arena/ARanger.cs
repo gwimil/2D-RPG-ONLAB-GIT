@@ -22,7 +22,6 @@ namespace EventCallbacks
             {
                 CmdSpawnMyProjectile();
                 basicAttackCooldownATM = 0.0f;
-                m_TextCooldownBasic.text = ((int)m_BasicAttackCooldown).ToString();
             }
         }
         override public void UseSkills(int i)

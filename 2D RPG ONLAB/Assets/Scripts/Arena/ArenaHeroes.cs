@@ -13,7 +13,7 @@ namespace EventCallbacks
 
 
         public const int maxHealth = 100;
-        public int currentHealth = maxHealth;
+        [SyncVar(hook = "OnChangeHealth")]public int currentHealth = maxHealth;
         public RectTransform healthBar;
 
         public int m_BaseDMG;
@@ -22,12 +22,10 @@ namespace EventCallbacks
 
         private float m_MovementSpeed = 3.0f;
 
-        public Image m_ImageCooldownBasic;
         public Image m_ImageCooldownSpellOne;
 
         public Image m_ImageCooldownSpellTwo;
 
-        public Text m_TextCooldownBasic;
         public Text m_TextCooldownSpellOne;
         public Text m_TextCooldownSpellTwo;
 
@@ -72,10 +70,8 @@ namespace EventCallbacks
             rigidbody = GetComponent<Rigidbody2D>();
             m_NormalizedMovement = new Vector2(1, 0);
 
-            m_ImageCooldownBasic.fillAmount = 0;
             m_ImageCooldownSpellOne.fillAmount = 0;
             m_ImageCooldownSpellTwo.fillAmount = 0;
-            m_TextCooldownBasic.text = "";
             m_TextCooldownSpellOne.text = "";
             m_TextCooldownSpellTwo.text = "";
 
@@ -121,7 +117,6 @@ namespace EventCallbacks
             transform.rotation = q;
 
 
-            m_ImageCooldownBasic.fillAmount = (m_BasicAttackCooldown - basicAttackCooldownATM) / m_BasicAttackCooldown;
             m_ImageCooldownSpellOne.fillAmount = (m_SpellOneCooldown - spellOneCooldownATM) / m_SpellOneCooldown;
             if (m_BasicAttackCooldown >= basicAttackCooldownATM) basicAttackCooldownATM++;
 
@@ -138,7 +133,6 @@ namespace EventCallbacks
                 if (m_SpellOneCooldown > spellOneCooldownATM) spellOneCooldownATM++;
                 if (spellOneCooldownATM > m_SpellOneCooldown) spellOneCooldownATM = m_SpellOneCooldown;
 
-                setSpellTextOnCD(m_TextCooldownBasic, m_BasicAttackCooldown, basicAttackCooldownATM);
                 setSpellTextOnCD(m_TextCooldownSpellOne, m_SpellOneCooldown, spellOneCooldownATM);
 
                 if (second == 5000)
@@ -275,13 +269,25 @@ namespace EventCallbacks
 
         public void TakeDamage(int amount)
         {
+
+            if (!isServer)
+            {
+                return;
+            }
+
             currentHealth -= amount;
             if (currentHealth <= 0)
             {
                 currentHealth = 0;
                 Die();
             }
-            healthBar.sizeDelta = new Vector2(currentHealth * 2, healthBar.sizeDelta.y);
+            
+        }
+
+
+        void OnChangeHealth(int health)
+        {
+            healthBar.sizeDelta = new Vector2(health * 2, healthBar.sizeDelta.y);
         }
 
 

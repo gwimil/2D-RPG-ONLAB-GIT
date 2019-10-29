@@ -23,7 +23,6 @@ namespace EventCallbacks
             {
                 CmdFire();
                 basicAttackCooldownATM = 0.0f;
-                m_TextCooldownBasic.text = ((int)m_BasicAttackCooldown).ToString();
             }
         }
 
@@ -56,21 +55,22 @@ namespace EventCallbacks
         {
 
             // We are guaranteed to be on the server right now.
-            ArenaProjectiles p = Instantiate(m_BaseAttack, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 180));
+            
+            GameObject p = Instantiate(m_BaseAttack.gameObject, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 180));
             //  p.setDirection(m_NormalizedMovement)
             p.GetComponent<ArenaProjectiles>().ID = ID;
-            p.gameObject.GetComponent<Rigidbody2D>().velocity = m_NormalizedMovement * 5;
+            Debug.Log(GetComponent<NetworkTransform>().transform.rotation);
+            p.GetComponent<Rigidbody2D>().velocity = m_NormalizedMovement * 5;
             p.GetComponent<ArenaProjectiles>().m_damage += m_BaseDMG / 10;
             p.GetComponent<ArenaProjectiles>().direction = Quaternion.Euler(0, 0, transform.rotation.z + 180);
-
             //go.GetComponent<NetworkIdentity>().AssignClientAuthority( connectionToClient );
 
             // Now that the object exists on the server, propagate it to all
             // the clients (and also wire up the NetworkIdentity)
-            NetworkServer.Spawn(p.gameObject);
+            NetworkServer.Spawn(p);
+            
 
-
-            Destroy(p.gameObject, 3);
+            Destroy(p, 3);
         }
 
 
@@ -93,6 +93,7 @@ namespace EventCallbacks
             // Now that the object exists on the server, propagate it to all
             // the clients (and also wire up the NetworkIdentity)
             NetworkServer.Spawn(fb);
+            
             Destroy(fb, 3);
 
         }
