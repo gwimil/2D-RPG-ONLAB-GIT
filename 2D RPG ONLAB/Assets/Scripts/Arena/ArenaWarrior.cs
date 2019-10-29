@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class ArenaWarrior : NetworkBehaviour
+public class ArenaWarrior : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

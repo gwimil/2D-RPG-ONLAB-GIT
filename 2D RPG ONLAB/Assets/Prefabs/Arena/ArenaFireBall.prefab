@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 2389405542855095813}
   - component: {fileID: 3144485838100068029}
   - component: {fileID: 2139082399941279071}
-  m_Layer: 12
+  m_Layer: 18
   m_Name: ArenaFireBall
-  m_TagString: PlayerProjectile
+  m_TagString: ArenaProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,8 +178,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user: 
+  heroID: 0
+  direction: {x: 0, y: 0, z: 0, w: 0}
   m_damage: 40
-  m_MovemenetSpeed: 140
+  SpeedInUnitsPerSecond: 0
 --- !u!114 &2139082399941279071
 MonoBehaviour:
   m_ObjectHideFlags: 0

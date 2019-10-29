@@ -36,7 +36,7 @@ namespace EventCallbacks
             switch (i)
             {
                 case 1:
-                    if (m_SpellOneCooldown == spellOneCooldownATM && m_CurrentMana >= m_SpellOneManaCost && m_SpellOne != null)
+                    if (m_SpellOneCooldown == spellOneCooldownATM && m_SpellOne != null)
                     {
                         List<ArenaProjectiles> multipleArrows = new List<ArenaProjectiles>();
                         for (int j = -2; j < 3; j++)
@@ -44,25 +44,23 @@ namespace EventCallbacks
                             multipleArrows.Add(Instantiate(m_SpellOne, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 180)));
                             if (m_NormalizedMovement.y == 0.0f)
                             {
-                                multipleArrows[j + 2].setDirection(m_NormalizedMovement + new Vector2(0.0f, 0.2f * j));
+                          //      multipleArrows[j + 2].setDirection(m_NormalizedMovement + new Vector2(0.0f, 0.2f * j));
                             }
                             else if (m_NormalizedMovement.x == 0.0f)
                             {
-                                multipleArrows[j + 2].setDirection(m_NormalizedMovement + new Vector2(0.2f * j, 0.0f));
+                            //    multipleArrows[j + 2].setDirection(m_NormalizedMovement + new Vector2(0.2f * j, 0.0f));
                             }
                             else if (m_NormalizedMovement.x == m_NormalizedMovement.y)
                             {
-                                multipleArrows[j + 2].setDirection(m_NormalizedMovement + new Vector2(0.14f * j, -0.14f * j));
+                           //     multipleArrows[j + 2].setDirection(m_NormalizedMovement + new Vector2(0.14f * j, -0.14f * j));
                             }
                             else
                             {
-                                multipleArrows[j + 2].setDirection(m_NormalizedMovement + new Vector2(0.14f * j, 0.14f * j));
+                           //     multipleArrows[j + 2].setDirection(m_NormalizedMovement + new Vector2(0.14f * j, 0.14f * j));
                             }
 
                             multipleArrows[j + 2].m_damage += m_BaseDMG / 10;
-                            multipleArrows[j + 2].user = gameObject.name;
                         }
-                        m_CurrentMana -= m_SpellOneManaCost;
                         spellOneCooldownATM = 0.0f;
                         m_TextCooldownSpellOne.text = ((int)m_SpellOneCooldown).ToString();
                     }
@@ -73,7 +71,6 @@ namespace EventCallbacks
                 default: break;
             }
 
-            SetHealthUI();
         }
 
 
@@ -83,7 +80,7 @@ namespace EventCallbacks
 
             // We are guaranteed to be on the server right now.
             ArenaProjectiles p = Instantiate(m_BaseAttack, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 180));
-            p.setDirection(m_NormalizedMovement);
+         //   p.setDirection(m_NormalizedMovement);
             p.m_damage += m_BaseDMG / 15;
 
             //go.GetComponent<NetworkIdentity>().AssignClientAuthority( connectionToClient );

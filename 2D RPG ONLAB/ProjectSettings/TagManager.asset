@@ -20,6 +20,7 @@ TagManager:
   - Hero
   - ItemHolder
   - EnemySpawner
+  - ArenaProjectile
   layers:
   - Default
   - TransparentFX
@@ -39,7 +40,7 @@ TagManager:
   - Non_CollidableObjects
   - LootBags
   - Teleporter
-  - 
+  - ArenaProjectile
   - 
   - 
   - 

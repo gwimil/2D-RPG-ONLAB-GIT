@@ -16,14 +16,12 @@ namespace EventCallbacks
         {
 
             // Is this actually my own local PlayerConnectionObject?
-            /*   if (isLocalPlayer == false)
+               if (isLocalPlayer == false)
                {
-                   PlayerCamera.SetActive(false);
                    // This object belongs to another player.
                    return;
                }
 
-               PlayerCamera.SetActive(true);*/
             // PlayerUnitPrefab = GameObject.Find("ArenaManager").GetComponent<ArenaManager>().choosenHero;
             // Debug.Log(PlayerUnitPrefab);
 
@@ -97,6 +95,8 @@ namespace EventCallbacks
 
             // We are guaranteed to be on the server right now.
             GameObject go = Instantiate(PlayerUnitPrefab);
+
+         //   go.GetComponent<ArenaHeroes>().aID = playerControllerId;
 
             //go.GetComponent<NetworkIdentity>().AssignClientAuthority( connectionToClient );
 

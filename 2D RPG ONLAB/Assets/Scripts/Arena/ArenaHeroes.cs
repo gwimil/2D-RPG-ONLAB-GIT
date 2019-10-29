@@ -8,6 +8,17 @@ namespace EventCallbacks
 {
     public abstract class ArenaHeroes : NetworkBehaviour
     {
+        [HideInInspector]public static int _ID = 1;
+        [HideInInspector] public int ID;
+
+
+        public const int maxHealth = 100;
+        public int currentHealth = maxHealth;
+        public RectTransform healthBar;
+
+        public int m_BaseDMG;
+
+
 
         private float m_MovementSpeed = 3.0f;
 
@@ -32,38 +43,13 @@ namespace EventCallbacks
         public float m_BasicAttackCooldown;
         protected float basicAttackCooldownATM;
 
-
         protected Vector2 m_NormalizedMovement;
-
-        public Slider m_HpSlider;
-        public Slider m_ManaSlider;
-        protected Color m_FullHealthColor = Color.green;
-        protected Color m_ZeroHealthColor = Color.red;
-        protected Color m_FullManaColor = Color.blue;
-        protected Color m_ZeroManaColor = Color.grey;
-        public Image m_FillHPImage;
-        public Image m_FillManaImage;
 
 
         protected Rigidbody2D rigidbody;
 
 
-        // change the maxmana and maxhp different for each hero
-        public float m_MaxHP = 100f;
-        public float m_MaxMana = 100f;
 
-        public float m_BaseDMG;
-
-        [SyncVar]
-        protected float m_CurrentHP;
-
-        [SyncVar]
-        protected float m_CurrentMana;
-
-        public float m_Armor;
-        public float m_MagicResist;
-        public float m_HealthRegen;
-        public float m_ManaRegen;
 
         public Sprite[] m_MovementSprites;
 
@@ -71,7 +57,6 @@ namespace EventCallbacks
         private float timer;
         private int previousSecond;
 
-        private string heroObjectName;
 
         private SpriteRenderer spriteRenderer;
 
@@ -81,9 +66,10 @@ namespace EventCallbacks
         public void Start()
         {
 
+            ID = _ID;
+            _ID++;
             spriteRenderer = GetComponent<SpriteRenderer>();
             rigidbody = GetComponent<Rigidbody2D>();
-            heroObjectName = this.gameObject.name;
             m_NormalizedMovement = new Vector2(1, 0);
 
             m_ImageCooldownBasic.fillAmount = 0;
@@ -93,11 +79,6 @@ namespace EventCallbacks
             m_TextCooldownSpellOne.text = "";
             m_TextCooldownSpellTwo.text = "";
 
-
-            m_CurrentHP = m_MaxHP;
-            m_CurrentMana = m_MaxMana;
-
-            SetHealthUI();
             spellOneCooldownATM = m_SpellOneCooldown;
             basicAttackCooldownATM = m_BasicAttackCooldown;
 
@@ -156,16 +137,10 @@ namespace EventCallbacks
 
                 if (m_SpellOneCooldown > spellOneCooldownATM) spellOneCooldownATM++;
                 if (spellOneCooldownATM > m_SpellOneCooldown) spellOneCooldownATM = m_SpellOneCooldown;
-                // TODO the the spell cooldown will shorten 0-1 sec depending on when we press it, FIX IT
-                if (m_MaxMana >= m_CurrentMana) m_CurrentMana += m_ManaRegen;
-                if (m_CurrentMana > m_MaxMana) m_CurrentMana = m_MaxMana;
-                if (m_MaxHP >= m_CurrentHP) m_CurrentHP += m_ManaRegen;
-                if (m_CurrentHP > m_MaxHP) m_CurrentHP = m_MaxMana;
 
                 setSpellTextOnCD(m_TextCooldownBasic, m_BasicAttackCooldown, basicAttackCooldownATM);
                 setSpellTextOnCD(m_TextCooldownSpellOne, m_SpellOneCooldown, spellOneCooldownATM);
 
-                SetHealthUI();
                 if (second == 5000)
                 {
                     timer = 0.0f;
@@ -193,7 +168,6 @@ namespace EventCallbacks
 
             if (!hasAuthority)
             {
-                Debug.Log("Returns");
                 return;
             }
 
@@ -239,6 +213,7 @@ namespace EventCallbacks
         {
             q = qu;
             velocity = position;
+            if (position.x != 0 || position.y != 0) m_NormalizedMovement = position.normalized;
             if (num != 3)
             {
                 spriteRenderer.sprite = m_MovementSprites[num];
@@ -263,6 +238,7 @@ namespace EventCallbacks
             {
                 return;
             }
+            if (position.x != 0 || position.y != 0) m_NormalizedMovement = position.normalized;
             velocity = position;
             q = qu;
 
@@ -297,31 +273,15 @@ namespace EventCallbacks
 
 
 
-        protected void SetHealthUI()
+        public void TakeDamage(int amount)
         {
-            if (!hasAuthority)
+            currentHealth -= amount;
+            if (currentHealth <= 0)
             {
-                return;
+                currentHealth = 0;
+                Die();
             }
-
-            m_HpSlider.value = m_CurrentHP / m_MaxHP;
-            m_ManaSlider.value = m_CurrentMana / m_MaxMana;
-            m_FillHPImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHP / m_MaxHP);
-            m_FillManaImage.color = Color.Lerp(m_ZeroManaColor, m_FullManaColor, m_CurrentMana / m_MaxMana);
-        }
-
-
-
-        public void TakeDamage(float amount)
-        {
-            if (!hasAuthority)
-            {
-                return;
-            }
-
-            m_CurrentHP -= amount;
-            SetHealthUI();
-            if (m_CurrentHP <= 0) Die();
+            healthBar.sizeDelta = new Vector2(currentHealth * 2, healthBar.sizeDelta.y);
         }
 
 
@@ -330,34 +290,6 @@ namespace EventCallbacks
 
 
 
-
-        public void HealHero(float heal)
-        {
-            if (!hasAuthority)
-            {
-                return;
-            }
-
-            m_CurrentHP += heal;
-            if (m_CurrentHP > m_MaxHP)
-            {
-                m_CurrentHP = m_MaxHP;
-            }
-        }
-
-        public void ManaHero(float mana)
-        {
-            if (!hasAuthority)
-            {
-                return;
-            }
-
-            m_CurrentMana += mana;
-            if (m_CurrentMana > m_MaxMana)
-            {
-                m_CurrentMana = m_MaxMana;
-            }
-        }
 
 
 

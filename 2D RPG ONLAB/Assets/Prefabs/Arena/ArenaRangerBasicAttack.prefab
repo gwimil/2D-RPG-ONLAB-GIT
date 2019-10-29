@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 8749692016320237063}
   - component: {fileID: 7448934952741703296}
   - component: {fileID: 8265439217317071301}
-  m_Layer: 12
+  m_Layer: 18
   m_Name: ArenaRangerBasicAttack
-  m_TagString: PlayerProjectile
+  m_TagString: ArenaProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,8 +178,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user: 
+  heroID: 0
+  direction: {x: 0, y: 0, z: 0, w: 0}
   m_damage: 10
-  m_MovemenetSpeed: 180
+  SpeedInUnitsPerSecond: 0
 --- !u!114 &8265439217317071301
 MonoBehaviour:
   m_ObjectHideFlags: 0
