@@ -31,6 +31,7 @@ namespace EventCallbacks
             if (m_EnemyName == obj.Unit.gameObject.name)
             {
                 m_CurrentNumber++;
+                m_QuestNumberOfDoneText.text = m_CurrentNumber.ToString();
                 Debug.Log("Killed " + m_CurrentNumber + " out of " + m_NumberToKill);
             }
 

@@ -43,9 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bd2ff63117e6cd4eb0f7996e9876c67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_QuestNameText: {fileID: 0}
+  m_QuestNumberOfDoneText: {fileID: 0}
   m_QuestId: 1
-  m_QuestName: Kill 5 wild MageDummies
-  m_EnemyToKill: {fileID: 7677658676989817457, guid: 214c15c53fc027c40a4fdd2d175280c8,
+  m_QuestName: "Menny d\xE9lre \xE9s \xF6lj meg 5 ellens\xE9get"
+  m_EnemyToKill: {fileID: 3451256116118997821, guid: cd3cb52c115efe248a3fe8c2021730a9,
     type: 3}
   m_NumberToKill: 5
   m_QuestItem: {fileID: 6729422052235457514, guid: b0bf57f8cb01c5a4cbfbb2a3dfa59a5f,
