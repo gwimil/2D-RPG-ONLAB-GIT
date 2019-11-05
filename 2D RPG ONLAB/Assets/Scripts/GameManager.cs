@@ -18,7 +18,11 @@ namespace EventCallbacks
 
         public GameObject m_ProceduralCave;
 
-        public GameObject CaveTeleporterOut;
+        public GameObject m_TeleportedToTheCave;
+        public GameObject m_CaveTeleporterOut;
+        public GameObject m_TeleportedInCave;
+        public GameObject m_TeleportToFirstBoss;
+        public GameObject m_TeleporterToSecondBoss;
 
         private List<Vector2> placesToSpawn;
         private Vector2 placeToSpawnHeroes;
@@ -27,16 +31,12 @@ namespace EventCallbacks
 
         private int numberOfPlayers;
 
-        [HideInInspector] public int heroesInCave;
-
-
         private System.Guid TeleportEventGuid;
 
         // Start is called before the first frame update
 
         private void Awake()
         {
-            heroesInCave = 0;
             placesToSpawn = new List<Vector2>();
             m_Camera.m_Targets = new Transform[MenuData.m_playerNumber];
             numberOfPlayers = MenuData.m_playerNumber;
@@ -47,7 +47,7 @@ namespace EventCallbacks
         void Start()
         {
             //later the player can choose his hero, sets camera
-            CaveTeleporterOut.SetActive(false);
+            m_CaveTeleporterOut.SetActive(false);
             Debug.Log(MenuData.m_playerNumber);
             UnsetHeroes();
             BindHeroesToPlayers();
@@ -67,7 +67,10 @@ namespace EventCallbacks
                 m_Inventories[i].m_SlotHolder = m_SlotHolders[i];
             }
 
-            EventSystem.Current.RegisterListener<TeleportEventInfo>(TeleportPlayerToNewPlace, ref TeleportEventGuid);
+            SetUpCave();
+
+            EventSystem.Current.RegisterListener<PlaceFoundEventInfo>(TeleportPlayerToNewPlace, ref TeleportEventGuid);
+            EventSystem.Current.RegisterListener<MobQuestDoneEventInfo>(EnemyQuestDone, ref TeleportEventGuid);
 
         }
         
@@ -132,13 +135,28 @@ namespace EventCallbacks
 
         }
 
-        private void TeleportPlayerToNewPlace(TeleportEventInfo tei)
+        private void TeleportPlayerToNewPlace(PlaceFoundEventInfo tei)
         {
-            switch (tei.teleportName)
+            switch (tei.PlaceName)
             {
-                case "Cave":
-                    TeleportHeroToCave(tei.playerToTeleport.m_PlayerID);
-                    Debug.Log("Teleported");
+                case "outCave":
+                    m_TeleportToFirstBoss.SetActive(true);
+                    SetUpCave();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        private void EnemyQuestDone(MobQuestDoneEventInfo mqe)
+        {
+            switch (mqe.MobName)
+            {
+                case "dummy":
+                    m_TeleportedToTheCave.SetActive(true);
+                    break;
+                case "mage":
+                    m_TeleporterToSecondBoss.SetActive(true);
                     break;
 
                 default:
@@ -147,41 +165,22 @@ namespace EventCallbacks
         }
 
 
-        private void TeleportHeroToCave(int id)
-        {
-            int num;
-            if (heroesInCave == 0)
-            {
-                placesToSpawn = m_ProceduralCave.GetComponent<MapGenerator>().GenerateMapFromManager();
+          private void SetUpCave()
+          {
+              int num;
+              placesToSpawn = m_ProceduralCave.GetComponent<MapGenerator>().GenerateMapFromManager();
 
-                num = Random.Range(0, placesToSpawn.Count);
-                CaveTeleporterOut.transform.position = new Vector3(placesToSpawn[num].x, placesToSpawn[num].y, 0);
-                CaveTeleporterOut.SetActive(true);
-                num = Random.Range(0, placesToSpawn.Count);
-                placeToSpawnHeroes = placesToSpawn[num];
+              num = Random.Range(0, placesToSpawn.Count);
+            m_CaveTeleporterOut.transform.position = new Vector3(placesToSpawn[num].x, placesToSpawn[num].y, 0);
+            m_CaveTeleporterOut.SetActive(true);
+              num = Random.Range(0, placesToSpawn.Count);
+              placeToSpawnHeroes = placesToSpawn[num];
+            m_TeleportedInCave.transform.position = new Vector3(placeToSpawnHeroes.x, placeToSpawnHeroes.y, 0);
 
-                PlaceFoundEventInfo qd = new PlaceFoundEventInfo();
-                qd.PlaceName = "cave";
-                EventSystem.Current.FireEvent(qd);
+          }
 
 
-            }
-            heroesInCave++;
-            
-            m_Players[id-1].m_hero.transform.position = new Vector3(placeToSpawnHeroes.x, placeToSpawnHeroes.y, 0);
 
-        }
-
-        public void TeleportPlayerToFixedPosition(string nameOfHero, Vector2 to)
-        {
-            for (int i = 0; i < m_Heroes.Length; i++)
-            {
-                if (m_Heroes[i].gameObject.name.Equals(nameOfHero)) m_Heroes[i].transform.position = new Vector3(to.x, to.y, 0);
-                PlaceFoundEventInfo qd = new PlaceFoundEventInfo();
-                qd.PlaceName = "outCave";
-                EventSystem.Current.FireEvent(qd);
-            }
-        }
 
     }
 }

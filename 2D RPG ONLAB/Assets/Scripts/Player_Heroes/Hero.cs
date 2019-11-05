@@ -366,17 +366,6 @@ namespace EventCallbacks
         abstract public void GetExp(int exp);
 
 
-
-
-        private void onTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.gameObject.tag.Equals("teleport"))
-            {
-                collision.gameObject.GetComponent<Teleporter>().TeleportTo(this);
-            }
-        }
-
-
         public void HealHero(float heal)
         {
             m_CurrentHP += heal;

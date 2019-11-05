@@ -87,18 +87,6 @@ namespace EventCallbacks
                         ipei.HeroName = m_hero.gameObject.name;
                         EventSystem.Current.FireEvent(ipei);
                     }
-                    if (m_hero.overTeleport)
-                    {
-                        TeleportEventInfo tei = new TeleportEventInfo();
-                        tei.EventDescription = "your hero wants to pick up an item";
-                        tei.teleportName = m_hero.teleportName;
-                        tei.playerToTeleport = this;
-                        EventSystem.Current.FireEvent(tei);
-                        m_hero.overTeleport = false;
-                        m_hero.teleportName = "";
-                    }
-
-                    
                 }
 
 

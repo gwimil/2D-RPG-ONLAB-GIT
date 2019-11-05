@@ -11,9 +11,11 @@ namespace EventCallbacks
         public static Quest m_CurrentQuest;
         public List<Quest> m_Quests;
 
+
         public Text m_QuestNumber;
         public Text m_QuestName;
         public Text m_QuestDoneSoFar;
+
 
         private int questNumberInt;
         private Guid QuestEventGuid;
@@ -45,6 +47,7 @@ namespace EventCallbacks
             }
 
         }
+
 
         private void QuestDone(QuestDoneEventInfo qd)
         {

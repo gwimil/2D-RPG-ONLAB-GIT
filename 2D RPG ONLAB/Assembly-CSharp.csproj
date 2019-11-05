@@ -123,8 +123,6 @@
     <Compile Include="Assets\Scripts\Quests\Quest.cs" />
     <Compile Include="Assets\Scripts\Quests\QuestManager.cs" />
     <Compile Include="Assets\Scripts\Static\MenuData.cs" />
-    <Compile Include="Assets\Scripts\Triggers\Teleporter.cs" />
-    <Compile Include="Assets\Scripts\Triggers\TeleportTrigger.cs" />
     <None Include="Assets\SpellBookPreface\ReadMe.txt" />
     <None Include="Assets\FreePixelGear\ReadMe.txt" />
     <None Include="Assets\Tiny Fantasy Icons\README.txt" />

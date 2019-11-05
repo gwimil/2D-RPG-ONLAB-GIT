@@ -28,13 +28,15 @@ namespace EventCallbacks
         private int jumpCounter;
         private int fireBallCounter;
 
+        private bool started;
+
         private void Awake()
         {
             this.fireballMaker = gameObject.GetComponent<Fireball4Ways>();
             renderer = GetComponentInChildren<SpriteRenderer>();
             originalColor = renderer.color;
             rigidbody = GetComponent<Rigidbody2D>();
-
+            started = false;
             phaseCounter = 1;
             fireBallCounter = 0;
             jumpCounter = 0;
@@ -78,7 +80,6 @@ namespace EventCallbacks
             inMiddle = true;
             increase = true;
             fireballMaker.startAttacking(false);
-            InvokeRepeating("StartPlaying", 2.0f, 1.0f);
         }
 
         private void StartPlaying(){
@@ -204,24 +205,51 @@ namespace EventCallbacks
 
         private void Update()
         {
-            if (m_MaxHP * 1/4 > m_HP)
+            if (!started)
             {
-                phaseCounter = 5;
+                GameObject[] playersToFind = GameObject.FindGameObjectsWithTag("Hero");
+
+                for (int i = 0; i < playersToFind.Length; i++)
+                {
+                    Vector2 playerPos = playersToFind[i].transform.position;
+                    Vector2 currPos = this.transform.position;
+                    float distance = Vector2.Distance(new Vector2(transform.position.x, transform.position.y), playerPos);
+                    if (distance < 10)
+                    {
+                        started = true;
+                        InvokeRepeating("StartPlaying", 2.0f, 1.0f);
+                        break;
+                    }
+                }
+                    
             }
-            else if (m_MaxHP * 2 / 4 > m_HP)
+            else
             {
-                phaseCounter = 4;
+                if (m_MaxHP * 1 / 4 > m_HP)
+                {
+                    phaseCounter = 5;
+                }
+                else if (m_MaxHP * 2 / 4 > m_HP)
+                {
+                    phaseCounter = 4;
+                }
+                else if (m_MaxHP * 3 / 4 > m_HP)
+                {
+                    phaseCounter = 2;
+                }
             }
-            else if (m_MaxHP * 3 / 4 > m_HP)
-            {
-                phaseCounter = 2;
-            }
+            
+
+
+            
         }
 
         public override void Die()
         {
             MobDeathEventInfo udei = new MobDeathEventInfo();
-
+            udei.Unit = this;
+            udei.Killer = this.killer;
+            udei.Level = this.m_Level;
             EventSystem.Current.FireEvent(udei);
             Instantiate(m_Teleporter, transform.position, Quaternion.Euler(0,0,0));
 
