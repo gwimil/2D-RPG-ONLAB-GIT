@@ -10,6 +10,7 @@ namespace EventCallbacks
 
         public Projectile m_EnemyFireBall;
         public GameObject m_RainFireBall;
+        public GameObject m_Teleporter;
 
         private bool inMiddle;
         private bool increase;
@@ -33,7 +34,6 @@ namespace EventCallbacks
             renderer = GetComponentInChildren<SpriteRenderer>();
             originalColor = renderer.color;
             rigidbody = GetComponent<Rigidbody2D>();
-            startPosition = rigidbody.position;
 
             phaseCounter = 1;
             fireBallCounter = 0;
@@ -118,6 +118,11 @@ namespace EventCallbacks
                                 {
                                     atLeastOnePlayerNear = true;
                                 }
+                                if (Mathf.Sqrt(randomX * randomX + randomY * randomY ) > 7.0f)
+                                {
+                                    atLeastOnePlayerNear = true;
+                                }
+
                                 nearplayer = atLeastOnePlayerNear;
                             }
                         }
@@ -211,6 +216,16 @@ namespace EventCallbacks
             {
                 phaseCounter = 2;
             }
+        }
+
+        public override void Die()
+        {
+            MobDeathEventInfo udei = new MobDeathEventInfo();
+
+            EventSystem.Current.FireEvent(udei);
+            Instantiate(m_Teleporter, transform.position, Quaternion.Euler(0,0,0));
+
+            Destroy(this.gameObject);
         }
 
     }

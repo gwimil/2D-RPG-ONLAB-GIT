@@ -21,6 +21,7 @@ TagManager:
   - ItemHolder
   - EnemySpawner
   - ArenaProjectile
+  - RainFireBall
   layers:
   - Default
   - TransparentFX
@@ -41,7 +42,7 @@ TagManager:
   - LootBags
   - Teleporter
   - ArenaProjectile
-  - 
+  - PlayerBlocker
   - 
   - 
   - 

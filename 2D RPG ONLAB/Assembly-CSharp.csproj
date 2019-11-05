@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\Items\Items.cs" />
     <Compile Include="Assets\Scripts\Items\Potions.cs" />
     <Compile Include="Assets\Scripts\Items\Slot.cs" />
+    <Compile Include="Assets\Scripts\Map\Inverted2DEdgeColl.cs" />
     <Compile Include="Assets\Scripts\Map\ObjectArray.cs" />
     <Compile Include="Assets\Scripts\Map\RandomObsticleSpawner.cs" />
     <Compile Include="Assets\Scripts\Map\SimpleTeleporter.cs" />

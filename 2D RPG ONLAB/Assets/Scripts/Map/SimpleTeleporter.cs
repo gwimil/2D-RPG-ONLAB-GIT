@@ -25,7 +25,7 @@ namespace EventCallbacks {
                 {
                     collision.gameObject.GetComponent<Hero>().transform.position = new Vector3(m_LocationToTeleport.x, m_LocationToTeleport.y, 0);
                 }
-                gameManager.heroesInCave--;
+                
             }
         }
 

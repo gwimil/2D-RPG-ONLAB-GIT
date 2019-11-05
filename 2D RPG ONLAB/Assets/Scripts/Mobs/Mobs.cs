@@ -99,7 +99,7 @@ namespace EventCallbacks
         abstract protected void Movement(Vector2 Dir);
         abstract public void Attack(Vector2 Dir);
 
-        public void Die()
+        public virtual void Die()
         {
             Bag droppedBag = Instantiate(m_Drop, transform.position, Quaternion.Euler(0, 0, 0));
             droppedBag.gameObject.name = "Bag";

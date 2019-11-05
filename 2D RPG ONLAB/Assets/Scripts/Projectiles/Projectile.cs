@@ -12,7 +12,7 @@ namespace EventCallbacks
         public float m_MovemenetSpeed;
         private Vector2 m_Direction;
         private float m_LifeTime;
-        private float m_MaxLifeTime;
+        [HideInInspector]public float m_MaxLifeTime;
         private new Rigidbody2D rigidbody;
         private Transform parentTransform;
 
