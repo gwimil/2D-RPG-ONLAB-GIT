@@ -7,7 +7,7 @@ namespace EventCallbacks
 {
     public class Quest : MonoBehaviour
     {
-        [HideInInspector]public Text m_QuestNameText;
+        [HideInInspector] public Text m_QuestNameText;
         [HideInInspector] public Text m_QuestNumberOfDoneText;
         public int m_QuestId;
         public string m_QuestName;
@@ -16,6 +16,7 @@ namespace EventCallbacks
         {
             m_QuestNameText = name;
             m_QuestNumberOfDoneText = done;
+            m_QuestNameText.text = m_QuestName;
             m_QuestNumberOfDoneText.text = "0";
         }
     }

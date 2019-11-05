@@ -29,6 +29,11 @@ namespace EventCallbacks
         public int Level;
     }
 
+    public class PlaceFoundEventInfo : EventInfo
+    {
+        public string PlaceName;
+    }
+
     public class MobDeathEventInfo : SpawnerDeathEventInfo
     {
         public Mobs Unit;

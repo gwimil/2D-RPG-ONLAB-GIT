@@ -159,6 +159,12 @@ namespace EventCallbacks
                 CaveTeleporterOut.SetActive(true);
                 num = Random.Range(0, placesToSpawn.Count);
                 placeToSpawnHeroes = placesToSpawn[num];
+
+                PlaceFoundEventInfo qd = new PlaceFoundEventInfo();
+                qd.PlaceName = "cave";
+                EventSystem.Current.FireEvent(qd);
+
+
             }
             heroesInCave++;
             
@@ -171,6 +177,9 @@ namespace EventCallbacks
             for (int i = 0; i < m_Heroes.Length; i++)
             {
                 if (m_Heroes[i].gameObject.name.Equals(nameOfHero)) m_Heroes[i].transform.position = new Vector3(to.x, to.y, 0);
+                PlaceFoundEventInfo qd = new PlaceFoundEventInfo();
+                qd.PlaceName = "outCave";
+                EventSystem.Current.FireEvent(qd);
             }
         }
 

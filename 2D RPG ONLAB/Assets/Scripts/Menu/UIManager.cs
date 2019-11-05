@@ -13,7 +13,6 @@ namespace EventCallbacks
         public RectTransform m_MageManaSlider;
         public RectTransform m_MageBasicAttack;
         public RectTransform m_MageSpell1;
-        public RectTransform m_MageSpell2;
 
         
         public Hero m_RangerHero;
@@ -22,7 +21,6 @@ namespace EventCallbacks
         public RectTransform m_RangerManaSlider;
         public RectTransform m_RangerBasicAttack;
         public RectTransform m_RangerSpell1;
-        public RectTransform m_RangerSpell2;
         
         public Hero m_WarriorHero;
         public RectTransform m_WarriorInventory;
@@ -30,7 +28,6 @@ namespace EventCallbacks
         public RectTransform m_WarriorManaSlider;
         public RectTransform m_WarriorBasicAttack;
         public RectTransform m_WarriorSpell1;
-        public RectTransform m_WarriorSpell2;
 
         RectTransform inventoryRectTransform;
         RectTransform hpRectTransform;
@@ -45,7 +42,6 @@ namespace EventCallbacks
         private RectTransform MageManaSlider;
         private RectTransform MageBasicAttack;
         private RectTransform MageSpell1;
-        private RectTransform MageSpell2;
 
         
         private RectTransform RangerInventory;
@@ -53,14 +49,12 @@ namespace EventCallbacks
         private RectTransform RangerManaSlider;
         private RectTransform RangerBasicAttack;
         private RectTransform RangerSpell1;
-        private RectTransform RangerSpell2;
         
         private RectTransform WarriorInventory;
         private RectTransform WarriorHpSlider;
         private RectTransform WarriorManaSlider;
         private RectTransform WarriorBasicAttack;
         private RectTransform WarriorSpell1;
-        private RectTransform WarriorSpell2;
 
         private GameObject go;
 
@@ -89,21 +83,18 @@ namespace EventCallbacks
             MageManaSlider = m_MageManaSlider;
             MageBasicAttack = m_MageBasicAttack;
             MageSpell1 = m_MageSpell1;
-            MageSpell2 = m_MageSpell2;
 
             RangerInventory = m_RangerInventory;
             RangerHpSlider = m_RangerHpSlider;
             RangerManaSlider = m_RangerManaSlider;
             RangerBasicAttack = m_RangerBasicAttack;
             RangerSpell1 = m_RangerSpell1;
-            RangerSpell2 = m_RangerSpell2;
 
             WarriorInventory = m_WarriorInventory;
             WarriorHpSlider = m_WarriorHpSlider;
             WarriorManaSlider = m_WarriorManaSlider;
             WarriorBasicAttack = m_WarriorBasicAttack;
             WarriorSpell1 = m_WarriorSpell1;
-            WarriorSpell2 = m_WarriorSpell2;
     }
 
         private void OnGUI()
@@ -144,8 +135,6 @@ namespace EventCallbacks
                         m_RangerSpell1.anchoredPosition = new Vector2(Screen.width / 4 + 100, 15);
                         m_WarriorSpell1.anchoredPosition = new Vector2(-Screen.width / 4 - 100, 15);
 
-                        m_RangerSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 +30 , 15);
-                        m_WarriorSpell2.anchoredPosition = new Vector2(-Screen.width / 4 - 100 +30, 15);
                     }
                     else
                     {
@@ -165,7 +154,6 @@ namespace EventCallbacks
                         m_RangerSpell1.anchoredPosition = new Vector2(-Screen.width / 4 - 100, 15);
 
                         m_WarriorSpell1.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, 15);
-                        m_RangerSpell2.anchoredPosition = new Vector2(-Screen.width / 4 - 100 + 30, 15);
                     }
 
                 }
@@ -188,8 +176,6 @@ namespace EventCallbacks
                         m_RangerSpell1.anchoredPosition = new Vector2(Screen.width / 4 + 100, 15);
                         m_MageSpell1.anchoredPosition = new Vector2(-Screen.width / 4 - 100, 15);
 
-                        m_RangerSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, 15);
-                        m_MageSpell2.anchoredPosition = new Vector2(-Screen.width / 4 - 100 + 30, 15);
                     }
                     else
                     {
@@ -208,8 +194,6 @@ namespace EventCallbacks
                         m_MageSpell1.anchoredPosition = new Vector2(Screen.width / 4 + 100, 15);
                         m_RangerSpell1.anchoredPosition = new Vector2(-Screen.width / 4 - 100, 15);
 
-                        m_MageSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, 15);
-                        m_RangerSpell2.anchoredPosition = new Vector2(-Screen.width / 4 - 100 + 30, 15);
 
 
                     }
@@ -233,8 +217,6 @@ namespace EventCallbacks
                         m_WarriorSpell1.anchoredPosition = new Vector2(Screen.width / 4 + 100, -15);
                         m_MageSpell1.anchoredPosition = new Vector2(-Screen.width / 4 - 100, -15);
 
-                        m_WarriorSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, 15);
-                        m_MageSpell2.anchoredPosition = new Vector2(-Screen.width / 4 - 100 + 30, 15);
                     }
                     else
                     {
@@ -253,8 +235,6 @@ namespace EventCallbacks
                         m_MageSpell1.anchoredPosition = new Vector2(Screen.width / 4 + 100, -15);
                         m_WarriorSpell1.anchoredPosition = new Vector2(-Screen.width / 4 - 100, -15);
 
-                        m_MageSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, 15);
-                        m_WarriorSpell2.anchoredPosition = new Vector2(-Screen.width / 4 - 100 + 30, 15);
                     }
                 }
             }
@@ -284,9 +264,6 @@ namespace EventCallbacks
                     m_WarriorSpell1.anchoredPosition = new Vector2(-Screen.width / 4 - 100, 15);
                     m_RangerSpell1.anchoredPosition = new Vector2(0, 15);
 
-                    m_MageSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, 15);
-                    m_WarriorSpell2.anchoredPosition = new Vector2(-Screen.width / 4 - 100 + 30, 15);
-                    m_RangerSpell2.anchoredPosition = new Vector2(30, 15);
 
 
 
@@ -314,10 +291,6 @@ namespace EventCallbacks
                     m_WarriorSpell1.anchoredPosition = new Vector2(-Screen.width / 4 - 100, 15);
                     m_MageSpell1.anchoredPosition = new Vector2(0, 15);
 
-                    m_RangerSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, 15);
-                    m_WarriorSpell2.anchoredPosition = new Vector2(-Screen.width / 4 - 100 + 30, 15);
-                    m_MageSpell2.anchoredPosition = new Vector2(30, 15);
-
 
                 }
                 else if (magePos.x < warriorPos.x && warriorPos.x < rangerPos.x)
@@ -342,9 +315,6 @@ namespace EventCallbacks
                     m_MageSpell1.anchoredPosition = new Vector2(-Screen.width / 4 - 100, 15);
                     m_WarriorSpell1.anchoredPosition = new Vector2(0, 15);
 
-                    m_RangerSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, 15);
-                    m_MageSpell2.anchoredPosition = new Vector2(-Screen.width / 4 - 100 + 30, 15);
-                    m_WarriorSpell2.anchoredPosition = new Vector2(30, 15);
 
                 }
                 else if (magePos.x < rangerPos.x && rangerPos.x < warriorPos.x)
@@ -369,12 +339,6 @@ namespace EventCallbacks
                     m_MageSpell1.anchoredPosition = new Vector2(-Screen.width / 4 - 100, 15);
                     m_RangerSpell1.anchoredPosition = new Vector2(0, 15);
 
-                    m_WarriorSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, 15);
-                    m_MageSpell2.anchoredPosition = new Vector2(-Screen.width / 4 - 100 + 30, 15);
-                    m_RangerSpell2.anchoredPosition = new Vector2(30, 15);
-
-
-
                 }
                 else if (rangerPos.x < magePos.x && magePos.x < warriorPos.x)
                 {
@@ -397,11 +361,6 @@ namespace EventCallbacks
                     m_WarriorSpell1.anchoredPosition = new Vector2(Screen.width / 4 + 100, 15);
                     m_RangerSpell1.anchoredPosition = new Vector2(-Screen.width / 4 - 100, 15);
                     m_MageSpell1.anchoredPosition = new Vector2(0, 15);
-
-                    m_WarriorSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, 15);
-                    m_RangerSpell2.anchoredPosition = new Vector2(-Screen.width / 4 - 100 + 30, 15);
-                    m_MageSpell2.anchoredPosition = new Vector2(30, 15);
-
 
 
                 }
@@ -426,10 +385,6 @@ namespace EventCallbacks
                     m_MageSpell1.anchoredPosition = new Vector2(Screen.width / 4 + 100, 15);
                     m_RangerSpell1.anchoredPosition = new Vector2(-Screen.width / 4 - 100, 15);
                     m_WarriorSpell1.anchoredPosition = new Vector2(0, 15);
-
-                    m_MageSpell2.anchoredPosition = new Vector2(Screen.width / 4 + 100 + 30, 15);
-                    m_RangerSpell2.anchoredPosition = new Vector2(-Screen.width / 4 - 100 + 30, 15);
-                    m_WarriorSpell2.anchoredPosition = new Vector2(30, 15);
 
                 }
             }

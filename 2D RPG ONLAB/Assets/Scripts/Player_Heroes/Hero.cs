@@ -13,19 +13,13 @@ namespace EventCallbacks
 
         public Image m_ImageCooldownBasic;
         public Image m_ImageCooldownSpellOne;
-        public Image m_ImageCooldownSpellTwo;
 
         public Text m_TextCooldownBasic;
         public Text m_TextCooldownSpellOne;
-        public Text m_TextCooldownSpellTwo;
 
         public float m_SpellOneCooldown;
         protected float spellOneCooldownATM;
         public float m_SpellOneManaCost;
-
-        public float m_SpellTwoCooldown;
-        protected float spellTwoCooldownATM;
-        public float m_SpellTwoManaCost;
 
 
         public float m_BasicAttackCooldown;
@@ -111,10 +105,8 @@ namespace EventCallbacks
 
             m_ImageCooldownBasic.fillAmount = 0;
             m_ImageCooldownSpellOne.fillAmount = 0;
-            m_ImageCooldownSpellTwo.fillAmount = 0;
             m_TextCooldownBasic.text = "";
             m_TextCooldownSpellOne.text = "";
-            m_TextCooldownSpellTwo.text = "";
 
         }
 
