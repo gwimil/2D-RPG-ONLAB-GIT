@@ -24,8 +24,8 @@ namespace EventCallbacks
         public float m_Armor;
         public float m_MagicResist;
 
-        private Color originalColor;
-        private new SpriteRenderer renderer;
+        protected Color originalColor;
+        protected new SpriteRenderer renderer;
         protected new Rigidbody2D rigidbody;
 
         protected Vector3 startPosition;
@@ -39,8 +39,6 @@ namespace EventCallbacks
             originalColor = renderer.color;
             rigidbody = GetComponent<Rigidbody2D>();
             startPosition = rigidbody.position;
-
-            
         }
 
         private void Start()
@@ -79,7 +77,7 @@ namespace EventCallbacks
         }
 
 
-        public void TakeDamage(float dmg, string killer)
+        public virtual void TakeDamage(float dmg, string killer)
         {
             this.killer = killer;
             m_HP -= dmg;
@@ -92,7 +90,7 @@ namespace EventCallbacks
             renderer.color = originalColor;
         }
 
-        private void CheckIfDeath()
+        protected void CheckIfDeath()
         {
             if (m_HP <= 0.0f) Die();
         }

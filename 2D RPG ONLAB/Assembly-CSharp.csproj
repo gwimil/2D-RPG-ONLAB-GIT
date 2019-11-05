@@ -102,6 +102,7 @@
     <Compile Include="Assets\Scripts\Mobs\MobManager.cs" />
     <Compile Include="Assets\Scripts\Mobs\Mobs.cs" />
     <Compile Include="Assets\Scripts\Mobs\Non_AgressiveEnemy.cs" />
+    <Compile Include="Assets\Scripts\Mobs\RainProjectiles.cs" />
     <Compile Include="Assets\Scripts\Player_Heroes\Hero.cs" />
     <Compile Include="Assets\Scripts\Player_Heroes\Mage.cs" />
     <Compile Include="Assets\Scripts\Player_Heroes\Player.cs" />

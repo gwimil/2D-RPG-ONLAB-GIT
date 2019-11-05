@@ -9,7 +9,10 @@ namespace EventCallbacks
     {
         public Projectile m_EnemyFireBall;
 
-        private bool attack;
+        public bool attack;
+
+        public bool fullPower;
+
 
         private Vector2 vectorMultiplier;
         private Vector2 firstAngle;
@@ -25,6 +28,7 @@ namespace EventCallbacks
         // Start is called before the first frame update
         void Start()
         {
+            fullPower = false;
             rotateSpeed = 5;
             rotateDirection = 1;
             attack = true;
@@ -46,14 +50,22 @@ namespace EventCallbacks
         {
             if (attack)
             {
-                Projectile fb1 = Instantiate(m_EnemyFireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
-                fb1.setDirection(firstAngle);
+                if (fullPower)
+                {
+                    Projectile fb1 = Instantiate(m_EnemyFireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
+                    fb1.setDirection(firstAngle);
+                }
+                
 
                 Projectile fb2 = Instantiate(m_EnemyFireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
                 fb2.setDirection(secondAngle);
 
-                Projectile fb3 = Instantiate(m_EnemyFireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
-                fb3.setDirection(thirdAngle);
+                if (fullPower)
+                {
+                    Projectile fb3 = Instantiate(m_EnemyFireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
+                    fb3.setDirection(thirdAngle);
+                }
+                
 
                 Projectile fb4 = Instantiate(m_EnemyFireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
                 fb4.setDirection(fourthAngle);
