@@ -127,6 +127,31 @@ namespace EventCallbacks
             EventSystem.Current.RegisterListener<MobDeathEventInfo>(EnemyKilled, ref MobDeathEventGuid);
             EventSystem.Current.RegisterListener<SpawnerDeathEventInfo>(EnemyKilled, ref SpawnerDeathEventGuid);
 
+            InvokeRepeating("UpdateCd", 0.0f, 1.0f);
+            InvokeRepeating("UpdateBasic", 0.0f, 0.1f);
+
+        }
+
+        private void UpdateBasic()
+        {
+            if (m_BasicAttackCooldown >= basicAttackCooldownATM) basicAttackCooldownATM+= 0.1f;
+        }
+
+
+        private void UpdateCd()
+        {
+            if (m_SpellOneCooldown > spellOneCooldownATM) spellOneCooldownATM++;
+            if (spellOneCooldownATM > m_SpellOneCooldown) spellOneCooldownATM = m_SpellOneCooldown;
+            // TODO the the spell cooldown will shorten 0-1 sec depending on when we press it, FIX IT
+            if (m_MaxMana >= m_CurrentMana) m_CurrentMana += m_ManaRegen;
+            if (m_CurrentMana > m_MaxMana) m_CurrentMana = m_MaxMana;
+            if (m_MaxHP >= m_CurrentHP) m_CurrentHP += m_ManaRegen;
+            if (m_CurrentHP > m_MaxHP) m_CurrentHP = m_MaxMana;
+
+            setSpellTextOnCD(m_TextCooldownBasic, m_BasicAttackCooldown, basicAttackCooldownATM);
+            setSpellTextOnCD(m_TextCooldownSpellOne, m_SpellOneCooldown, spellOneCooldownATM);
+
+            SetHealthUI();
         }
 
         void Update()
@@ -138,42 +163,13 @@ namespace EventCallbacks
 
             m_ImageCooldownBasic.fillAmount = (m_BasicAttackCooldown - basicAttackCooldownATM) / m_BasicAttackCooldown;
             m_ImageCooldownSpellOne.fillAmount = (m_SpellOneCooldown - spellOneCooldownATM) / m_SpellOneCooldown;
-            if (m_BasicAttackCooldown >= basicAttackCooldownATM) basicAttackCooldownATM++;
-
-            timer += Time.deltaTime;
-            int second = Convert.ToInt32(timer % 5000);
-
+            
             if (buffDuration > 0)
             {
                 buffDuration--;
             }
 
 
-
-
-            // EVERY SECOND
-            if (second - previousSecond == 1)
-            {
-                previousSecond++;
-
-                if (m_SpellOneCooldown > spellOneCooldownATM) spellOneCooldownATM++;
-                if (spellOneCooldownATM > m_SpellOneCooldown) spellOneCooldownATM = m_SpellOneCooldown;
-                // TODO the the spell cooldown will shorten 0-1 sec depending on when we press it, FIX IT
-                if (m_MaxMana >= m_CurrentMana) m_CurrentMana += m_ManaRegen;
-                if (m_CurrentMana > m_MaxMana) m_CurrentMana = m_MaxMana;
-                if (m_MaxHP >= m_CurrentHP) m_CurrentHP += m_ManaRegen;
-                if (m_CurrentHP > m_MaxHP) m_CurrentHP = m_MaxMana;
-
-                setSpellTextOnCD(m_TextCooldownBasic, m_BasicAttackCooldown, basicAttackCooldownATM);
-                setSpellTextOnCD(m_TextCooldownSpellOne, m_SpellOneCooldown, spellOneCooldownATM);
-
-                SetHealthUI();
-                if (second == 5000)
-                {
-                    timer = 0.0f;
-                    previousSecond = 0;
-                }
-            }
         }
 
         // MOVING AND UI ---------------------------------------MOVING AND UI---------------------------------------------MOVING AND UI

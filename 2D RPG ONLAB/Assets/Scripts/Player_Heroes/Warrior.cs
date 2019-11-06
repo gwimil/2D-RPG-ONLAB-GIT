@@ -8,15 +8,34 @@ namespace EventCallbacks
 {
     public class Warrior : Hero
     {
+        public GameObject m_ShieldBot;
+        public GameObject m_AttackBot;
 
         override public void Attack()
         {
-
+            if (m_BasicAttackCooldown <= basicAttackCooldownATM && m_ShieldBot != null)
+            {
+                GameObject p = Instantiate(m_ShieldBot, transform.position, Quaternion.Euler(0, 0, 0));
+                p.SetActive(true);
+                basicAttackCooldownATM = 0.0f;
+                m_TextCooldownBasic.text = ((int)m_BasicAttackCooldown).ToString();
+            }
         }
 
         override public void UseSkill(int i)
         {
-
+            if (i == 1)
+            {
+                if (m_SpellOneCooldown == spellOneCooldownATM && m_CurrentMana >= m_SpellOneManaCost && m_AttackBot != null)
+                {
+                    GameObject p = Instantiate(m_AttackBot, transform.position, Quaternion.Euler(0, 0, 0));
+                    p.SetActive(true);
+                    // p.m_damage += m_BaseDMG / 10;
+                    m_CurrentMana -= m_SpellOneManaCost;
+                    spellOneCooldownATM = 0.0f;
+                    m_TextCooldownSpellOne.text = ((int)m_SpellOneCooldown).ToString();
+                }
+            }
         }
 
         public override void GetExp(int exp)

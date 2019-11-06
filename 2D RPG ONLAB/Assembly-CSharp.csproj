@@ -112,7 +112,9 @@
     <Compile Include="Assets\Scripts\Player_Heroes\Warrior.cs" />
     <Compile Include="Assets\Scripts\ProceduralCave\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\ProceduralCave\MeshGenerator.cs" />
+    <Compile Include="Assets\Scripts\Projectiles\DestroyAfterSeconds.cs" />
     <Compile Include="Assets\Scripts\Projectiles\Fireball.cs" />
+    <Compile Include="Assets\Scripts\Projectiles\FireClosestEnemyBot.cs" />
     <Compile Include="Assets\Scripts\Projectiles\MageBasicAttack.cs" />
     <Compile Include="Assets\Scripts\Projectiles\Projectile.cs" />
     <Compile Include="Assets\Scripts\Projectiles\RangerBasicAttack.cs" />

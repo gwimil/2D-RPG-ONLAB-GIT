@@ -66,6 +66,10 @@ namespace EventCallbacks
                 {
                     other.GetComponent<Hero>().TakeDamage(m_damage);
                 }
+                if (other.tag == "Bot")
+                {
+                    other.GetComponent<FireClosestEnemyBot>().TakeDamage(m_damage);
+                }
             }
 
             Destroy(this.gameObject);
