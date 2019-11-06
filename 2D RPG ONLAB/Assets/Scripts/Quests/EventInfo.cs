@@ -39,6 +39,11 @@ namespace EventCallbacks
         public Mobs Unit;
     }
 
+    public class MobQuestDoneEventInfo : SpawnerDeathEventInfo
+    {
+        public string MobName;
+    }
+
     public class TeleportEventInfo : EventInfo
     {
         public string teleportName;
@@ -50,7 +55,6 @@ namespace EventCallbacks
 
     public class QuestDoneEventInfo : EventInfo
     {
-        public string UnitName;
         public int QuestID;
     }
 }

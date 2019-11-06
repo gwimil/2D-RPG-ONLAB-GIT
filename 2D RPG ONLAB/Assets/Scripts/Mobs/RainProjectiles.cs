@@ -23,6 +23,12 @@ namespace EventCallbacks
             InvokeRepeating("LaunchProjectiles", 2.0f, m_SpawnTime);
         }
 
+        public void ResetInvoke()
+        {
+            CancelInvoke();
+            InvokeRepeating("LaunchProjectiles", 2.0f, m_SpawnTime);
+        }
+
         private void LaunchProjectiles()
         {
             if (rain)

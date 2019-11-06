@@ -28,7 +28,10 @@ namespace EventCallbacks
         private int jumpCounter;
         private int fireBallCounter;
 
+        private bool readyToPhase3;
+
         private bool started;
+        private bool readyToPhase5;
 
         private void Awake()
         {
@@ -40,9 +43,8 @@ namespace EventCallbacks
             phaseCounter = 1;
             fireBallCounter = 0;
             jumpCounter = 0;
-
-            m_RainFireBall = GameObject.FindGameObjectWithTag("RainFireBall");
-
+            readyToPhase3 = false;
+            readyToPhase5 = false;
         }
 
 
@@ -67,7 +69,7 @@ namespace EventCallbacks
             this.killer = killer;
             m_HP -= dmg;
             renderer.color = Color.red;
-            healthBar.sizeDelta = new Vector2(m_HP/50 * 3, healthBar.sizeDelta.y);
+            healthBar.sizeDelta = new Vector2(m_HP/m_MaxHP*300, healthBar.sizeDelta.y);
             Invoke("ResetColor", 0.2f);
             CheckIfDeath();
 
@@ -104,7 +106,6 @@ namespace EventCallbacks
                         float randomX = gameObject.transform.position.x;
                         float randomY = gameObject.transform.position.y;
                         GameObject[] playersToFind = GameObject.FindGameObjectsWithTag("Hero");
-
                         while (nearplayer)
                         {
                             randomX = Random.Range(m_Middle.x - m_JumpRadius / 2, m_Middle.x + m_JumpRadius / 2);
@@ -119,7 +120,7 @@ namespace EventCallbacks
                                 {
                                     atLeastOnePlayerNear = true;
                                 }
-                                if (Mathf.Sqrt(randomX * randomX + randomY * randomY ) > 7.0f)
+                                if (Mathf.Sqrt((randomX-m_Middle.x) * (randomX - m_Middle.x) + (randomY - m_Middle.y) * (randomY - m_Middle.y)) > 7.0f)
                                 {
                                     atLeastOnePlayerNear = true;
                                 }
@@ -127,25 +128,40 @@ namespace EventCallbacks
                                 nearplayer = atLeastOnePlayerNear;
                             }
                         }
-
                         gameObject.transform.position = new Vector3(randomX, randomY, 0);
 
-                        Projectile fb1 = Instantiate(m_EnemyFireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90), this.gameObject.transform);
+                        Projectile fb1 = Instantiate(m_EnemyFireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
                         fb1.setDirection(new Vector2(1, 0));
 
-                        Projectile fb2 = Instantiate(m_EnemyFireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90), this.gameObject.transform);
+                        Projectile fb2 = Instantiate(m_EnemyFireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
                         fb2.setDirection(new Vector2(0, 1));
 
-                        Projectile fb3 = Instantiate(m_EnemyFireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90), this.gameObject.transform);
+                        Projectile fb3 = Instantiate(m_EnemyFireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
                         fb3.setDirection(new Vector2(-1, 0));
 
-                        Projectile fb4 = Instantiate(m_EnemyFireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90), this.gameObject.transform);
+                        Projectile fb4 = Instantiate(m_EnemyFireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
                         fb4.setDirection(new Vector2(0, -1));
+
+                        if (jumpCounter >= 20)
+                        {
+                            Projectile fb5 = Instantiate(m_EnemyFireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
+                            fb5.setDirection(new Vector2(0.7f, 0.7f));
+
+                            Projectile fb6 = Instantiate(m_EnemyFireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
+                            fb6.setDirection(new Vector2(-0.7f, 0.7f));
+
+                            Projectile fb7 = Instantiate(m_EnemyFireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
+                            fb7.setDirection(new Vector2(0.7f, -0.7f));
+
+                            Projectile fb8 = Instantiate(m_EnemyFireBall, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
+                            fb8.setDirection(new Vector2(-0.7f, -0.7f));
+                        }
                     }
+
                     jumpCounter++;
                     if (jumpCounter >= 30)
                     {
-                        phaseCounter = 3;
+                        readyToPhase3 = true;
                     }
                     break;
                 case 3:
@@ -157,12 +173,11 @@ namespace EventCallbacks
                     if (fireBallCounter >= 15)
                     {
                         fireballMaker.rotateDirection = fireballMaker.rotateDirection * -1;
-                        fireBallCounter = 0;
+                        fireBallCounter = -2;
                     }
                     break;
                 case 4:
                     fireballMaker.attack = false;
-                    fireBallCounter = -2;
                     if (fireBallCounter >= 0)
                     {
                         m_RainFireBall.gameObject.GetComponent<RainProjectiles>().rain = true;
@@ -171,30 +186,33 @@ namespace EventCallbacks
                     if (fireBallCounter >= 15)
                     {
                         m_RainFireBall.gameObject.GetComponent<RainProjectiles>().rain = false;
-                        fireBallCounter = -5;
+                        fireBallCounter = -3;
                     }
-                    fireBallCounter = -3;
                     break;
                 case 5:
+                    if (!readyToPhase5)
+                    {
+                        m_RainFireBall.gameObject.GetComponent<RainProjectiles>().m_SpawnTime = 1.0f;
+                        m_RainFireBall.gameObject.GetComponent<RainProjectiles>().ResetInvoke();
+                        m_RainFireBall.gameObject.GetComponent<RainProjectiles>().rain = true;
+                        readyToPhase5 = true;
+                        fireBallCounter = -2;
+                    }
                     if (fireBallCounter >= 0)
                     {
-                        m_RainFireBall.gameObject.GetComponent<RainProjectiles>().rain = true;
-                        m_RainFireBall.gameObject.GetComponent<RainProjectiles>().m_SpawnTime = 1f;
                         fireballMaker.startAttacking(true);
                         fireballMaker.fullPower = true;
-                        fireballMaker.rotateSpeed = 12;
+                        fireballMaker.rotateSpeed = 10;
                         fireBallCounter = 0;
-                        
+
                         if (fireBallCounter >= 15)
                         {
                             fireballMaker.rotateDirection = fireballMaker.rotateDirection * -1;
                             fireBallCounter = 0;
                         }
+                        
                     }
                     fireBallCounter++;
-
-
-
                     break;
             }
 
@@ -233,12 +251,17 @@ namespace EventCallbacks
                 {
                     phaseCounter = 4;
                 }
+                else if (readyToPhase3)
+                {
+                    phaseCounter = 3;
+                }
                 else if (m_MaxHP * 3 / 4 > m_HP)
                 {
                     phaseCounter = 2;
                 }
             }
-            
+
+            Debug.Log(phaseCounter.ToString());
 
 
             
@@ -251,7 +274,8 @@ namespace EventCallbacks
             udei.Killer = this.killer;
             udei.Level = this.m_Level;
             EventSystem.Current.FireEvent(udei);
-            Instantiate(m_Teleporter, transform.position, Quaternion.Euler(0,0,0));
+            GameObject teleporter = Instantiate(m_Teleporter, transform.position, Quaternion.Euler(0,0,0));
+            teleporter.SetActive(true);
 
             Destroy(this.gameObject);
         }

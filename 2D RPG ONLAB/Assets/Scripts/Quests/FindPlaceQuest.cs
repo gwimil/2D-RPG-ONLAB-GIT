@@ -23,7 +23,6 @@ namespace EventCallbacks
             {
                 QuestDoneEventInfo qd = new QuestDoneEventInfo();
                 qd.EventDescription = "Quest \"" + m_QuestName + "\" has been completed!";
-                qd.UnitName = "cave";
                 qd.QuestID = m_QuestId;
                 EventSystem.Current.FireEvent(qd);
                 EventSystem.Current.UnregisterListener<PlaceFoundEventInfo>(PlaceFoundEventGuid);
