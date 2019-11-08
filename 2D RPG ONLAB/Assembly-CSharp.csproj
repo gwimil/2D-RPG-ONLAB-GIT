@@ -99,6 +99,7 @@
     <Compile Include="Assets\Scripts\Mobs\AgressiveRangerEnemy.cs" />
     <Compile Include="Assets\Scripts\Mobs\EnemySpawner.cs" />
     <Compile Include="Assets\Scripts\Mobs\Fireball4Ways.cs" />
+    <Compile Include="Assets\Scripts\Mobs\HunterBoss.cs" />
     <Compile Include="Assets\Scripts\Mobs\MageBoss.cs" />
     <Compile Include="Assets\Scripts\Mobs\MobManager.cs" />
     <Compile Include="Assets\Scripts\Mobs\Mobs.cs" />
@@ -116,7 +117,9 @@
     <Compile Include="Assets\Scripts\Projectiles\Fireball.cs" />
     <Compile Include="Assets\Scripts\Projectiles\FireClosestEnemyBot.cs" />
     <Compile Include="Assets\Scripts\Projectiles\MageBasicAttack.cs" />
+    <Compile Include="Assets\Scripts\Projectiles\NewBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\Projectiles\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Projectiles\ProjectileShooterAround.cs" />
     <Compile Include="Assets\Scripts\Projectiles\RangerBasicAttack.cs" />
     <Compile Include="Assets\Scripts\Quests\EventInfo.cs" />
     <Compile Include="Assets\Scripts\Quests\EventSystem.cs" />

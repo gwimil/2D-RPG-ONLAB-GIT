@@ -261,8 +261,6 @@ namespace EventCallbacks
                 }
             }
 
-            Debug.Log(phaseCounter.ToString());
-
 
             
         }

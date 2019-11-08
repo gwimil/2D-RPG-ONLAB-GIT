@@ -7280,7 +7280,7 @@ MonoBehaviour:
   m_TextCooldownSpellOne: {fileID: 1804986264410413770}
   m_SpellOneCooldown: 10
   m_SpellOneManaCost: 30
-  m_BasicAttackCooldown: 5
+  m_BasicAttackCooldown: 10
   m_HpSlider: {fileID: 1190666726723295654}
   m_ManaSlider: {fileID: 4132056778022961092}
   m_FillHPImage: {fileID: 5245538559638797581}
@@ -8412,6 +8412,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 344397666396159070, guid: 1b51d35c813e9e14395d758e9b22e130,
+        type: 3}
+      propertyPath: m_SecondToDestroy
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b51d35c813e9e14395d758e9b22e130, type: 3}

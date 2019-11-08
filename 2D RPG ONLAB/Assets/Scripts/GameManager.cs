@@ -24,6 +24,7 @@ namespace EventCallbacks
         public GameObject m_TeleportToFirstBoss;
         public GameObject m_TeleporterToSecondBoss;
 
+
         private List<Vector2> placesToSpawn;
         private Vector2 placeToSpawnHeroes;
 

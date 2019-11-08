@@ -70,12 +70,6 @@ namespace EventCallbacks
         public Sprite[] m_MovementSprites;
 
 
-        private float timer;
-        private int previousSecond;
-
-        private string heroObjectName;
-
-
         private Guid SpawnerDeathEventGuid;
         private Guid MobDeathEventGuid;
 
@@ -100,7 +94,6 @@ namespace EventCallbacks
             spriteRenderer = GetComponent<SpriteRenderer>();
             rigidbody = GetComponent<Rigidbody2D>();
             inventory = GetComponent<Inventory>();
-            heroObjectName = this.gameObject.name;
             m_NormalizedMovement = new Vector2(1, 0);
 
             m_ImageCooldownBasic.fillAmount = 0;
@@ -121,9 +114,6 @@ namespace EventCallbacks
             spellOneCooldownATM = m_SpellOneCooldown;
             basicAttackCooldownATM = m_BasicAttackCooldown;
 
-            previousSecond = 0;
-            timer = 0.0f;
-
             EventSystem.Current.RegisterListener<MobDeathEventInfo>(EnemyKilled, ref MobDeathEventGuid);
             EventSystem.Current.RegisterListener<SpawnerDeathEventInfo>(EnemyKilled, ref SpawnerDeathEventGuid);
 
@@ -135,6 +125,10 @@ namespace EventCallbacks
         private void UpdateBasic()
         {
             if (m_BasicAttackCooldown >= basicAttackCooldownATM) basicAttackCooldownATM+= 0.1f;
+            if (buffDuration > 0)
+            {
+                buffDuration--;
+            }
         }
 
 
@@ -164,10 +158,7 @@ namespace EventCallbacks
             m_ImageCooldownBasic.fillAmount = (m_BasicAttackCooldown - basicAttackCooldownATM) / m_BasicAttackCooldown;
             m_ImageCooldownSpellOne.fillAmount = (m_SpellOneCooldown - spellOneCooldownATM) / m_SpellOneCooldown;
             
-            if (buffDuration > 0)
-            {
-                buffDuration--;
-            }
+            
 
 
         }
