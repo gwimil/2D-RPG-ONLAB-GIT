@@ -62501,7 +62501,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -73344,6 +73344,9 @@ MonoBehaviour:
   - {fileID: 1090251258202457118, guid: 97166d1f44faf004f8d66e8edf6c35e3, type: 3}
   - {fileID: 8106060193427776179, guid: 9ac7319d34c983f49aca611037097ddb, type: 3}
   - {fileID: 1404558507783016837, guid: 9711a27ea830418478e8acbce7dccd11, type: 3}
+  - {fileID: 176577793892007117, guid: b2d5f1fc50cddd04781a791c1637de65, type: 3}
+  - {fileID: 7422058832021627474, guid: f10119cb1514bcf419036f71c7bf6707, type: 3}
+  - {fileID: 9004867387074691792, guid: f8cea660aceba164a93dd92799342f9e, type: 3}
   m_QuestNumber: {fileID: 675547626}
   m_QuestName: {fileID: 650162898}
   m_QuestDoneSoFar: {fileID: 1873160758}

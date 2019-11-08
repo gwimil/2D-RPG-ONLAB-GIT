@@ -9,7 +9,6 @@ namespace EventCallbacks
     {
         public List<Mobs> m_EnemyToKill;
         public int m_NumberToKill;
-        public Items m_QuestItem;
 
         private int m_CurrentNumber;
         private List<string> m_EnemyName;
