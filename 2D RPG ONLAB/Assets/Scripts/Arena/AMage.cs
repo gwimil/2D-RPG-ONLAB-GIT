@@ -50,13 +50,15 @@ namespace EventCallbacks
             }
         }
 
+        GameObject p;
+
         [Command]
         void CmdFire()
         {
 
             // We are guaranteed to be on the server right now.
-            
-            GameObject p = Instantiate(m_BaseAttack.gameObject, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 180));
+
+            p = Instantiate(m_BaseAttack.gameObject, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 180));
             //  p.setDirection(m_NormalizedMovement)
             p.GetComponent<ArenaProjectiles>().ID = ID;
             Debug.Log(GetComponent<NetworkTransform>().transform.rotation);
@@ -68,11 +70,18 @@ namespace EventCallbacks
             // Now that the object exists on the server, propagate it to all
             // the clients (and also wire up the NetworkIdentity)
             NetworkServer.Spawn(p);
-            
+
+            RpcFire(transform.position, m_NormalizedMovement);
 
             Destroy(p, 3);
         }
 
+        [ClientRpc]
+        void RpcFire(Vector3 postition, Vector3 normalized)
+        {
+            p.gameObject.transform.position = postition;
+            p.GetComponent<Rigidbody2D>().velocity = normalized * 5;
+        }
 
 
 

@@ -24,18 +24,11 @@ namespace EventCallbacks
 
         public Image m_ImageCooldownSpellOne;
 
-        public Image m_ImageCooldownSpellTwo;
-
         public Text m_TextCooldownSpellOne;
-        public Text m_TextCooldownSpellTwo;
 
         public float m_SpellOneCooldown;
         protected float spellOneCooldownATM;
         public float m_SpellOneManaCost;
-
-        public float m_SpellTwoCooldown;
-        protected float spellTwoCooldownATM;
-        public float m_SpellTwoManaCost;
 
 
         public float m_BasicAttackCooldown;
@@ -71,9 +64,7 @@ namespace EventCallbacks
             m_NormalizedMovement = new Vector2(1, 0);
 
             m_ImageCooldownSpellOne.fillAmount = 0;
-            m_ImageCooldownSpellTwo.fillAmount = 0;
             m_TextCooldownSpellOne.text = "";
-            m_TextCooldownSpellTwo.text = "";
 
             spellOneCooldownATM = m_SpellOneCooldown;
             basicAttackCooldownATM = m_BasicAttackCooldown;

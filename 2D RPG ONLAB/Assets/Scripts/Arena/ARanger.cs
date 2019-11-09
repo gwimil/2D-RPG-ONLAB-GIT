@@ -37,29 +37,7 @@ namespace EventCallbacks
                 case 1:
                     if (m_SpellOneCooldown == spellOneCooldownATM && m_SpellOne != null)
                     {
-                        List<ArenaProjectiles> multipleArrows = new List<ArenaProjectiles>();
-                        for (int j = -2; j < 3; j++)
-                        {
-                            multipleArrows.Add(Instantiate(m_SpellOne, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 180)));
-                            if (m_NormalizedMovement.y == 0.0f)
-                            {
-                          //      multipleArrows[j + 2].setDirection(m_NormalizedMovement + new Vector2(0.0f, 0.2f * j));
-                            }
-                            else if (m_NormalizedMovement.x == 0.0f)
-                            {
-                            //    multipleArrows[j + 2].setDirection(m_NormalizedMovement + new Vector2(0.2f * j, 0.0f));
-                            }
-                            else if (m_NormalizedMovement.x == m_NormalizedMovement.y)
-                            {
-                           //     multipleArrows[j + 2].setDirection(m_NormalizedMovement + new Vector2(0.14f * j, -0.14f * j));
-                            }
-                            else
-                            {
-                           //     multipleArrows[j + 2].setDirection(m_NormalizedMovement + new Vector2(0.14f * j, 0.14f * j));
-                            }
-
-                            multipleArrows[j + 2].m_damage += m_BaseDMG / 10;
-                        }
+                        CmdSpawnMultipleProjectiles();
                         spellOneCooldownATM = 0.0f;
                         m_TextCooldownSpellOne.text = ((int)m_SpellOneCooldown).ToString();
                     }
@@ -78,15 +56,44 @@ namespace EventCallbacks
         {
 
             // We are guaranteed to be on the server right now.
-            ArenaProjectiles p = Instantiate(m_BaseAttack, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 180));
-         //   p.setDirection(m_NormalizedMovement);
-            p.m_damage += m_BaseDMG / 15;
-
+            GameObject p = Instantiate(m_BaseAttack.gameObject, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 180));
+            p.GetComponent<Rigidbody2D>().velocity = m_NormalizedMovement*5;
+            p.GetComponent<ArenaProjectiles>().ID = ID;
             //go.GetComponent<NetworkIdentity>().AssignClientAuthority( connectionToClient );
 
             // Now that the object exists on the server, propagate it to all
             // the clients (and also wire up the NetworkIdentity)
-            NetworkServer.SpawnWithClientAuthority(p.gameObject, connectionToClient);
+            NetworkServer.Spawn(p.gameObject);
+        }
+
+
+        [Command]
+        void CmdSpawnMultipleProjectiles()
+        {
+            List<GameObject> multipleArrows = new List<GameObject>();
+            for (int j = -2; j < 3; j++)
+            {
+                multipleArrows.Add(Instantiate(m_SpellOne.gameObject, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 180)));
+                if (m_NormalizedMovement.y == 0.0f)
+                {
+                    multipleArrows[j + 2].GetComponent<Rigidbody2D>().velocity = (m_NormalizedMovement + new Vector2(0.0f, 0.2f * j))*5;
+                }
+                else if (m_NormalizedMovement.x == 0.0f)
+                {
+                    multipleArrows[j + 2].GetComponent<Rigidbody2D>().velocity = (m_NormalizedMovement + new Vector2(0.2f * j, 0.0f))*5;
+                }
+                else if (m_NormalizedMovement.x == m_NormalizedMovement.y)
+                {
+                    multipleArrows[j + 2].GetComponent<Rigidbody2D>().velocity = (m_NormalizedMovement + new Vector2(0.14f * j, -0.14f * j))*5;
+                }
+                else
+                {
+                    multipleArrows[j + 2].gameObject.GetComponent<Rigidbody2D>().velocity = (m_NormalizedMovement + new Vector2(0.14f * j, 0.14f * j))*5;
+                }
+                multipleArrows[j + 2].GetComponent<ArenaProjectiles>().ID = ID;
+                NetworkServer.Spawn(multipleArrows[j + 2]);
+            }
+
         }
 
     }

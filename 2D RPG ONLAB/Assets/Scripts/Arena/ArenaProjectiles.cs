@@ -11,7 +11,6 @@ namespace EventCallbacks
         [SyncVar(hook = "ChangeRotation")]
         [HideInInspector] public Quaternion direction;
 
-
         [SyncVar]
         [HideInInspector]public int ID;
 
@@ -21,31 +20,29 @@ namespace EventCallbacks
 
         private void Start()
         {
-          //  aut = true;
+
         }
 
         void ChangeRotation(Quaternion dir)
         {
-            this.transform.rotation = dir;
+            transform.rotation = dir;
         }
 
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-
-
             if (other.tag == "Hero")
             {
                 ArenaHeroes otherHero = other.gameObject.GetComponent<ArenaHeroes>();
                 if (ID != otherHero.ID)
                 {
                     otherHero.TakeDamage(m_damage);
-                    Destroy(this.gameObject);
+                    NetworkServer.Destroy(this.gameObject);
                 }
             }
             else
             {
-                Destroy(this.gameObject);
+                NetworkServer.Destroy(this.gameObject);
             }
         }
 

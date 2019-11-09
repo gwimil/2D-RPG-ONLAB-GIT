@@ -41,7 +41,7 @@ namespace EventCallbacks
             //Instantiate(PlayerUnitPrefab);
 
             // Command (politely) the server to SPAWN our unit
-            CmdSpawnMyUnit();
+          //  CmdSpawnMyUnit();
         }
 
 

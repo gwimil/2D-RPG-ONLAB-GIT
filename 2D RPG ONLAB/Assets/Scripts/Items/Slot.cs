@@ -15,12 +15,12 @@ namespace EventCallbacks
 
 
         private void Start()
-        {
+        { 
             if (gameObject.GetComponentInChildren<Text>() != null)
             {
                 GetComponentInChildren<Text>().text = "";
             }
-            nullSprite = GetComponent<Image>().sprite;
+            nullSprite = null;
         }
 
         public void AddItemToSlot(Items item, bool b = true)
@@ -57,7 +57,7 @@ namespace EventCallbacks
 
         public void AddToEmptyEqupmentSlot(Slot s)
         {
-            AddItemToSlot(s.m_item, false);
+            AddItemToSlot(s.m_item, true);
             s.RemoveItemFromSlot();
         }
 
