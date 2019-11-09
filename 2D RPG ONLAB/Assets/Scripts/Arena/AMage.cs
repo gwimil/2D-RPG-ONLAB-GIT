@@ -50,7 +50,7 @@ namespace EventCallbacks
             }
         }
 
-        GameObject p;
+     //   GameObject p;
 
         [Command]
         void CmdFire()
@@ -58,7 +58,7 @@ namespace EventCallbacks
 
             // We are guaranteed to be on the server right now.
 
-            p = Instantiate(m_BaseAttack.gameObject, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 180));
+            GameObject p = Instantiate(m_BaseAttack.gameObject, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 180));
             //  p.setDirection(m_NormalizedMovement)
             p.GetComponent<ArenaProjectiles>().ID = ID;
             Debug.Log(GetComponent<NetworkTransform>().transform.rotation);
@@ -70,17 +70,17 @@ namespace EventCallbacks
             // the clients (and also wire up the NetworkIdentity)
             NetworkServer.Spawn(p);
             p.GetComponent<ArenaProjectiles>().RpcChangeRotation(m_NormalizedMovement);
-            RpcFire(transform.position, m_NormalizedMovement);
+          //  RpcFire(transform.position, m_NormalizedMovement);
 
             Destroy(p, 3);
         }
 
-        [ClientRpc]
+      /*  [ClientRpc]
         void RpcFire(Vector3 postition, Vector3 normalized)
         {
             p.gameObject.transform.position = postition;
             p.GetComponent<Rigidbody2D>().velocity = normalized * 5;
-        }
+        }*/
 
 
 

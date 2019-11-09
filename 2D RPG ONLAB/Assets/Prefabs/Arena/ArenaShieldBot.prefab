@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5304537491865454015}
   - component: {fileID: 8831406817220630080}
   - component: {fileID: 5768224049469806105}
-  - component: {fileID: 3007502854272449688}
-  - component: {fileID: -4723025107688808649}
-  - component: {fileID: -3281798719442339063}
+  - component: {fileID: 2718901601351269291}
+  - component: {fileID: 6127090229759110120}
+  - component: {fileID: 8979185887294787464}
   m_Layer: 0
   m_Name: ArenaShieldBot
   m_TagString: Bot
@@ -98,7 +98,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3007502854272449688
+--- !u!114 &2718901601351269291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,7 +131,7 @@ MonoBehaviour:
     i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
---- !u!114 &-4723025107688808649
+--- !u!114 &6127090229759110120
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 2
-  m_SendInterval: 0.11111111
+  m_SendInterval: 0.1
   m_SyncRotationAxis: 3
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
---- !u!50 &-3281798719442339063
+--- !u!50 &8979185887294787464
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0

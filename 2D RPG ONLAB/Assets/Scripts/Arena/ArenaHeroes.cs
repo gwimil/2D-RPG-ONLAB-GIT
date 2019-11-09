@@ -44,6 +44,8 @@ namespace EventCallbacks
 
         public Sprite[] m_MovementSprites;
 
+        public GameObject m_YouDiedTextObject;
+
 
         private float timer;
         private int previousSecond;
@@ -282,12 +284,28 @@ namespace EventCallbacks
 
 
 
-
-
-
         private void Die()
         {
+            if (isLocalPlayer)
+            {
+                Instantiate(m_YouDiedTextObject);
+            }
 
+            gameObject.SetActive(false);
+            CmdPlayerDied();
         }
+
+        [Command]
+        void CmdPlayerDied()
+        {
+            gameObject.SetActive(false);
+        }
+
+        [ClientRpc]
+        void RpcPlayerDied()
+        {
+            gameObject.SetActive(false);
+        }
+
     }
 }

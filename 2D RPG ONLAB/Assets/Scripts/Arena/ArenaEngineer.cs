@@ -38,16 +38,11 @@ namespace EventCallbacks
                 case 1:
                     if (m_SpellOneCooldown == spellOneCooldownATM && m_ShieldBot != null)
                     {
-                        
-                        CmdSpawnHealBot();
+                        CmdSpawnShieldBot();
                         spellOneCooldownATM = 0.0f;
                         m_TextCooldownSpellOne.text = ((int)m_SpellOneCooldown).ToString();
                     }
                     break;
-                case 2:
-                    break;
-
-                default: break;
             }
         }
 
@@ -62,7 +57,7 @@ namespace EventCallbacks
 
 
         [Command]
-        void CmdSpawnHealBot()
+        void CmdSpawnShieldBot()
         {
             GameObject p = Instantiate(m_ShieldBot, transform.position, Quaternion.Euler(0, 0, 0));
             p.GetComponentInChildren<ArenaShieldBotID>().ID = ID;

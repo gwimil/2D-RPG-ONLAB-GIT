@@ -18,11 +18,6 @@ namespace EventCallbacks
         public Button m_RangerButton;
         public Button m_WarriorButton;
 
-
-        [HideInInspector] public GameObject choosenHero;
-
-
-
         // Start is called before the first frame update
         void Start()
         {
@@ -36,7 +31,6 @@ namespace EventCallbacks
 
         private void MageButtonClicked()
         {
-            choosenHero = m_MageHero;
             m_HeroChooser.gameObject.SetActive(false);
             m_NetworkManager.SetActive(true);
             m_NetworkManager.GetComponent<MyNetworkManager>().chosenCharacter = 0;
@@ -45,7 +39,6 @@ namespace EventCallbacks
 
         private void RangerButtonClicked()
         {
-            choosenHero = m_RangerHero;
             m_HeroChooser.gameObject.SetActive(false);
             m_NetworkManager.SetActive(true);
             m_NetworkManager.GetComponent<MyNetworkManager>().chosenCharacter = 1;
@@ -53,7 +46,6 @@ namespace EventCallbacks
 
         private void WarriorButtonClicked()
         {
-            choosenHero = m_WarriorHero;
             m_HeroChooser.gameObject.SetActive(false);
             m_NetworkManager.SetActive(true);
             m_NetworkManager.GetComponent<MyNetworkManager>().chosenCharacter = 2;

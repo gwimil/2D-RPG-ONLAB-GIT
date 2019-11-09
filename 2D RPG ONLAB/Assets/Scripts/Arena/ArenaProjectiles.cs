@@ -7,7 +7,6 @@ namespace EventCallbacks
 {
     public abstract class ArenaProjectiles : NetworkBehaviour
     {
-
         [SyncVar]
         [HideInInspector]public int ID;
 
