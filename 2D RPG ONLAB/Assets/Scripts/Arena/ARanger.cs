@@ -64,6 +64,8 @@ namespace EventCallbacks
             // Now that the object exists on the server, propagate it to all
             // the clients (and also wire up the NetworkIdentity)
             NetworkServer.Spawn(p);
+
+            p.GetComponent<ArenaProjectiles>().RpcChangeRotation(m_NormalizedMovement);
         }
 
 
@@ -92,6 +94,7 @@ namespace EventCallbacks
                 }
                 multipleArrows[j + 2].GetComponent<ArenaProjectiles>().ID = ID;
                 NetworkServer.Spawn(multipleArrows[j + 2]);
+                multipleArrows[j + 2].GetComponent<ArenaProjectiles>().RpcChangeRotation(m_NormalizedMovement);
             }
 
         }

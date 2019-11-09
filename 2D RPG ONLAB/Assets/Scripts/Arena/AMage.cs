@@ -64,13 +64,12 @@ namespace EventCallbacks
             Debug.Log(GetComponent<NetworkTransform>().transform.rotation);
             p.GetComponent<Rigidbody2D>().velocity = m_NormalizedMovement * 5;
             p.GetComponent<ArenaProjectiles>().m_damage += m_BaseDMG / 10;
-            p.GetComponent<ArenaProjectiles>().direction = Quaternion.Euler(0, 0, transform.rotation.z + 180);
             //go.GetComponent<NetworkIdentity>().AssignClientAuthority( connectionToClient );
 
             // Now that the object exists on the server, propagate it to all
             // the clients (and also wire up the NetworkIdentity)
             NetworkServer.Spawn(p);
-
+            p.GetComponent<ArenaProjectiles>().RpcChangeRotation(m_NormalizedMovement);
             RpcFire(transform.position, m_NormalizedMovement);
 
             Destroy(p, 3);
@@ -95,14 +94,15 @@ namespace EventCallbacks
             fb.GetComponent<ArenaProjectiles>().ID = ID;
             fb.gameObject.GetComponent<Rigidbody2D>().velocity = m_NormalizedMovement * 5;
             fb.GetComponent<ArenaProjectiles>().m_damage += m_BaseDMG / 10;
-            fb.GetComponent<ArenaProjectiles>().direction = Quaternion.Euler(0, 0, transform.rotation.z + 90);
 
             //go.GetComponent<NetworkIdentity>().AssignClientAuthority( connectionToClient );
 
             // Now that the object exists on the server, propagate it to all
             // the clients (and also wire up the NetworkIdentity)
             NetworkServer.Spawn(fb);
-            
+            fb.GetComponent<ArenaProjectiles>().RpcChangeRotation(m_NormalizedMovement);
+
+
             Destroy(fb, 3);
 
         }

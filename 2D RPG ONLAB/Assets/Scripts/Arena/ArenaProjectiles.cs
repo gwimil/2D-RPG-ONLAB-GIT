@@ -8,9 +8,6 @@ namespace EventCallbacks
     public abstract class ArenaProjectiles : NetworkBehaviour
     {
 
-        [SyncVar(hook = "ChangeRotation")]
-        [HideInInspector] public Quaternion direction;
-
         [SyncVar]
         [HideInInspector]public int ID;
 
@@ -18,14 +15,12 @@ namespace EventCallbacks
         private Transform parentTransform;
         public float SpeedInUnitsPerSecond;
 
-        private void Start()
+        [ClientRpc]
+        public void RpcChangeRotation(Vector3 dir)
         {
-
-        }
-
-        void ChangeRotation(Quaternion dir)
-        {
-            transform.rotation = dir;
+            transform.Rotate(0, 0, transform.rotation.z);
+            float angle = Vector2.SignedAngle(dir, new Vector2(1, 0));
+            transform.Rotate(0, 0, -angle);
         }
 
 
@@ -37,6 +32,13 @@ namespace EventCallbacks
                 if (ID != otherHero.ID)
                 {
                     otherHero.TakeDamage(m_damage);
+                    NetworkServer.Destroy(this.gameObject);
+                }
+            }
+            else if (other.tag == "Bot")
+            {
+                if (other.gameObject.GetComponent<ArenaShieldBotID>().ID != ID)
+                {
                     NetworkServer.Destroy(this.gameObject);
                 }
             }

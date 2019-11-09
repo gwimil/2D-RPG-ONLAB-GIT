@@ -12,9 +12,6 @@ namespace EventCallbacks
         public GameObject m_ShieldBot;
         public GameObject m_AttackBot;
 
-
-
-
         public override void Attack()
         {
             if (!hasAuthority)
@@ -42,7 +39,7 @@ namespace EventCallbacks
                     if (m_SpellOneCooldown == spellOneCooldownATM && m_ShieldBot != null)
                     {
                         
-                    //    CmdSpawnHealBot();
+                        CmdSpawnHealBot();
                         spellOneCooldownATM = 0.0f;
                         m_TextCooldownSpellOne.text = ((int)m_SpellOneCooldown).ToString();
                     }
@@ -64,14 +61,14 @@ namespace EventCallbacks
         }
 
 
-      /*  [Command]
+        [Command]
         void CmdSpawnHealBot()
         {
             GameObject p = Instantiate(m_ShieldBot, transform.position, Quaternion.Euler(0, 0, 0));
-            p.GetComponent<ArenaHealBot>().ID = ID;
+            p.GetComponentInChildren<ArenaShieldBotID>().ID = ID;
 
             NetworkServer.Spawn(p);
-        }*/
+        }
 
 
 

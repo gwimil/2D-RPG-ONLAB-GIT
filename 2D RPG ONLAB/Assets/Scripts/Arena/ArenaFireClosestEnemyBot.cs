@@ -24,7 +24,7 @@ namespace EventCallbacks
         {
             GameObject[] playersToFind = GameObject.FindGameObjectsWithTag("Hero");
             GameObject closestEnemy = null;
-            float closestDistance = 7;
+            float closestDistance = 20;
             Vector2 closestNormalizedMovement = new Vector2(0, 0);
             for (int i = 0; i < playersToFind.Length; i++)
             {
@@ -62,6 +62,7 @@ namespace EventCallbacks
             fb.GetComponent<ArenaProjectiles>().ID = ID;
 
             NetworkServer.Spawn(fb);
+            fb.GetComponent<ArenaProjectiles>().RpcChangeRotation(normalizedMovement);
         }
 
 
