@@ -72,8 +72,25 @@ namespace EventCallbacks
             previousSecond = 0;
             timer = 0.0f;
 
+
+            InvokeRepeating("UpdateCd", 0.0f, 1.0f);
+            InvokeRepeating("UpdateBasic", 0.0f, 0.1f);
         }
 
+        private void UpdateCd()
+        {
+            previousSecond++;
+
+            if (m_SpellOneCooldown > spellOneCooldownATM) spellOneCooldownATM++;
+            if (spellOneCooldownATM > m_SpellOneCooldown) spellOneCooldownATM = m_SpellOneCooldown;
+
+            setSpellTextOnCD(m_TextCooldownSpellOne, m_SpellOneCooldown, spellOneCooldownATM);
+        }
+
+        private void UpdateBasic()
+        {
+            if (m_BasicAttackCooldown >= basicAttackCooldownATM) basicAttackCooldownATM += 0.1f;
+        }
 
         void Update()
         {
@@ -109,29 +126,7 @@ namespace EventCallbacks
 
 
             m_ImageCooldownSpellOne.fillAmount = (m_SpellOneCooldown - spellOneCooldownATM) / m_SpellOneCooldown;
-            if (m_BasicAttackCooldown >= basicAttackCooldownATM) basicAttackCooldownATM++;
 
-
-
-            timer += Time.deltaTime;
-            int second = Convert.ToInt32(timer % 5000);
-
-            // EVERY SECOND
-            if (second - previousSecond == 1)
-            {
-                previousSecond++;
-
-                if (m_SpellOneCooldown > spellOneCooldownATM) spellOneCooldownATM++;
-                if (spellOneCooldownATM > m_SpellOneCooldown) spellOneCooldownATM = m_SpellOneCooldown;
-
-                setSpellTextOnCD(m_TextCooldownSpellOne, m_SpellOneCooldown, spellOneCooldownATM);
-
-                if (second == 5000)
-                {
-                    timer = 0.0f;
-                    previousSecond = 0;
-                }
-            }
         }
 
         // MOVING AND UI ---------------------------------------MOVING AND UI---------------------------------------------MOVING AND UI

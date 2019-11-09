@@ -28,7 +28,10 @@ namespace EventCallbacks
 
             if (startPos != null)
             {
-                player = Instantiate(characters[selectedClass], startPos.position, startPos.rotation) as GameObject;
+                float posX = Random.Range(-5.0f, 5.0f);
+                float posY = Random.Range(-5.0f, 5.0f);
+                Vector3 pos = new Vector3(posX, posY, 0);
+                player = Instantiate(characters[selectedClass], startPos.position + pos, startPos.rotation) as GameObject;
             }
             else
             {

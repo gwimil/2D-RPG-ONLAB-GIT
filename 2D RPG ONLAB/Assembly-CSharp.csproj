@@ -65,13 +65,14 @@
     <Compile Include="Assets\FantasyIconsPackFree\Demo\IconViewer.cs" />
     <Compile Include="Assets\Scripts\Arena\AMage.cs" />
     <Compile Include="Assets\Scripts\Arena\ARanger.cs" />
+    <Compile Include="Assets\Scripts\Arena\ArenaEngineer.cs" />
     <Compile Include="Assets\Scripts\Arena\ArenaFireBall.cs" />
+    <Compile Include="Assets\Scripts\Arena\ArenaFireClosestEnemyBot.cs" />
     <Compile Include="Assets\Scripts\Arena\ArenaHeroes.cs" />
     <Compile Include="Assets\Scripts\Arena\ArenaMageBasic.cs" />
     <Compile Include="Assets\Scripts\Arena\ArenaManager.cs" />
     <Compile Include="Assets\Scripts\Arena\ArenaProjectiles.cs" />
     <Compile Include="Assets\Scripts\Arena\ArenaRangerBasic.cs" />
-    <Compile Include="Assets\Scripts\Arena\ArenaWarrior.cs" />
     <Compile Include="Assets\Scripts\Arena\MyNetworkManager.cs" />
     <Compile Include="Assets\Scripts\Arena\PlayerConnectionObject.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraControll.cs" />

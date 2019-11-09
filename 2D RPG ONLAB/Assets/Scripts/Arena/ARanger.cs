@@ -63,7 +63,7 @@ namespace EventCallbacks
 
             // Now that the object exists on the server, propagate it to all
             // the clients (and also wire up the NetworkIdentity)
-            NetworkServer.Spawn(p.gameObject);
+            NetworkServer.Spawn(p);
         }
 
 
