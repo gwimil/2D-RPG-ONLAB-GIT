@@ -28,6 +28,8 @@ namespace EventCallbacks
 
         public Vector2 m_MiddlePosition;
 
+        public RectTransform healthBar;
+
         public Projectile m_EnemyArrow;
         private int phaseCounter;
 
@@ -105,7 +107,7 @@ namespace EventCallbacks
                         SetBossNewPositionRandom(5);
                         transform.position = new Vector3(m_MiddlePosition.x, m_MiddlePosition.y, 0);
                         outSideCounter = 0;
-                        counter = -7;
+                        counter = -6;
                     }
                     if (counter == -1)
                     {
@@ -114,7 +116,7 @@ namespace EventCallbacks
                         outSideCounter++;
                     }
 
-                    if (counter >=6)
+                    if (counter >=5)
                     {
                         int randomInt = Random.Range(0, 5);
                         SetBossNewPositionRandom(randomInt);
@@ -198,7 +200,7 @@ namespace EventCallbacks
                     for (int j = 0; j < m_ArrowShootersTop.Count; j++)
                     {
                         m_ArrowShootersTop[j].gameObject.SetActive(true);
-                        m_ArrowShootersTop[j].ResetShootRate(4.0f, 200.0f);
+                        m_ArrowShootersTop[j].ResetShootRate(3.0f, 200.0f);
                         m_ArrowShootersTop[j].shootingEnabled = true;
                     }
                     for (int j = 0; j < m_ArrowShootersLeft.Count; j++)
@@ -232,7 +234,7 @@ namespace EventCallbacks
                     for (int j = 0; j < m_ArrowShootersLeft.Count; j++)
                     {
                         m_ArrowShootersLeft[j].gameObject.SetActive(true);
-                        m_ArrowShootersLeft[j].ResetShootRate(4.0f, 200.0f);
+                        m_ArrowShootersLeft[j].ResetShootRate(3.0f, 200.0f);
                         m_ArrowShootersLeft[j].shootingEnabled = true;
                     }
                     for (int j = 0; j < m_ArrowShootersRight.Count; j++)
@@ -265,7 +267,7 @@ namespace EventCallbacks
                     for (int j = 0; j < m_ArrowShootersRight.Count; j++)
                     {
                         m_ArrowShootersRight[j].gameObject.SetActive(true);
-                        m_ArrowShootersRight[j].ResetShootRate(4.0f, 200.0f);
+                        m_ArrowShootersRight[j].ResetShootRate(3.0f, 200.0f);
                         m_ArrowShootersRight[j].shootingEnabled = true;
                     }
                     for (int j = 0; j < m_ArrowShootersBot.Count; j++)
@@ -391,7 +393,17 @@ namespace EventCallbacks
             return v;
         }
 
-       
+        public override void TakeDamage(float dmg, string killer)
+        {
+            this.killer = killer;
+            m_HP -= dmg;
+            renderer.color = Color.red;
+            healthBar.sizeDelta = new Vector2(m_HP / m_MaxHP * 300, healthBar.sizeDelta.y);
+            Invoke("ResetColor", 0.2f);
+            CheckIfDeath();
+
+        }
+
 
         public override void ManageMovement()
         {

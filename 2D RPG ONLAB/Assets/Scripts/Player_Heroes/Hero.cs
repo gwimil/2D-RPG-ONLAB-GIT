@@ -76,21 +76,20 @@ namespace EventCallbacks
         [HideInInspector] public int bags;
         [HideInInspector] public bool overTeleport;
         [HideInInspector] public string teleportName;
-        [HideInInspector] public int buffDuration;
-        [HideInInspector] public int buffStrength;
-        [HideInInspector] public IPotions currentBuff;
 
 
         private SpriteRenderer spriteRenderer;
 
+        private float movementBonus;
 
-
+        private IEnumerator coroutine;
+        private bool alreadySpeedBuffed;
 
         protected void Awake()
         {
+            alreadySpeedBuffed = false;
+            movementBonus = 1.0f;
             bags = 0;
-            buffDuration = 0;
-            buffStrength = 0;
             spriteRenderer = GetComponent<SpriteRenderer>();
             rigidbody = GetComponent<Rigidbody2D>();
             inventory = GetComponent<Inventory>();
@@ -125,10 +124,6 @@ namespace EventCallbacks
         private void UpdateBasic()
         {
             if (m_BasicAttackCooldown >= basicAttackCooldownATM) basicAttackCooldownATM+= 0.1f;
-            if (buffDuration > 0)
-            {
-                buffDuration--;
-            }
         }
 
 
@@ -168,12 +163,7 @@ namespace EventCallbacks
 
         public void Move(Vector2 position)
         {
-
-            if (buffDuration > 0)
-            {
-                position = position + position * buffStrength / 100.0f;
-            }
-            rigidbody.MovePosition(rigidbody.position + position);
+            rigidbody.MovePosition(rigidbody.position + position * movementBonus);
             if (position.x != 0 || position.y != 0) m_NormalizedMovement = position.normalized;
 
             if (m_MovementSprites != null)
@@ -277,7 +267,7 @@ namespace EventCallbacks
                 case "Gloves":
                     EquipItemByLocation(i, m_GlovesSlot);
                     break;
-                case "Legging":
+                case "Boots":
                     EquipItemByLocation(i, m_LeggingSlot);
                     break;
                 case "Weapon":
@@ -318,7 +308,7 @@ namespace EventCallbacks
                     slotToEquiep.RemoveItemFromSlot(false);
                     item.UpdateStatsWithItem(this, false);
                     slotToEquiep.AddToEmptyEqupmentSlot(CurrentSlot);
-                    CurrentSlot.m_item.UpdateStatsWithItem(this, true);
+                    slotToEquiep.m_item.UpdateStatsWithItem(this, true);
                     item.m_Quantity = 1;
                     inventory.AddItem(item);
                 }
@@ -371,7 +361,43 @@ namespace EventCallbacks
             }
         }
 
+        
 
+        public void PotionDrinked(IPotions effect, float str, float dur, int loc)
+        {
+
+            Slot slot = inventory.m_slots[loc].GetComponent<Slot>();
+            switch (effect)
+            {
+                case IPotions.InstantHealth:
+                    HealHero(str);
+                    slot.RemoveItemFromSlot();
+                    break;
+                case IPotions.InstantMana:
+                    ManaHero(str);
+                    slot.RemoveItemFromSlot();
+                    break;
+                case IPotions.Speed:
+                    if (!alreadySpeedBuffed)
+                    {
+                       alreadySpeedBuffed = true;
+                       movementBonus = movementBonus + movementBonus * str/100;
+                       coroutine = WaitForSpeedPotionToEnd(dur);
+                       StartCoroutine(coroutine);
+                       slot.RemoveItemFromSlot();
+                    }
+                    break;
+                   
+            }
+            SetHealthUI();
+        }
+
+        private IEnumerator WaitForSpeedPotionToEnd(float waitUntil)
+        {
+            yield return new WaitForSeconds(waitUntil);
+            alreadySpeedBuffed = false;
+            movementBonus = 1.0f;
+        }
 
         private void Die()
         {

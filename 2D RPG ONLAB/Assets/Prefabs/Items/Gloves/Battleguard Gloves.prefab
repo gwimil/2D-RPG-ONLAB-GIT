@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8836449475096377761}
   m_Layer: 0
   m_Name: Battleguard Gloves
-  m_TagString: Armor
+  m_TagString: Gloves
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sprite: {fileID: 21300000, guid: e85a4f4a40f9cca409993136dabd3bcc, type: 3}
-  m_ID: 1
+  m_ID: 14
   m_isQuestItem: 0
   m_Quantity: 1
   m_name: Battleguard Gloves

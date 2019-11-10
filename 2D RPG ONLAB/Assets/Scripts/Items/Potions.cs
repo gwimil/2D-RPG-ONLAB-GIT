@@ -11,20 +11,18 @@ namespace EventCallbacks
         public int m_EffectDuration;
         public int m_EffectStrength;
 
-        override public void Use(Hero h)
+        override public void Use(Hero h, int location)
         {
             switch (m_Potion_Effect)
             {
                 case IPotions.Speed:
-                    h.currentBuff = m_Potion_Effect;
-                    h.buffDuration = m_EffectDuration * 1000;
-                    h.buffStrength = m_EffectStrength;
+                    h.PotionDrinked(IPotions.Speed, m_EffectStrength, m_EffectDuration, location);
                     break;
                 case IPotions.InstantHealth:
-                    h.HealHero(m_EffectStrength);
+                    h.PotionDrinked(IPotions.InstantHealth, m_EffectStrength, m_EffectDuration, location);
                     break;
                 case IPotions.InstantMana:
-                    h.ManaHero(m_EffectStrength);
+                    h.PotionDrinked(IPotions.InstantMana, m_EffectStrength, m_EffectDuration, location);
                     break;
                 default: break;
             }

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sprite: {fileID: 21300000, guid: 4ec5e8e694bc3334db32778bebfd01e7, type: 3}
-  m_ID: 1
+  m_ID: 2
   m_isQuestItem: 0
   m_Quantity: 1
   m_name: Battleguard Armor

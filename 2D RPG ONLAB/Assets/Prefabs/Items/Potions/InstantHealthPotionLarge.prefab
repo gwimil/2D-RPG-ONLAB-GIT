@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5386489006439118401}
   m_Layer: 0
   m_Name: InstantHealthPotionLarge
-  m_TagString: Untagged
+  m_TagString: HPPotion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sprite: {fileID: 21300000, guid: 9a8f615aa852fcb4f9557c6550ebd454, type: 3}
-  m_ID: 0
+  m_ID: 10001
   m_isQuestItem: 0
   m_Quantity: 1
   m_name: InstantHealthPotionLarge
@@ -53,4 +53,4 @@ MonoBehaviour:
   m_buyingPrice: 60
   m_Potion_Effect: 1
   m_EffectDuration: 30
-  m_EffectStrength: 120
+  m_EffectStrength: 200

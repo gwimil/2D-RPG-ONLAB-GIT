@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sprite: {fileID: 21300000, guid: a2bcc88f94981eb4d8eceb8d65771717, type: 3}
-  m_ID: 0
+  m_ID: 27
   m_isQuestItem: 0
   m_Quantity: 1
   m_name: ButcherKnife

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 142058486932997969}
   m_Layer: 0
   m_Name: DarkMountain Gloves
-  m_TagString: Armor
+  m_TagString: Gloves
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sprite: {fileID: 21300000, guid: 6b5d537fb6d2b8b4abee9de72ec7c504, type: 3}
-  m_ID: 1
+  m_ID: 15
   m_isQuestItem: 0
   m_Quantity: 1
   m_name: DarkMountain Gloves

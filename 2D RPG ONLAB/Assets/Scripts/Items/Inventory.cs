@@ -70,10 +70,22 @@ namespace EventCallbacks
             {
                 if (m_slots[i].transform.childCount == 2)
                 {
-                    if (item.m_ID == m_slots[i].GetComponent<Slot>().m_item.m_ID)
+                    int hh = item.m_ID;
+                    if (m_slots[i].GetComponent<Slot>() == null)
                     {
-                        m_slots[i].GetComponent<Slot>().SumItemsQuantities(item);
-                        return;
+                        break;
+                    }
+                    else if (m_slots[i].GetComponent<Slot>().m_item == null)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        if (item.m_ID == m_slots[i].GetComponent<Slot>().m_item.m_ID)
+                        {
+                            m_slots[i].GetComponent<Slot>().SumItemsQuantities(item);
+                            return;
+                        }
                     }
                 }
             }
@@ -93,7 +105,7 @@ namespace EventCallbacks
 
         public void UseItem(Hero h, int location)
         {
-            m_slots[location].GetComponent<Slot>().m_item.Use(h);
+            m_slots[location].GetComponent<Slot>().m_item.Use(h, location);
         }
 
     }

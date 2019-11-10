@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sprite: {fileID: 21300000, guid: 683e7d9d6853b8a4b9dbe41a0be44b5c, type: 3}
-  m_ID: 1
+  m_ID: 4
   m_isQuestItem: 0
   m_Quantity: 1
   m_name: GreyKnight Armor

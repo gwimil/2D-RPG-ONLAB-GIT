@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sprite: {fileID: 21300000, guid: fdf9505acc4050143af4484d372ca54a, type: 3}
-  m_ID: 1
+  m_ID: 3
   m_isQuestItem: 0
   m_Quantity: 1
   m_name: DarkMountain Armor

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9038592437697462940}
   m_Layer: 0
   m_Name: GreyKnight Boots
-  m_TagString: Armor
+  m_TagString: Boots
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sprite: {fileID: 21300000, guid: 16c1bab30244e46438e1968dda34bd70, type: 3}
-  m_ID: 1
+  m_ID: 10
   m_isQuestItem: 0
   m_Quantity: 1
   m_name: GreyKnight Boots

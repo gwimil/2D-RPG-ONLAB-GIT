@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2773053610133586671}
   m_Layer: 0
   m_Name: Scout Helmet
-  m_TagString: Armor
+  m_TagString: Helmet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sprite: {fileID: 21300000, guid: e3e0bf567e013164bab2b74e80ae37bf, type: 3}
-  m_ID: 1
+  m_ID: 24
   m_isQuestItem: 0
   m_Quantity: 1
   m_name: Scout Helmet

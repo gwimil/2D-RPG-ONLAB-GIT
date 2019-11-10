@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sprite: {fileID: 21300000, guid: db49433d40e53614492908d3cb323f14, type: 3}
-  m_ID: 0
+  m_ID: 26
   m_isQuestItem: 0
   m_Quantity: 1
   m_name: AssassinDagger

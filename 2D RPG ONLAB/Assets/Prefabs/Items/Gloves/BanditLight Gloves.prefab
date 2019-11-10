@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 467192313283586182}
   m_Layer: 0
   m_Name: BanditLight Gloves
-  m_TagString: Armor
+  m_TagString: Gloves
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sprite: {fileID: 21300000, guid: d6a5be75ee20dd94682b602816b88b5d, type: 3}
-  m_ID: 1
+  m_ID: 13
   m_isQuestItem: 0
   m_Quantity: 1
   m_name: BanditLight Gloves

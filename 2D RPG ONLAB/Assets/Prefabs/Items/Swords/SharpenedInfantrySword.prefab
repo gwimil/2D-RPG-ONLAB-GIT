@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sprite: {fileID: 21300000, guid: 490de5b67a54a914088038c8d2c8282f, type: 3}
-  m_ID: 0
+  m_ID: 31
   m_isQuestItem: 0
   m_Quantity: 1
   m_name: SharpenedInfantrySword

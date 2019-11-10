@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7912614861030038329}
   m_Layer: 0
   m_Name: BanditLight Helmet
-  m_TagString: Armor
+  m_TagString: Helmet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sprite: {fileID: 21300000, guid: 83ab2434deb511a4b8aabd90f5d9de60, type: 3}
-  m_ID: 1
+  m_ID: 19
   m_isQuestItem: 0
   m_Quantity: 1
   m_name: BanditLight Helmet

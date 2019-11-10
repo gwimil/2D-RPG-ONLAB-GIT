@@ -8,7 +8,7 @@ namespace EventCallbacks
 {
     public class Bag : MonoBehaviour
     {
-        [HideInInspector] public List<Items> items;
+        public Items items;
         public Image image;
         public Image m_lootImage;
         public ItemManager m_ItemManager;
@@ -22,13 +22,12 @@ namespace EventCallbacks
         private void Awake()
         {
             ItemPickedUpGuid = new Guid();
-            items = new List<Items>();
             heroesOverlapping = new List<Hero>();
         }
 
         private void Start()
         {
-            items.Add(m_ItemManager.ReturnRandomItemsWithMaxLevel(0,20));
+            items = m_ItemManager.ReturnRandomItemsWithMaxLevel(0,20);
             overlappingHeroes = 0;
             image.gameObject.SetActive(false);
 
@@ -38,8 +37,7 @@ namespace EventCallbacks
 
         public void SetItemByMinMax(int min, int max)
         {
-            items.Clear();
-            items.Add(m_ItemManager.ReturnRandomItemsWithMaxLevel(min, max));
+            items = m_ItemManager.ReturnRandomItemsWithMaxLevel(min, max);
         }
 
         private void OnItemPickedUp(ItemPickupEventInfo ui)
@@ -63,7 +61,7 @@ namespace EventCallbacks
             {
                 if (heroesOverlapping[i].gameObject.name == heroName)
                 {
-                    heroesOverlapping[i].AddItemToInventory(m_ItemManager.GiveItem(items[0].m_ID));
+                    heroesOverlapping[i].AddItemToInventory(items);
                     Destroy(gameObject);
                 }
             }
@@ -75,9 +73,8 @@ namespace EventCallbacks
             {
                 collision.GetComponent<Hero>().CollideWithBag(true);
                 heroesOverlapping.Add(collision.GetComponent<Hero>());
-                Debug.Log(items.Count);
                 overlappingHeroes++;
-                if (items.Count >= 1) m_lootImage.sprite = items[0].m_sprite;
+                if (items != null) m_lootImage.sprite = items.m_sprite;
                 image.gameObject.SetActive(true);
             }
         }

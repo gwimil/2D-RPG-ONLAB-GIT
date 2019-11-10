@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sprite: {fileID: 21300000, guid: 34624a0e889b4f4418d79e7daefccd72, type: 3}
-  m_ID: 1
+  m_ID: 6
   m_isQuestItem: 0
   m_Quantity: 1
   m_name: Scout Armor

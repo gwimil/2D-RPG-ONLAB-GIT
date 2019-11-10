@@ -36,7 +36,10 @@ namespace EventCallbacks
             if (m_item.m_Quantity > 1)
             {
                 m_item.m_Quantity--;
-                GetComponentInChildren<Text>().text = m_item.m_Quantity.ToString();
+                if (GetComponentInChildren<Text>() != null)
+                {
+                    GetComponentInChildren<Text>().text = m_item.m_Quantity.ToString();
+                }
             }
             else
             {

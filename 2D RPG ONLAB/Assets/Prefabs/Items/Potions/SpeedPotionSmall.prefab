@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4353631053229568359}
   m_Layer: 0
   m_Name: SpeedPotionSmall
-  m_TagString: Untagged
+  m_TagString: SpeedPotion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sprite: {fileID: 21300000, guid: 75f3205da4d77cb40b448d7cc6d87bfb, type: 3}
-  m_ID: 0
+  m_ID: 10009
   m_isQuestItem: 0
   m_Quantity: 1
   m_name: SpeedPotionSmall

@@ -143,6 +143,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user: 
-  m_damage: 20
+  m_damage: 50
   m_MovemenetSpeed: 140
   m_MaxLifeTime: 0

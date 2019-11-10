@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2807219300845471963}
   m_Layer: 0
   m_Name: InstantManaPotionSmall
-  m_TagString: Untagged
+  m_TagString: ManaPotion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sprite: {fileID: 21300000, guid: e030cedfecbc78245bb3d527a5315055, type: 3}
-  m_ID: 0
+  m_ID: 10006
   m_isQuestItem: 0
   m_Quantity: 1
   m_name: InstantManaPotionSmall
