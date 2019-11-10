@@ -8,7 +8,7 @@ namespace EventCallbacks
     public abstract class ArenaProjectiles : NetworkBehaviour
     {
         [SyncVar]
-        [HideInInspector]public int ID;
+        [HideInInspector]public NetworkInstanceId ID;
 
         public int m_damage;
         private Transform parentTransform;
@@ -22,6 +22,10 @@ namespace EventCallbacks
             transform.Rotate(0, 0, -angle);
         }
 
+        public override void OnStartClient()
+        {
+            Debug.Log("clientid: " + ID);
+        }
 
         private void OnTriggerEnter2D(Collider2D other)
         {

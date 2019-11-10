@@ -3,22 +3,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using System.Collections.Generic;
 
 namespace EventCallbacks
 {
     public abstract class ArenaHeroes : NetworkBehaviour
     {
-        [HideInInspector]public static int _ID = 1;
-        [HideInInspector] public int ID;
-
+        public NetworkInstanceId ID;
 
         public const int maxHealth = 100;
         [SyncVar(hook = "OnChangeHealth")]public int currentHealth = maxHealth;
         public RectTransform healthBar;
 
         public int m_BaseDMG;
-
-
 
         private float m_MovementSpeed = 3.0f;
 
@@ -39,17 +36,7 @@ namespace EventCallbacks
 
         protected Rigidbody2D rigidbody;
 
-
-
-
         public Sprite[] m_MovementSprites;
-
-        
-
-
-        private float timer;
-        private int previousSecond;
-
 
         private SpriteRenderer spriteRenderer;
 
@@ -58,9 +45,6 @@ namespace EventCallbacks
 
         public void Start()
         {
-
-            ID = _ID;
-            _ID++;
             spriteRenderer = GetComponent<SpriteRenderer>();
             rigidbody = GetComponent<Rigidbody2D>();
             m_NormalizedMovement = new Vector2(1, 0);
@@ -71,18 +55,14 @@ namespace EventCallbacks
             spellOneCooldownATM = m_SpellOneCooldown;
             basicAttackCooldownATM = m_BasicAttackCooldown;
 
-            previousSecond = 0;
-            timer = 0.0f;
-
 
             InvokeRepeating("UpdateCd", 0.0f, 1.0f);
             InvokeRepeating("UpdateBasic", 0.0f, 0.1f);
         }
 
+
         private void UpdateCd()
         {
-            previousSecond++;
-
             if (m_SpellOneCooldown > spellOneCooldownATM) spellOneCooldownATM++;
             if (spellOneCooldownATM > m_SpellOneCooldown) spellOneCooldownATM = m_SpellOneCooldown;
 

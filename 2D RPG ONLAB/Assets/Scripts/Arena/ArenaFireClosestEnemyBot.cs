@@ -12,7 +12,7 @@ namespace EventCallbacks
         public ArenaProjectiles m_ProjectileToFire;
 
         [SyncVar]
-        [HideInInspector]public int ID;
+        [HideInInspector]public NetworkInstanceId ID;
 
 
         void Start()

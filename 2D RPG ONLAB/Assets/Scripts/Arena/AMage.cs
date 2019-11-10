@@ -63,7 +63,6 @@ namespace EventCallbacks
             p.GetComponent<ArenaProjectiles>().ID = ID;
             Debug.Log(GetComponent<NetworkTransform>().transform.rotation);
             p.GetComponent<Rigidbody2D>().velocity = m_NormalizedMovement * 5;
-            p.GetComponent<ArenaProjectiles>().m_damage += m_BaseDMG / 10;
             //go.GetComponent<NetworkIdentity>().AssignClientAuthority( connectionToClient );
 
             // Now that the object exists on the server, propagate it to all
@@ -93,7 +92,6 @@ namespace EventCallbacks
             GameObject fb = Instantiate(m_FireBall.gameObject, transform.position, Quaternion.Euler(0, 0, transform.rotation.z + 90));
             fb.GetComponent<ArenaProjectiles>().ID = ID;
             fb.gameObject.GetComponent<Rigidbody2D>().velocity = m_NormalizedMovement * 5;
-            fb.GetComponent<ArenaProjectiles>().m_damage += m_BaseDMG / 10;
 
             //go.GetComponent<NetworkIdentity>().AssignClientAuthority( connectionToClient );
 

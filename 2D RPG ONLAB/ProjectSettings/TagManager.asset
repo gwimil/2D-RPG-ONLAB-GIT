@@ -23,6 +23,7 @@ TagManager:
   - ArenaProjectile
   - RainFireBall
   - Bot
+  - PlayerObject
   layers:
   - Default
   - TransparentFX

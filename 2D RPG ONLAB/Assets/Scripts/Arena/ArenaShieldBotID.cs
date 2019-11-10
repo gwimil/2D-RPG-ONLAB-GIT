@@ -7,6 +7,6 @@ public class ArenaShieldBotID : NetworkBehaviour
 {
     // Start is called before the first frame update
     [SyncVar]
-    [HideInInspector]public int ID;
+    [HideInInspector]public NetworkInstanceId ID;
 
 }

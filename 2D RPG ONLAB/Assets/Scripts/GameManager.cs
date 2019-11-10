@@ -24,6 +24,8 @@ namespace EventCallbacks
         public GameObject m_TeleportToFirstBoss;
         public GameObject m_TeleporterToSecondBoss;
 
+        public GameObject m_BagToPutInCave;
+
 
         private List<Vector2> placesToSpawn;
         private Vector2 placeToSpawnHeroes;
@@ -159,11 +161,18 @@ namespace EventCallbacks
               placesToSpawn = m_ProceduralCave.GetComponent<MapGenerator>().GenerateMapFromManager();
 
               num = Random.Range(0, placesToSpawn.Count);
-            m_CaveTeleporterOut.transform.position = new Vector3(placesToSpawn[num].x, placesToSpawn[num].y, 0);
-            m_CaveTeleporterOut.SetActive(true);
+              m_CaveTeleporterOut.transform.position = new Vector3(placesToSpawn[num].x, placesToSpawn[num].y, 0);
+              m_CaveTeleporterOut.SetActive(true);
               num = Random.Range(0, placesToSpawn.Count);
               placeToSpawnHeroes = placesToSpawn[num];
-            m_TeleportedInCave.transform.position = new Vector3(placeToSpawnHeroes.x, placeToSpawnHeroes.y, 0);
+              m_TeleportedInCave.transform.position = new Vector3(placeToSpawnHeroes.x, placeToSpawnHeroes.y, 0);
+
+            for (int i = 0; i < 5; i++)
+            {
+                num = Random.Range(0, placesToSpawn.Count);
+                GameObject b = Instantiate(m_BagToPutInCave, new Vector3(placesToSpawn[num].x, placesToSpawn[num].y, 0), Quaternion.Euler(0,0,0));
+                b.GetComponent<Bag>().SetItemByMinMax(5, 10);
+            }
 
           }
 
