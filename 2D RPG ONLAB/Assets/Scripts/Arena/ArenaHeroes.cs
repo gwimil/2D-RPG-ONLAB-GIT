@@ -44,7 +44,7 @@ namespace EventCallbacks
 
         public Sprite[] m_MovementSprites;
 
-        public GameObject m_YouDiedTextObject;
+        
 
 
         private float timer;
@@ -237,7 +237,6 @@ namespace EventCallbacks
             {
                 spriteRenderer.flipX = false;
             }
-
         }
 
 
@@ -288,7 +287,8 @@ namespace EventCallbacks
         {
             if (isLocalPlayer)
             {
-                Instantiate(m_YouDiedTextObject);
+                Debug.Log("you died");
+                gameObject.GetComponentInParent<PlayerConnectionObject>().SetYouLoseActive();
             }
 
             gameObject.SetActive(false);
@@ -298,14 +298,9 @@ namespace EventCallbacks
         [Command]
         void CmdPlayerDied()
         {
-            gameObject.SetActive(false);
+            NetworkServer.Destroy(this.gameObject);
         }
 
-        [ClientRpc]
-        void RpcPlayerDied()
-        {
-            gameObject.SetActive(false);
-        }
 
     }
 }

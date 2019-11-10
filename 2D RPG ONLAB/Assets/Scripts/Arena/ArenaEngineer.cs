@@ -60,7 +60,7 @@ namespace EventCallbacks
         void CmdSpawnShieldBot()
         {
             GameObject p = Instantiate(m_ShieldBot, transform.position, Quaternion.Euler(0, 0, 0));
-            p.GetComponentInChildren<ArenaShieldBotID>().ID = ID;
+            p.GetComponent<ArenaShieldBotID>().ID = ID;
 
             NetworkServer.Spawn(p);
         }

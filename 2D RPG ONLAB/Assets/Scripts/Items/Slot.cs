@@ -57,7 +57,7 @@ namespace EventCallbacks
 
         public void AddToEmptyEqupmentSlot(Slot s)
         {
-            AddItemToSlot(s.m_item, true);
+            AddItemToSlot(s.m_item, false);
             s.RemoveItemFromSlot();
         }
 

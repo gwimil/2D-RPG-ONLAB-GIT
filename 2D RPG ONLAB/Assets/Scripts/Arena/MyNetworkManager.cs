@@ -31,12 +31,15 @@ namespace EventCallbacks
                 float posX = Random.Range(-5.0f, 5.0f);
                 float posY = Random.Range(-5.0f, 5.0f);
                 Vector3 pos = new Vector3(posX, posY, 0);
-                player = Instantiate(characters[selectedClass], startPos.position + pos, startPos.rotation) as GameObject;
+               // player = Instantiate(characters[selectedClass], startPos.position + pos, startPos.rotation) as GameObject;
+                player = Instantiate(playerPrefab, startPos.position + pos, startPos.rotation) as GameObject;
+                player.GetComponent<PlayerConnectionObject>().PlayerUnitPrefab = characters[selectedClass];
             }
             else
             {
-                player = Instantiate(characters[selectedClass], Vector3.zero, Quaternion.identity) as GameObject;
-
+              // player = Instantiate(characters[selectedClass], Vector3.zero, Quaternion.identity) as GameObject;
+                player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+                player.GetComponent<PlayerConnectionObject>().PlayerUnitPrefab = characters[selectedClass];
             }
 
             NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);

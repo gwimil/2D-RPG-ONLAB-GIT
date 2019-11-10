@@ -12,7 +12,6 @@ namespace EventCallbacks
         public Image image;
         public Image m_lootImage;
         public ItemManager m_ItemManager;
-        private Hero hero;
         private int overlappingHeroes;
 
 
@@ -29,12 +28,18 @@ namespace EventCallbacks
 
         private void Start()
         {
-            items.Add(m_ItemManager.GiveItem(0));
+            items.Add(m_ItemManager.ReturnRandomItemsWithMaxLevel(0,20));
             overlappingHeroes = 0;
             image.gameObject.SetActive(false);
 
             EventSystem.Current.RegisterListener<ItemPickupEventInfo>(OnItemPickedUp, ref ItemPickedUpGuid);
 
+        }
+
+        public void SetItemByMinMax(int min, int max)
+        {
+            items.Clear();
+            items.Add(m_ItemManager.ReturnRandomItemsWithMaxLevel(min, max));
         }
 
         private void OnItemPickedUp(ItemPickupEventInfo ui)
@@ -72,7 +77,6 @@ namespace EventCallbacks
                 heroesOverlapping.Add(collision.GetComponent<Hero>());
                 Debug.Log(items.Count);
                 overlappingHeroes++;
-                hero = collision.gameObject.GetComponent<Hero>();
                 if (items.Count >= 1) m_lootImage.sprite = items[0].m_sprite;
                 image.gameObject.SetActive(true);
             }
@@ -85,7 +89,6 @@ namespace EventCallbacks
             {
                 collision.GetComponent<Hero>().CollideWithBag(false);
                 heroesOverlapping.Remove(collision.GetComponent<Hero>());
-                hero = null;
                 image.gameObject.SetActive(false);
             }
         }

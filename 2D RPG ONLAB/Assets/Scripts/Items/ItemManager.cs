@@ -64,5 +64,36 @@ namespace EventCallbacks
             else return m_NormalItems[i];
         }
 
+        public Items ReturnRandomItemsWithMaxLevel(int minLevel, int maxLevel)
+        {
+            Items itemDrop = null;
+            float randomNumber = Random.Range(0.0f, 1.0f);
+            if (randomNumber <= 0.2)
+            {
+                
+                int rand = Random.Range(0, m_Potions.Count);
+                itemDrop = m_Potions[rand];
+            }
+            else
+            {
+                bool foundItem = false;
+                while (!foundItem)
+                {
+                    int rand = Random.Range(0, m_EquippableItems.Count);
+                    float quality = m_EquippableItems[rand].gameObject.GetComponent<Equippable>().Quality;
+                    int qual = (int)quality;
+                    if (qual <= maxLevel && qual >= minLevel)
+                    {
+                        itemDrop = m_EquippableItems[rand];
+                        foundItem = true;
+                    }
+
+                }
+            }
+
+            return itemDrop;
+        }
+
+
     }
 }

@@ -8,7 +8,6 @@ namespace EventCallbacks
 {
     public class ArenaManager : MonoBehaviour
     {
-
         public GameObject m_NetworkManager;
         public GameObject m_MageHero;
         public GameObject m_RangerHero;
@@ -28,14 +27,12 @@ namespace EventCallbacks
             m_WarriorButton.onClick.AddListener(WarriorButtonClicked);
         }
 
-
         private void MageButtonClicked()
         {
             m_HeroChooser.gameObject.SetActive(false);
             m_NetworkManager.SetActive(true);
             m_NetworkManager.GetComponent<MyNetworkManager>().chosenCharacter = 0;
-    
-    }
+        }
 
         private void RangerButtonClicked()
         {

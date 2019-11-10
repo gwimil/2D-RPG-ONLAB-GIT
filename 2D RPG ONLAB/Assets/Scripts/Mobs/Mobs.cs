@@ -103,6 +103,7 @@ namespace EventCallbacks
         {
             Bag droppedBag = Instantiate(m_Drop, transform.position, Quaternion.Euler(0, 0, 0));
             droppedBag.gameObject.name = "Bag";
+            droppedBag.SetItemByMinMax(0, 5);
 
 
             MobDeathEventInfo udei = new MobDeathEventInfo();

@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-
+using UnityEngine.UI;
 
 namespace EventCallbacks
 {
     public class PlayerConnectionObject : NetworkBehaviour
     {
 
+
         public GameObject PlayerUnitPrefab;
+        public GameObject m_YouDiedTextObject;
+
+        [HideInInspector]
 
         // Use this for initialization
         void Start()
@@ -22,113 +26,71 @@ namespace EventCallbacks
                    return;
                }
 
-            // PlayerUnitPrefab = GameObject.Find("ArenaManager").GetComponent<ArenaManager>().choosenHero;
-            // Debug.Log(PlayerUnitPrefab);
-
-            //PlayerUnitPrefab = GameObject.Find("ArenaManager").GetComponent<ArenaManager>().choosenHero;
-            // Debug.Log(PlayerUnitPrefab);
-
-
-
-            // Since the PlayerConnectionObject is invisible and not part of the world,
-            // give me something physical to move around!
-
-            // Instantiate() only creates an object on the LOCAL COMPUTER.
-            // Even if it has a NetworkIdentity is still will NOT exist on
-            // the network (and therefore not on any other client) UNLESS
-            // NetworkServer.Spawn() is called on this object.
-
-            //Instantiate(PlayerUnitPrefab);
-
-            // Command (politely) the server to SPAWN our unit
-          //  CmdSpawnMyUnit();
+            CmdSpawnMyUnit();
         }
 
 
-        // SyncVars are variables where if their value changes on the SERVER, then all clients
-        // are automatically informed of the new value.
-        // [SyncVar(hook = "OnPlayerNameChanged")]
-        // public string PlayerName = "Anonymous";
-
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
-            // Remember: Update runs on EVERYONE's computer, whether or not they own this
-            // particular player object.
+            if (isLocalPlayer == false)
+            {
+                return;
+            }
+        }
 
+        public void SetYouLoseActive()
+        {
+            if (isLocalPlayer == false)
+            {
+                // This object belongs to another player.
+                return;
+            }
 
-
-            /* if (Input.GetKeyDown(KeyCode.S))
-             {
-                 CmdSpawnMyUnit();
-             }*/
-
-            /*  if (Input.GetKeyDown(KeyCode.Q))
-              {
-                  string n = "Quill" + Random.Range(1, 100);
-
-                  Debug.Log("Sending the server a request to change our name to: " + n);
-                  CmdChangePlayerName(n);
-              }*/
-
+            m_YouDiedTextObject.GetComponentInChildren<Text>().text = "Meghaltál";
+            m_YouDiedTextObject.SetActive(true);
         }
 
 
-        /*  void OnPlayerNameChanged(string newName)
-          {
-              Debug.Log("OnPlayerNameChanged: OldName: " + PlayerName + "   NewName: " + newName);
+        public void SetYouWinActive()
+        {
+            if (isLocalPlayer == false)
+            {
+                // This object belongs to another player.
+                return;
+            }
+            m_YouDiedTextObject.GetComponentInChildren<Text>().text = "Nyertél";
+            m_YouDiedTextObject.SetActive(true);
+        }
 
-              // WARNING:  If you use a hook on a SyncVar, then our local value does NOT get automatically
-              // updated.
-              PlayerName = newName;
-
-              gameObject.name = "PlayerConnectionObject [" + newName + "]";
-          }*/
-
-        //////////////////////////// COMMANDS
-        // Commands are special functions that ONLY get executed on the server.
-
+        public void ReSpawn()
+        {
+            if (isLocalPlayer == false)
+            {
+                // This object belongs to another player.
+                return;
+            }
+            m_YouDiedTextObject.SetActive(false);
+            CmdSpawnMyUnit();
+        }
 
         [Command]
         void CmdSpawnMyUnit()
         {
+            // float randomX = Random.Range(-5.0f, 5.0f);
+            // float randomY = Random.Range(-5.0f, 5.0f);
 
-            // We are guaranteed to be on the server right now.
-            GameObject go = Instantiate(PlayerUnitPrefab);
-
-         //   go.GetComponent<ArenaHeroes>().aID = playerControllerId;
-
-            //go.GetComponent<NetworkIdentity>().AssignClientAuthority( connectionToClient );
-
-            // Now that the object exists on the server, propagate it to all
-            // the clients (and also wire up the NetworkIdentity)
+            //  GameObject go = Instantiate(PlayerUnitPrefab, gameObject.transform.position + new Vector3(randomX,randomY,0),Quaternion.Euler(0,0,0), this.gameObject.transform);
+            GameObject go = Instantiate(PlayerUnitPrefab, this.gameObject.transform);
             NetworkServer.SpawnWithClientAuthority(go, connectionToClient);
+            go.transform.SetParent(gameObject.transform);
+       //     RpcSetParent(go, gameObject);
         }
 
-        /*  [Command]
-          void CmdChangePlayerName(string n)
-          {
-              Debug.Log("CmdChangePlayerName: " + n);
+     /*   [ClientRpc]
+        void RpcSetParent(GameObject child, GameObject parent)
+        {
+            child.transform.SetParent(parent.transform);
+        }*/
 
-              // Maybe we should check that the name doesn't have any blacklisted words it?
-              // If there is a bad word in the name, do we just ignore this request and do nothing?
-              //    ... or do we still call the Rpc but with the original name?
-
-              PlayerName = n;
-
-              // Tell all the client what this player's name now is.
-              //RpcChangePlayerName(PlayerName);
-          }
-          */
-        //////////////////////////// RPC
-        // RPCs are special functions that ONLY get executed on the clients.
-
-        /*    [ClientRpc]
-            void RpcChangePlayerName(string n)
-            {
-                Debug.Log("RpcChangePlayerName: We were asked to change the player name on a particular PlayerConnectionObject: " + n);
-                PlayerName = n;
-            }
-        */
     }
 }
