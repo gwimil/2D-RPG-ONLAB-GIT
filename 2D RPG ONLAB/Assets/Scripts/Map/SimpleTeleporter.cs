@@ -5,6 +5,8 @@ using UnityEngine;
 namespace EventCallbacks {
     public class SimpleTeleporter : MonoBehaviour
     {
+        public GameManager gameManager;
+
         public Vector2 m_LocationToTeleport;
 
         public bool m_OtherTeleporter;
@@ -36,6 +38,8 @@ namespace EventCallbacks {
                 PlaceFoundEventInfo qd = new PlaceFoundEventInfo();
                 qd.PlaceName = m_NameOfTeleportEvent;
                 EventSystem.Current.FireEvent(qd);
+
+                gameManager.PlayTeleportSound();
 
             }
         }

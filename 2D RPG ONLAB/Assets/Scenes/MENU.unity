@@ -155,7 +155,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 100}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 100, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5162015
 MonoBehaviour:
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 35323eef9f6870e4492cddb1ecfd3d54, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 35509e0a5f0e8c94a98250d70d122fe9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 89155958}
   - component: {fileID: 89155957}
   m_Layer: 5
-  m_Name: WarriorImage
+  m_Name: EngineerImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -382,7 +382,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 100}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 100, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &89155957
 MonoBehaviour:
@@ -402,8 +402,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 44f70e21ee9a39c41834ecbcee7c1bf8, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 1456680996983660394, guid: 0019a80f3966e794fbb65fd3eb5bba53,
+    type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1258,7 +1259,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: WARRIOR
+  m_Text: ENGINEER
 --- !u!222 &689606039
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2223,7 +2224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1304958355}
   m_Layer: 5
-  m_Name: Warrior
+  m_Name: Engineer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2703,7 +2704,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 100}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 100, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1644756397
 MonoBehaviour:
@@ -2723,7 +2724,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9165903385af77e4ea9d5b5fa125bf27, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fac4277e14a271e408934f3c1bc7d3f2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3298,9 +3299,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'ARENA
-
-'
+  m_Text: ARENA
 --- !u!222 &2053878973
 CanvasRenderer:
   m_ObjectHideFlags: 0

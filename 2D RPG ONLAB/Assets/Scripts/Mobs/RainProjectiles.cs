@@ -36,7 +36,6 @@ namespace EventCallbacks
                 int randomCounter = Random.Range(0, m_ProjectileNumber);
                 Projectile fb1 = Instantiate(m_EnemyFireBall, m_FirstProjectilePosition + new Vector2(m_ProjectileDistance * randomCounter, 0), Quaternion.Euler(0, 0, transform.rotation.z + 90));
                 fb1.setDirection(new Vector2(0, -1));
-                fb1.m_MaxLifeTime = m_ProjectileLifeTime;
             }
             
         }

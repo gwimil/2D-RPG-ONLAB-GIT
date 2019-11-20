@@ -6,6 +6,13 @@ namespace EventCallbacks
 {
     public class GameManager : MonoBehaviour
     {
+
+        public AudioClip normalBackground;
+        public AudioClip caveBackground;
+        public AudioClip bossBackground;
+        public AudioClip teleportSound;
+
+
         public ItemManager m_ItemManager;
         public QuestManager m_QuestManager;
         public Player2D[] m_Players;
@@ -132,12 +139,29 @@ namespace EventCallbacks
                 case "outCave":
                     m_TeleportToFirstBoss.SetActive(true);
                     SetUpCave();
+                    StartNormalSound();
                     break;
-
+                case "cave":
+                    StartCaveSound();
+                    break;
                 default:
                     break;
             }
         }
+
+        private void StartCaveSound()
+        {
+            m_Camera.GetComponentInChildren<AudioSource>().clip = caveBackground;
+            m_Camera.GetComponentInChildren<AudioSource>().Play();
+        }
+
+        private void StartNormalSound()
+        {
+            m_Camera.GetComponentInChildren<AudioSource>().clip = normalBackground;
+            m_Camera.GetComponentInChildren<AudioSource>().Play();
+        }
+
+
         private void EnemyQuestDone(MobQuestDoneEventInfo mqe)
         {
             switch (mqe.MobName)
@@ -154,6 +178,12 @@ namespace EventCallbacks
             }
         }
 
+
+        public void PlayTeleportSound()
+        {
+            gameObject.GetComponent<AudioSource>().clip = teleportSound;
+            gameObject.GetComponent<AudioSource>().Play();
+        }
 
           private void SetUpCave()
           {

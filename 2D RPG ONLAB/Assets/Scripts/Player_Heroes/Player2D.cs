@@ -35,8 +35,6 @@ namespace EventCallbacks
 
         void Update()
         {
-            
-
             if (Input.GetButtonDown("InventoryP" + m_PlayerID))
             {
                 m_hero.inventory.m_inventoryEnabled = !m_hero.inventory.m_inventoryEnabled;

@@ -9,6 +9,8 @@ namespace EventCallbacks
 {
     public abstract class ArenaHeroes : NetworkBehaviour
     {
+
+        [SyncVar]
         public NetworkInstanceId ID;
 
         public const int maxHealth = 100;
@@ -60,6 +62,13 @@ namespace EventCallbacks
             InvokeRepeating("UpdateBasic", 0.0f, 0.1f);
         }
 
+        public override void OnStartClient()
+        {
+           GameObject parentObject = ClientScene.FindLocalObject(ID);
+          transform.SetParent(parentObject.transform);
+            Debug.Log("clientid Hero: " + ID);
+        }
+
 
         private void UpdateCd()
         {
@@ -81,7 +90,6 @@ namespace EventCallbacks
             {
                 return;
             }
-
 
             //EVERY FRAME
 
@@ -265,12 +273,7 @@ namespace EventCallbacks
 
         private void Die()
         {
-            if (isLocalPlayer)
-            {
-                Debug.Log("you died");
-                gameObject.GetComponentInParent<PlayerConnectionObject>().SetYouLoseActive();
-            }
-
+            gameObject.GetComponentInParent<PlayerConnectionObject>().SetYouLoseActive();
             gameObject.SetActive(false);
             CmdPlayerDied();
         }
@@ -278,9 +281,18 @@ namespace EventCallbacks
         [Command]
         void CmdPlayerDied()
         {
-            NetworkServer.Destroy(this.gameObject);
+          gameObject.GetComponentInParent<PlayerConnectionObject>().SetYouLoseActive();
+          RpcPlayerDied();
+          NetworkServer.Destroy(this.gameObject);
+      
+        }
+
+        [ClientRpc]
+        void RpcPlayerDied()
+        {
+          gameObject.GetComponentInParent<PlayerConnectionObject>().SetYouLoseActive();
         }
 
 
-    }
+  }
 }
