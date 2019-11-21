@@ -48,7 +48,6 @@ namespace EventCallbacks
                 // This object belongs to another player.
                 return;
             }
-
             m_YouDiedTextObject.GetComponentInChildren<Text>().text = "Meghaltál";
             m_YouDiedTextObject.SetActive(true);
             m_RespawnButton.gameObject.SetActive(true);

@@ -14,7 +14,7 @@ namespace EventCallbacks
         public NetworkInstanceId ID;
 
         public const int maxHealth = 100;
-        [SyncVar(hook = "OnChangeHealth")]public int currentHealth = maxHealth;
+        [SyncVar(hook = "OnChangeHealth")] public int currentHealth = maxHealth;
         public RectTransform healthBar;
 
         public int m_BaseDMG;
@@ -64,8 +64,8 @@ namespace EventCallbacks
 
         public override void OnStartClient()
         {
-           GameObject parentObject = ClientScene.FindLocalObject(ID);
-          transform.SetParent(parentObject.transform);
+            GameObject parentObject = ClientScene.FindLocalObject(ID);
+            transform.SetParent(parentObject.transform);
             Debug.Log("clientid Hero: " + ID);
         }
 
@@ -256,26 +256,22 @@ namespace EventCallbacks
                 currentHealth = 0;
                 Die();
             }
-            
-        }
 
+        }
 
         void OnChangeHealth(int health)
         {
             healthBar.sizeDelta = new Vector2(health * 2, healthBar.sizeDelta.y);
         }
 
-
         abstract public void Attack();
         abstract public void UseSkills(int i);
 
-
-
         private void Die()
         {
-            gameObject.GetComponentInParent<PlayerConnectionObject>().SetYouLoseActive();
-            gameObject.SetActive(false);
-            CmdPlayerDied();
+          gameObject.GetComponentInParent<PlayerConnectionObject>().SetYouLoseActive();
+          gameObject.SetActive(false);
+          CmdPlayerDied();
         }
 
         [Command]
@@ -284,7 +280,7 @@ namespace EventCallbacks
           gameObject.GetComponentInParent<PlayerConnectionObject>().SetYouLoseActive();
           RpcPlayerDied();
           NetworkServer.Destroy(this.gameObject);
-      
+
         }
 
         [ClientRpc]
@@ -294,5 +290,5 @@ namespace EventCallbacks
         }
 
 
-  }
+    }
 }

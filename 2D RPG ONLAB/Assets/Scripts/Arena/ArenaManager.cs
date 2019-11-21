@@ -71,9 +71,9 @@ namespace EventCallbacks
 
         private void NewCharacterButtonClick()
         {
-      Destroy(m_NetworkManager.gameObject);
-      MyNetworkManager.Shutdown();
-          Scene scene = SceneManager.GetActiveScene();
+            Destroy(m_NetworkManager.gameObject);
+            MyNetworkManager.Shutdown();
+            Scene scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.name);
          }
 

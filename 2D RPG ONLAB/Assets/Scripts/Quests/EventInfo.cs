@@ -39,7 +39,12 @@ namespace EventCallbacks
         public Mobs Unit;
     }
 
-    public class MobQuestDoneEventInfo : SpawnerDeathEventInfo
+    public class HeroDiedEventInfo : SpawnerDeathEventInfo
+    {
+      public string HeroName;
+    }
+
+  public class MobQuestDoneEventInfo : SpawnerDeathEventInfo
     {
         public string MobName;
     }
