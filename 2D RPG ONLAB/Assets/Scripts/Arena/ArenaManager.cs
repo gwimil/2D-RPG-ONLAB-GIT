@@ -64,7 +64,7 @@ namespace EventCallbacks
         }
         private void MenuButtonClick()
         {
-      Destroy(m_NetworkManager.gameObject);
+         Destroy(m_NetworkManager.gameObject);
            MyNetworkManager.Shutdown();
            SceneManager.LoadScene("MENU");
         }

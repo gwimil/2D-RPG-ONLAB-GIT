@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\FantasyIconsPackFree\Demo\IconViewer.cs" />
+    <Compile Include="Assets\Prefabs\Neural\NeuralProjectile.cs" />
     <Compile Include="Assets\Scripts\Arena\AMage.cs" />
     <Compile Include="Assets\Scripts\Arena\ARanger.cs" />
     <Compile Include="Assets\Scripts\Arena\ArenaEngineer.cs" />
@@ -108,6 +109,11 @@
     <Compile Include="Assets\Scripts\Mobs\Mobs.cs" />
     <Compile Include="Assets\Scripts\Mobs\Non_AgressiveEnemy.cs" />
     <Compile Include="Assets\Scripts\Mobs\RainProjectiles.cs" />
+    <Compile Include="Assets\Scripts\NeuralNetwork\Bot.cs" />
+    <Compile Include="Assets\Scripts\NeuralNetwork\NeuralManager.cs" />
+    <Compile Include="Assets\Scripts\NeuralNetwork\NeuralNetwork.cs" />
+    <Compile Include="Assets\Scripts\NeuralNetwork\NeuralNetworkBProp.cs" />
+    <Compile Include="Assets\Scripts\NeuralNetwork\TestHero.cs" />
     <Compile Include="Assets\Scripts\Player_Heroes\Hero.cs" />
     <Compile Include="Assets\Scripts\Player_Heroes\Mage.cs" />
     <Compile Include="Assets\Scripts\Player_Heroes\Player.cs" />

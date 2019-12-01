@@ -24,6 +24,10 @@ TagManager:
   - RainFireBall
   - Bot
   - PlayerObject
+  - NeuralManager
+  - Neural
+  - Projectile
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -47,7 +51,7 @@ TagManager:
   - PlayerBlocker
   - EnemyProjectileBlocker
   - EnemyShooters
-  - 
+  - NeuralBot
   - 
   - 
   - 
