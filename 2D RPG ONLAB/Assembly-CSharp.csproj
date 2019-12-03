@@ -110,6 +110,8 @@
     <Compile Include="Assets\Scripts\Mobs\Non_AgressiveEnemy.cs" />
     <Compile Include="Assets\Scripts\Mobs\RainProjectiles.cs" />
     <Compile Include="Assets\Scripts\NeuralNetwork\Bot.cs" />
+    <Compile Include="Assets\Scripts\NeuralNetwork\NeuralFightProjectile.cs" />
+    <Compile Include="Assets\Scripts\NeuralNetwork\NeuralMage.cs" />
     <Compile Include="Assets\Scripts\NeuralNetwork\NeuralManager.cs" />
     <Compile Include="Assets\Scripts\NeuralNetwork\NeuralNetwork.cs" />
     <Compile Include="Assets\Scripts\NeuralNetwork\NeuralNetworkBProp.cs" />

@@ -31,14 +31,30 @@ public class NeuralNetworkBProp
     }
   }
 
+    public NeuralNetworkBProp(NeuralNetworkBProp copyNetwork)
+    {
+        //deep copy layers
+        this.layer = new int[copyNetwork.layer.Length];
+        for (int i = 0; i < copyNetwork.layer.Length; i++)
+        {
+            this.layer[i] = copyNetwork.layer[i];
+        }
 
+        //creates neural layers
+        layers = new Layer[copyNetwork.layer.Length - 1];
 
-  /// <summary>
-  /// High level feedforward for this network
-  /// </summary>
-  /// <param name="inputs">Inputs to be feed forwared</param>
-  /// <returns></returns>
-  public float[] FeedForward(float[] inputs)
+        for (int i = 0; i < copyNetwork.layers.Length; i++)
+        {
+            layers[i] = new Layer(copyNetwork.layers[i]);
+        }
+    }
+
+    /// <summary>
+    /// High level feedforward for this network
+    /// </summary>
+    /// <param name="inputs">Inputs to be feed forwared</param>
+    /// <returns></returns>
+    public float[] FeedForward(float[] inputs)
   {
     //feed forward
     layers[0].FeedForward(inputs);
@@ -122,21 +138,47 @@ public class NeuralNetworkBProp
       InitilizeWeights();
     }
 
+    public Layer(Layer copyLayer)
+    {
+        this.numberOfInputs = copyLayer.numberOfInputs;
+        this.numberOfOutputs = copyLayer.numberOfOutputs;
+
+        outputs = new float[numberOfOutputs];
+        inputs = new float[numberOfInputs];
+        weights = new float[numberOfOutputs, numberOfInputs];
+        weightsDelta = new float[numberOfOutputs, numberOfInputs];
+        gamma = new float[numberOfOutputs];
+        error = new float[numberOfOutputs];
+        CopyWeights(copyLayer);
+        InitilizeWeights();
+    }
+
 
     /// <summary>
     /// Initilize weights between -0.5 and 0.5
     /// </summary>
     public void InitilizeWeights()
     {
-      for (int i = 0; i < numberOfOutputs; i++)
-      {
-        for (int j = 0; j < numberOfInputs; j++)
-        {
-          this.weights[i, j] = UnityEngine.Random.Range(-0.5f, 0.5f);
-        }
-      }
+            for (int i = 0; i < numberOfOutputs; i++)
+            {
+                for (int j = 0; j < numberOfInputs; j++)
+                {
+                    this.weights[i, j] = UnityEngine.Random.Range(-0.5f, 0.5f);
+                }
+            }
     }
 
+
+    public void CopyWeights(Layer copyLayer)
+    {
+        for (int i = 0; i < numberOfOutputs; i++)
+        {
+            for (int j = 0; j < numberOfInputs; j++)
+            {
+                this.weights[i, j] = copyLayer.weights[i, j];
+            }
+        }
+    }
 
     /// <summary>
     /// Feedforward this layer with a given input

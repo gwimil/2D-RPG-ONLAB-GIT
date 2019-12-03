@@ -6,12 +6,13 @@ using UnityEngine.UI;
 
 public class NeuralManager : MonoBehaviour
 {
-
     public GameObject m_Bot;
     public GameObject m_TestHero;
     public GameObject m_TestPorjectilesToDodge;
+    public GameObject m_Mage;
 
     public GameObject m_DodgeWalls;
+    public GameObject m_NormalWalls;
 
     public GameObject m_MenuCanvas;
     public Button m_DodgeButton;
@@ -24,6 +25,7 @@ public class NeuralManager : MonoBehaviour
 
     public Text m_GenerationText;
     public Text m_NumberOfTriesText;
+    public Text m_PlayerBot;
 
     public NeuralNetwork dodgeCopyNeural;
 
@@ -31,6 +33,9 @@ public class NeuralManager : MonoBehaviour
 
     private bool allDodgeDied;
     private int dodgeGenerationNumber;
+    private int attackNumber;
+    private int playerWin;
+    private int botWin;
 
     private bool dodgeStarted;
     private bool attackStarted;
@@ -46,6 +51,9 @@ public class NeuralManager : MonoBehaviour
         isDodge = false;
         isAttack = false;
         isFight = false;
+        dodgeStarted = false;
+        allDodgeDied = false;
+
         m_MenuCanvas.gameObject.SetActive(true);
         m_BackCanvas.gameObject.SetActive(false);
 
@@ -55,10 +63,12 @@ public class NeuralManager : MonoBehaviour
         m_BackToMenuButton.onClick.AddListener(ClickOnMenuBack);
         m_BackButton.onClick.AddListener(ClickOnBack);
 
-        dodgeStarted = false;
-        allDodgeDied = false;
-        dodgeGenerationNumber = 1;
-        m_Bot.GetComponent<Bot>().attackNeuralNetwork = new NeuralNetworkBProp(new int[] { 7, 10, 10, 4 });
+        dodgeGenerationNumber = 0;
+        attackNumber = 0;
+        playerWin = 0;
+        botWin = 0;
+
+        m_Bot.GetComponent<Bot>().attackNeuralNetwork = new NeuralNetworkBProp(new int[] { 7, 12, 8, 4 });
         m_Bot.GetComponent<Bot>().dodgeNeuralNetwork = new NeuralNetwork(new int[] { 5, 7, 7, 4 });
         
     }
@@ -76,34 +86,62 @@ public class NeuralManager : MonoBehaviour
     private void ClickOnAttack()
     {
         isAttack = true;
+        RespawnTestHero();
+        GameObject bot = Instantiate(m_Bot, transform.position, Quaternion.Euler(0, 0, 0));
+        bot.GetComponent<Bot>().attack = true;
+        bot.GetComponent<Bot>().attackNeuralNetwork = m_Bot.GetComponent<Bot>().attackNeuralNetwork;
         m_MenuCanvas.gameObject.SetActive(false);
         m_BackCanvas.gameObject.SetActive(true);
 
     }
     private void ClickOnFight()
     {
+        
+        Instantiate(m_Mage, new Vector3(this.transform.position.x - 6, this.transform.position.y, 0),Quaternion.Euler(0,0,0));
+        GameObject bot = Instantiate(m_Bot, new Vector3(this.transform.position.x + 6, this.transform.position.y, 0), Quaternion.Euler(0, 0, 0));
+       // bot.GetComponent<Bot>().attackNeuralNetwork = m_Bot.GetComponent<Bot>().attackNeuralNetwork;
+        bot.GetComponent<Bot>().attackNeuralNetwork = new NeuralNetworkBProp(m_Bot.GetComponent<Bot>().attackNeuralNetwork);
+        bot.GetComponent<Bot>().dodgeNeuralNetwork = new NeuralNetwork(m_Bot.GetComponent<Bot>().dodgeNeuralNetwork);
+        bot.GetComponent<Bot>().fight = true;
         isFight = true;
         m_MenuCanvas.gameObject.SetActive(false);
         m_BackCanvas.gameObject.SetActive(true);
+        m_NormalWalls.gameObject.SetActive(true);
 
     }
     private void ClickOnMenuBack()
     {
         SceneManager.LoadScene("MENU");
     }
+
     private void ClickOnBack()
     {
         if (isAttack)
         {
-
-
+            GameObject neural = GameObject.FindGameObjectWithTag("Neural");
+            GameObject hero = GameObject.FindGameObjectWithTag("Hero");
+            GameObject proj = GameObject.FindGameObjectWithTag("EnemyProjectile");
+            if (neural != null)
+            {
+                m_Bot.GetComponent<Bot>().attackNeuralNetwork = neural.GetComponent<Bot>().attackNeuralNetwork;
+                Destroy(neural.gameObject);
+            }
+            if (hero != null)
+            {
+                Destroy(hero.gameObject);
+            }
+            if (proj != null)
+            {
+                Destroy(proj);
+            }
+            
             m_MenuCanvas.gameObject.SetActive(true);
             m_BackCanvas.gameObject.SetActive(false);
         }
         if (isDodge)
         {
             dodgeStarted = false;
-            m_DodgeWalls.SetActive(false);
+            
             CancelInvoke();
             GameObject[] neurals = GameObject.FindGameObjectsWithTag("Neural");
             if (neurals.Length == 1)
@@ -119,13 +157,35 @@ public class NeuralManager : MonoBehaviour
             {
                 Destroy(projectiles[i].gameObject);
             }
+            m_Bot.GetComponent<Bot>().dodge = false;
             m_MenuCanvas.gameObject.SetActive(true);
+            m_DodgeWalls.SetActive(false);
             m_BackCanvas.gameObject.SetActive(false);
         }
         if (isFight)
         {
-
-
+            isFight = false;
+            GameObject neural = GameObject.FindGameObjectWithTag("Neural");
+            GameObject hero = GameObject.FindGameObjectWithTag("Hero");
+            GameObject[] proj1 = GameObject.FindGameObjectsWithTag("EnemyProjectile");
+            GameObject[] proj2 = GameObject.FindGameObjectsWithTag("PlayerProjectile");
+            for (int i = 0; i < proj1.Length; i++)
+            {
+                Destroy(proj1[i].gameObject);
+            }
+            for (int i = 0; i < proj2.Length; i++)
+            {
+                Destroy(proj2[i].gameObject);
+            }
+            if (neural != null)
+            {
+                Destroy(neural.gameObject);
+            }
+            if (hero != null)
+            {
+                Destroy(hero.gameObject);
+            }
+            m_NormalWalls.gameObject.SetActive(false);
             m_MenuCanvas.gameObject.SetActive(true);
             m_BackCanvas.gameObject.SetActive(false);
         }
@@ -146,39 +206,52 @@ public class NeuralManager : MonoBehaviour
                 dodgeEnded();
             }
         }
+
+        if (isFight)
+        {
+            GameObject neural = GameObject.FindGameObjectWithTag("Neural");
+            GameObject hero = GameObject.FindGameObjectWithTag("Hero");
+
+            if (neural == null || hero == null)
+            {
+                if (neural == null)
+                {
+                    botWin++;
+                }
+                else
+                {
+                    playerWin++;
+                }
+                m_PlayerBot.text = "Player : Bot - " + playerWin + " : " + botWin;
+
+                ClickOnBack();
+            }
+        }
         
     }
 
     public void dodgeEnded()
     {
         dodgeGenerationNumber++;
+        m_GenerationText.text = "Generation: " + dodgeGenerationNumber;
         LearnToDodge();
     }
 
-    private void Finish()
-    {
-        if (m_TestHero != null)
-        {
-            Destroy(m_TestHero);
-        }
-        m_Bot.GetComponent<Bot>().attack = false;
-        m_Bot.GetComponent<Bot>().dodge = false;
-        m_Bot.GetComponent<Bot>().waitingForAttackToReach = false;
-
-    }
 
     public void RespawnTestHero()
     {
+        attackNumber++;
+        m_NumberOfTriesText.text = "Number of tries:" + attackNumber;
         float x = 0;
         float y = 0;
-        while (x > -5 && 5 > x && y > -5 && 5 > y)
+        while (x > -1 && 1 > x && y > -1 && 1 > y)
         {
-            x = Random.Range(-20, 20);
-            y = Random.Range(-20, 20);
+            x = Random.Range(-6, 6);
+            y = Random.Range(-6, 6);
         }
 
-        float moveX = Random.Range(0.0f, 1.0f);
-        float moveY = Random.Range(0.0f, 1.0f);
+        float moveX = Random.Range(-1.0f, 1.0f);
+        float moveY = Random.Range(-1.0f, 1.0f);
         Vector2 movement = new Vector2(moveX, moveY);
         Vector2 normalizedMovement = movement.normalized;
         GameObject tHero = Instantiate(m_TestHero, new Vector3(x, y, 0), Quaternion.Euler(0, 0, 0));
