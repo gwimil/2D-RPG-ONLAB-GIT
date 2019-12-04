@@ -11,18 +11,31 @@ namespace EventCallbacks
         public float m_damage;
         public float m_MovemenetSpeed;
         private Vector2 m_Direction;
-        private float m_LifeTime;
-        private float m_MaxLifeTime;
+        public float m_LifeTime;
         private new Rigidbody2D rigidbody;
         private Transform parentTransform;
 
-        private void Start()
+        private IEnumerator coroutine;
+
+
+        private void Awake()
         {
             rigidbody = GetComponent<Rigidbody2D>();
-            m_LifeTime = 0;
-            m_MaxLifeTime = 100;
-            m_MovemenetSpeed = m_MovemenetSpeed / 1000;
         }
+
+        private void Start()
+        {
+            m_MovemenetSpeed = m_MovemenetSpeed / 1000;
+            coroutine = WaitToDie(m_LifeTime);
+            StartCoroutine(coroutine);
+        }
+
+        private IEnumerator WaitToDie(float waitUntil)
+        {
+            yield return new WaitForSeconds(waitUntil);
+            Destroy(this.gameObject);
+        }
+
 
         public void setDirection(Vector2 m)
         {
@@ -32,11 +45,7 @@ namespace EventCallbacks
         }
 
 
-        private void Update()
-        {
-            m_LifeTime++;
-            if (m_LifeTime > m_MaxLifeTime) Destroy(this.gameObject);
-        }
+
 
         private void FixedUpdate()
         {
@@ -61,6 +70,10 @@ namespace EventCallbacks
                 if (other.tag == "Hero")
                 {
                     other.GetComponent<Hero>().TakeDamage(m_damage);
+                }
+                if (other.tag == "Bot")
+                {
+                    other.GetComponent<FireClosestEnemyBot>().TakeDamage(m_damage);
                 }
             }
 

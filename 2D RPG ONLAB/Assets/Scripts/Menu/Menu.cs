@@ -9,12 +9,14 @@ public class Menu : MonoBehaviour
 {
 
     public Button m_PlayButton;
-    public Button m_SettingsButton;
+    public Button m_ArenaButton;
     public Button m_QuitButton;
     public Button m_BackButton;
     public Button m_PlayerNumber1;
     public Button m_PlayerNumber2;
     public Button m_PlayerNumber3;
+    public Button m_PVP;
+    public Button m_Train;
     public Text m_ChooseHeroText;
 
     public Image m_BlackGround;
@@ -35,8 +37,8 @@ public class Menu : MonoBehaviour
     {
         m_PlayButton.gameObject.SetActive(true);
         m_PlayButton.onClick.AddListener(ClickOnPlay);
-        m_SettingsButton.gameObject.SetActive(true);
-        m_SettingsButton.onClick.AddListener(ClickOnSettings);
+        m_ArenaButton.gameObject.SetActive(true);
+        m_ArenaButton.onClick.AddListener(ClickOnArena);
         m_QuitButton.gameObject.SetActive(true);
         m_QuitButton.onClick.AddListener(ClickOnQuit);
 
@@ -49,6 +51,15 @@ public class Menu : MonoBehaviour
         m_PlayerNumber2.onClick.AddListener(ClickOnPlayer2Number);
         m_PlayerNumber3.gameObject.SetActive(false);
         m_PlayerNumber3.onClick.AddListener(ClickOnPlayer3Number);
+
+
+
+        m_PVP.gameObject.SetActive(false);
+        m_PVP.onClick.AddListener(ClickOnPVP);
+        m_Train.gameObject.SetActive(false);
+        m_Train.onClick.AddListener(ClickOnTrain);
+
+
 
         m_WarriorButton = m_WarriorHero.GetComponentInChildren<Button>();
         m_RangerButton = m_RangerHero.GetComponentInChildren<Button>();
@@ -87,9 +98,15 @@ public class Menu : MonoBehaviour
         m_PlayerNumber3.gameObject.SetActive(true);
     }
 
-    void ClickOnSettings()
+    void ClickOnArena()
     {
         turnMainMenu(false);
+
+
+        m_PVP.gameObject.SetActive(true);
+        m_Train.gameObject.SetActive(true);
+
+
     }
 
     void ClickOnQuit()
@@ -100,7 +117,7 @@ public class Menu : MonoBehaviour
     void turnMainMenu(bool b)
     {
         m_PlayButton.gameObject.SetActive(b);
-        m_SettingsButton.gameObject.SetActive(b);
+        m_ArenaButton.gameObject.SetActive(b);
         m_QuitButton.gameObject.SetActive(b);
         m_BackButton.gameObject.SetActive(!b);
     }
@@ -113,6 +130,9 @@ public class Menu : MonoBehaviour
         m_PlayerNumber1.gameObject.SetActive(false);
         m_PlayerNumber2.gameObject.SetActive(false);
         m_PlayerNumber3.gameObject.SetActive(false);
+
+        m_PVP.gameObject.SetActive(false);
+        m_Train.gameObject.SetActive(false);
 
         m_ChooseHeroText.gameObject.SetActive(false);
         m_WarriorHero.SetActive(false);
@@ -228,6 +248,17 @@ public class Menu : MonoBehaviour
         {
             m_ChooseHeroText.text = "Player " + m_PlayerChoosing + "choosing";
         }
+    }
+
+    void ClickOnPVP()
+    {
+        SceneManager.LoadScene("Arena", LoadSceneMode.Single);
+    }
+
+
+    void ClickOnTrain()
+    {
+        SceneManager.LoadScene("Trainer", LoadSceneMode.Single);
     }
 
 }

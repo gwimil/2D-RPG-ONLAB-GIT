@@ -15,10 +15,12 @@ namespace EventCallbacks
 
 
         private void Start()
-        {
-            if (gameObject.GetComponentInChildren<Text>() == null);
-            else GetComponentInChildren<Text>().text = "";
-            nullSprite = GetComponent<Image>().sprite;
+        { 
+            if (gameObject.GetComponentInChildren<Text>() != null)
+            {
+                GetComponentInChildren<Text>().text = "";
+            }
+            nullSprite = null;
         }
 
         public void AddItemToSlot(Items item, bool b = true)
@@ -34,7 +36,10 @@ namespace EventCallbacks
             if (m_item.m_Quantity > 1)
             {
                 m_item.m_Quantity--;
-                GetComponentInChildren<Text>().text = m_item.m_Quantity.ToString();
+                if (GetComponentInChildren<Text>() != null)
+                {
+                    GetComponentInChildren<Text>().text = m_item.m_Quantity.ToString();
+                }
             }
             else
             {

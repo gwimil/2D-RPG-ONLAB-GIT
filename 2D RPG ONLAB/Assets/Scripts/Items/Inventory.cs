@@ -63,30 +63,6 @@ namespace EventCallbacks
             return m_slots[i].GetComponent<Slot>();
         }
 
-        public int GetBestItemByTag(string tag)
-        {
-            int numberOfBestItem = -1;
-            float bestQuality = 0;
-            for (int i = 0; i < m_SlotNumber; i++)
-            {
-                if (m_slots[i].transform.childCount == 2)
-                {
-                    Equippable item = m_slots[i].gameObject.GetComponentInChildren<Equippable>();
-                    float itemQuality = item.Quality;
-                    if (item.tag == tag && itemQuality > bestQuality)
-                    {
-                        bestQuality = itemQuality;
-                        numberOfBestItem = i;
-                    }
-
-                }
-            }
-
-            Debug.Log(numberOfBestItem);
-            return numberOfBestItem;
-        }
-
-
 
         public void AddItem(Items item)
         {
@@ -94,10 +70,22 @@ namespace EventCallbacks
             {
                 if (m_slots[i].transform.childCount == 2)
                 {
-                    if (item.m_ID == m_slots[i].GetComponent<Slot>().m_item.m_ID)
+                    int hh = item.m_ID;
+                    if (m_slots[i].GetComponent<Slot>() == null)
                     {
-                        m_slots[i].GetComponent<Slot>().SumItemsQuantities(item);
-                        return;
+                        break;
+                    }
+                    else if (m_slots[i].GetComponent<Slot>().m_item == null)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        if (item.m_ID == m_slots[i].GetComponent<Slot>().m_item.m_ID)
+                        {
+                            m_slots[i].GetComponent<Slot>().SumItemsQuantities(item);
+                            return;
+                        }
                     }
                 }
             }
@@ -115,9 +103,9 @@ namespace EventCallbacks
             // TODO no room in inventory
         }
 
-        public void UseItem(int i)
+        public void UseItem(Hero h, int location)
         {
-            // return m_slots[i].GetComponent<Slot>().m_item.Use();
+            m_slots[location].GetComponent<Slot>().m_item.Use(h, location);
         }
 
     }

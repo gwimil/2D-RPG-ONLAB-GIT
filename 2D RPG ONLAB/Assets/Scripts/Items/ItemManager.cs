@@ -12,24 +12,6 @@ namespace EventCallbacks
         public List<Items> m_NormalItems;
 
 
-        // Start is called before the first frame update
-        void Start()
-        {
-            for (int i = 0; i < m_EquippableItems.Count; i++)
-            {
-                m_EquippableItems[i].m_ID = i;
-            }
-
-            for (int i = 0; i < m_Potions.Count; i++)
-            {
-                m_Potions[i].m_ID = i + 100000;
-            }
-
-            for (int i = 0; i < m_NormalItems.Count; i++)
-            {
-                m_NormalItems[i].m_ID = i + 2000000;
-            }
-        }
 
 
         // TODO give an enum parameter to this function
@@ -57,12 +39,43 @@ namespace EventCallbacks
             return items;
         }
 
-        public Items GiveItem(int i)
+    /*    public Items GiveItem(int i)
         {
             if (i < 100000) return m_EquippableItems[i];
-            else if (i < 200000) return m_Potions[i];
-            else return m_NormalItems[i];
+            else if (i < 200000) return m_Potions[i- 100000];
+            else return m_NormalItems[i- 200000];
+        }*/
+
+        public Items ReturnRandomItemsWithMaxLevel(int minLevel, int maxLevel)
+        {
+            Items itemDrop = null;
+            float randomNumber = Random.Range(0.0f, 1.0f);
+            if (randomNumber <= 0.2)
+            {
+                
+                int rand = Random.Range(0, m_Potions.Count);
+                itemDrop = m_Potions[rand];
+            }
+            else
+            {
+                bool foundItem = false;
+                while (!foundItem)
+                {
+                    int rand = Random.Range(0, m_EquippableItems.Count);
+                    float quality = m_EquippableItems[rand].gameObject.GetComponent<Equippable>().Quality;
+                    int qual = (int)quality;
+                    if (qual <= maxLevel && qual >= minLevel)
+                    {
+                        itemDrop = m_EquippableItems[rand];
+                        foundItem = true;
+                    }
+
+                }
+            }
+
+            return itemDrop;
         }
+
 
     }
 }

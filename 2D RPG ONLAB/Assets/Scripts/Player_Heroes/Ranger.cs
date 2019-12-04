@@ -57,8 +57,6 @@ namespace EventCallbacks
                         m_TextCooldownSpellOne.text = ((int)m_SpellOneCooldown).ToString();
                     }
                     break;
-                case 2:
-                    break;
 
                 default: break;
             }

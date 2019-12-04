@@ -20,6 +20,14 @@ TagManager:
   - Hero
   - ItemHolder
   - EnemySpawner
+  - ArenaProjectile
+  - RainFireBall
+  - Bot
+  - PlayerObject
+  - NeuralManager
+  - Neural
+  - Projectile
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -39,11 +47,11 @@ TagManager:
   - Non_CollidableObjects
   - LootBags
   - Teleporter
-  - 
-  - 
-  - 
-  - 
-  - 
+  - ArenaProjectile
+  - PlayerBlocker
+  - EnemyProjectileBlocker
+  - EnemyShooters
+  - NeuralBot
   - 
   - 
   - 

@@ -29,9 +29,24 @@ namespace EventCallbacks
         public int Level;
     }
 
+    public class PlaceFoundEventInfo : EventInfo
+    {
+        public string PlaceName;
+    }
+
     public class MobDeathEventInfo : SpawnerDeathEventInfo
     {
         public Mobs Unit;
+    }
+
+    public class HeroDiedEventInfo : SpawnerDeathEventInfo
+    {
+      public string HeroName;
+    }
+
+  public class MobQuestDoneEventInfo : SpawnerDeathEventInfo
+    {
+        public string MobName;
     }
 
     public class TeleportEventInfo : EventInfo
@@ -45,7 +60,6 @@ namespace EventCallbacks
 
     public class QuestDoneEventInfo : EventInfo
     {
-        public string UnitName;
         public int QuestID;
     }
 }

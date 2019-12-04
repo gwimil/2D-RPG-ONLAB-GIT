@@ -36,21 +36,6 @@ namespace EventCallbacks
             
         }
 
-        override public void Use()
-        {
-
-            //enum for armor types -> switch case
-            // equip the armor
-            //if alreadyequipped -> change slot
-            //if no armor equipped -> equip
-
-
-
-        }
-        override public void Drop()
-        {
-            // drops the armor to the players location
-        }
 
     }
 }
