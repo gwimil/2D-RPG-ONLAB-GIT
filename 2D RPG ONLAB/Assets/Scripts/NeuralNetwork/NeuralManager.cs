@@ -98,8 +98,7 @@ public class NeuralManager : MonoBehaviour
     {
         
         Instantiate(m_Mage, new Vector3(this.transform.position.x - 6, this.transform.position.y, 0),Quaternion.Euler(0,0,0));
-        GameObject bot = Instantiate(m_Bot, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.Euler(0, 0, 0));
-       // bot.GetComponent<Bot>().attackNeuralNetwork = m_Bot.GetComponent<Bot>().attackNeuralNetwork;
+        GameObject bot = Instantiate(m_Bot, new Vector3(this.transform.position.x + 6, this.transform.position.y, 0), Quaternion.Euler(0, 0, 0));
         bot.GetComponent<Bot>().attackNeuralNetwork = new NeuralNetworkBProp(m_Bot.GetComponent<Bot>().attackNeuralNetwork);
         bot.GetComponent<Bot>().dodgeNeuralNetwork = new NeuralNetwork(m_Bot.GetComponent<Bot>().dodgeNeuralNetwork);
         bot.GetComponent<Bot>().fight = true;

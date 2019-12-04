@@ -336,7 +336,7 @@ public class Bot : MonoBehaviour
             float left = 0;
 
             GameObject[] projectiles = GameObject.FindGameObjectsWithTag("PlayerProjectile");
-           // GameObject heroobj = GameObject.FindGameObjectWithTag("Hero");
+            GameObject heroobj = GameObject.FindGameObjectWithTag("Hero");
             GameObject closestProjectile = null;
             float closestDistance = Mathf.Sqrt(sizeOfArena * sizeOfArena + sizeOfArena * sizeOfArena);
             if (projectiles.Length != 0)
@@ -359,12 +359,12 @@ public class Bot : MonoBehaviour
                     }
                 }
             }
-        /*   float heroDistance = Vector2.Distance(heroobj.transform.position, this.transform.position);
+           float heroDistance = Vector2.Distance(heroobj.transform.position, this.transform.position);
             if (closestDistance > heroDistance)
             {
                 closestDistance = heroDistance;
                 closestProjectile = heroobj;
-            }*/
+            }
 
 
             float rightWallDistance = Vector2.Distance(this.transform.position, new Vector2(sizeOfArena / 2, this.transform.position.y));
