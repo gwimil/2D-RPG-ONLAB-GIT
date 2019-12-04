@@ -63,14 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\FontSwitcher.cs" />
-<<<<<<< HEAD
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/git repos/LegujabbSzakdolg/2D RPG ONLAB/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/git repos/LegujabbSzakdolg/2D RPG ONLAB/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
-    </Reference>
-=======
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>C:/git repos/LegujabbSzakdolg/2D RPG ONLAB/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>
@@ -119,17 +111,12 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/git repos/LegujabbSzakdolg/2D RPG ONLAB/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
->>>>>>> RecreatorBranch
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/git repos/LegujabbSzakdolg/2D RPG ONLAB/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
       <HintPath>C:/git repos/LegujabbSzakdolg/2D RPG ONLAB/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
-<<<<<<< HEAD
-    <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/git repos/LegujabbSzakdolg/2D RPG ONLAB/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
-=======
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
       <HintPath>C:/git repos/LegujabbSzakdolg/2D RPG ONLAB/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
@@ -138,7 +125,6 @@
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Runtime">
       <HintPath>C:/git repos/LegujabbSzakdolg/2D RPG ONLAB/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
->>>>>>> RecreatorBranch
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -336,21 +322,6 @@
       <HintPath>C:/git repos/LegujabbSzakdolg/2D RPG ONLAB/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-<<<<<<< HEAD
-      <HintPath>C:/git repos/LegujabbSzakdolg/2D RPG ONLAB/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>C:/git repos/LegujabbSzakdolg/2D RPG ONLAB/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>C:/git repos/LegujabbSzakdolg/2D RPG ONLAB/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>C:/git repos/LegujabbSzakdolg/2D RPG ONLAB/Library/PackageCache/com.unity.purchasing@2.0.3/UnityEngine.Purchasing.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Purchasing">
-      <HintPath>C:/git repos/LegujabbSzakdolg/2D RPG ONLAB/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
-=======
       <HintPath>C:/git repos/LegujabbSzakdolg/2D RPG ONLAB/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
@@ -364,7 +335,6 @@
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>C:/git repos/LegujabbSzakdolg/2D RPG ONLAB/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
->>>>>>> RecreatorBranch
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.6f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
