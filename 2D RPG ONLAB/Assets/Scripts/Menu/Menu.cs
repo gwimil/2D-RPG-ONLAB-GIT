@@ -104,7 +104,7 @@ public class Menu : MonoBehaviour
 
 
         m_PVP.gameObject.SetActive(true);
-     //   m_Train.gameObject.SetActive(true);
+        m_Train.gameObject.SetActive(true);
 
 
     }
@@ -130,6 +130,9 @@ public class Menu : MonoBehaviour
         m_PlayerNumber1.gameObject.SetActive(false);
         m_PlayerNumber2.gameObject.SetActive(false);
         m_PlayerNumber3.gameObject.SetActive(false);
+
+        m_PVP.gameObject.SetActive(false);
+        m_Train.gameObject.SetActive(false);
 
         m_ChooseHeroText.gameObject.SetActive(false);
         m_WarriorHero.SetActive(false);
@@ -255,7 +258,7 @@ public class Menu : MonoBehaviour
 
     void ClickOnTrain()
     {
-
+        SceneManager.LoadScene("Trainer", LoadSceneMode.Single);
     }
 
 }

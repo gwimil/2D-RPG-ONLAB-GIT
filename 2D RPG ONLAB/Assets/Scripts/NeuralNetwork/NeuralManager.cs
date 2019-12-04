@@ -89,7 +89,7 @@ public class NeuralManager : MonoBehaviour
         RespawnTestHero();
         GameObject bot = Instantiate(m_Bot, transform.position, Quaternion.Euler(0, 0, 0));
         bot.GetComponent<Bot>().attack = true;
-        bot.GetComponent<Bot>().attackNeuralNetwork = m_Bot.GetComponent<Bot>().attackNeuralNetwork;
+        bot.GetComponent<Bot>().attackNeuralNetwork = new NeuralNetworkBProp(m_Bot.GetComponent<Bot>().attackNeuralNetwork);
         m_MenuCanvas.gameObject.SetActive(false);
         m_BackCanvas.gameObject.SetActive(true);
 
@@ -98,7 +98,7 @@ public class NeuralManager : MonoBehaviour
     {
         
         Instantiate(m_Mage, new Vector3(this.transform.position.x - 6, this.transform.position.y, 0),Quaternion.Euler(0,0,0));
-        GameObject bot = Instantiate(m_Bot, new Vector3(this.transform.position.x + 6, this.transform.position.y, 0), Quaternion.Euler(0, 0, 0));
+        GameObject bot = Instantiate(m_Bot, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.Euler(0, 0, 0));
        // bot.GetComponent<Bot>().attackNeuralNetwork = m_Bot.GetComponent<Bot>().attackNeuralNetwork;
         bot.GetComponent<Bot>().attackNeuralNetwork = new NeuralNetworkBProp(m_Bot.GetComponent<Bot>().attackNeuralNetwork);
         bot.GetComponent<Bot>().dodgeNeuralNetwork = new NeuralNetwork(m_Bot.GetComponent<Bot>().dodgeNeuralNetwork);
@@ -118,12 +118,13 @@ public class NeuralManager : MonoBehaviour
     {
         if (isAttack)
         {
+            isAttack = false;
             GameObject neural = GameObject.FindGameObjectWithTag("Neural");
             GameObject hero = GameObject.FindGameObjectWithTag("Hero");
             GameObject proj = GameObject.FindGameObjectWithTag("EnemyProjectile");
             if (neural != null)
             {
-                m_Bot.GetComponent<Bot>().attackNeuralNetwork = neural.GetComponent<Bot>().attackNeuralNetwork;
+                m_Bot.GetComponent<Bot>().attackNeuralNetwork = new NeuralNetworkBProp(neural.GetComponent<Bot>().attackNeuralNetwork);
                 Destroy(neural.gameObject);
             }
             if (hero != null)
@@ -140,6 +141,7 @@ public class NeuralManager : MonoBehaviour
         }
         if (isDodge)
         {
+            isDodge = false;
             dodgeStarted = false;
             
             CancelInvoke();
@@ -255,7 +257,11 @@ public class NeuralManager : MonoBehaviour
         Vector2 movement = new Vector2(moveX, moveY);
         Vector2 normalizedMovement = movement.normalized;
         GameObject tHero = Instantiate(m_TestHero, new Vector3(x, y, 0), Quaternion.Euler(0, 0, 0));
-
+        float random = Random.Range(0.0f, 1.0f);
+        if (random < 0.1f)
+        {
+            normalizedMovement = new Vector2(0.0f, 0.0f);
+        }
         tHero.GetComponent<TestHero>().normalizedVelicoty = normalizedMovement;
     }
 
@@ -292,10 +298,10 @@ public class NeuralManager : MonoBehaviour
     {
         float distance = 0;
         float x = 0, y = 0;
-        while (15 > distance)
+        while (12 > distance)
         {
-            x = Random.Range(-20, 20);
-            y = Random.Range(-20, 20);
+            x = Random.Range(-16, 16);
+            y = Random.Range(-16, 16);
             distance = Vector2.Distance(new Vector2(0, 0), new Vector2(x, y));
         }
         GameObject projectile = Instantiate(m_TestPorjectilesToDodge, new Vector3(x, y, 0), Quaternion.Euler(0, 0, 90));
