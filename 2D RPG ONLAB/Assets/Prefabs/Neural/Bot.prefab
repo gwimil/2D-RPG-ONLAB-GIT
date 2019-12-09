@@ -156,7 +156,8 @@ MonoBehaviour:
   waitingForAttackToReach: 0
   canAttack: 0
   cooldownInSec: 0
-  sizeOfArena: 14
+  sizeOfArena: 15.4
+  m_WallDistance: 2
 --- !u!1 &5093290364568893038
 GameObject:
   m_ObjectHideFlags: 0

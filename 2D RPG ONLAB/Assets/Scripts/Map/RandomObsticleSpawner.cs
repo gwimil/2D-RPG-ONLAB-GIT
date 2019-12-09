@@ -18,10 +18,7 @@ public class RandomObsticleSpawner : MonoBehaviour
         {
             float x = Random.Range(-m_SpawnRadius, m_SpawnRadius);
             float y = Random.Range(-m_SpawnRadius, m_SpawnRadius);
-
-
             Instantiate(m_ObjectToSpawn, new Vector3(this.transform.position.x + x, this.transform.position.y + y, 0), transform.rotation, gameObject.transform);
-
         }
 
     }

@@ -131,7 +131,6 @@ namespace EventCallbacks
     {
       if (m_SpellOneCooldown > spellOneCooldownATM) spellOneCooldownATM++;
       if (spellOneCooldownATM > m_SpellOneCooldown) spellOneCooldownATM = m_SpellOneCooldown;
-      // TODO the the spell cooldown will shorten 0-1 sec depending on when we press it, FIX IT
       if (m_MaxMana >= m_CurrentMana) m_CurrentMana += m_ManaRegen;
       if (m_CurrentMana > m_MaxMana) m_CurrentMana = m_MaxMana;
       if (m_MaxHP >= m_CurrentHP) m_CurrentHP += m_ManaRegen;
@@ -257,7 +256,6 @@ namespace EventCallbacks
 
       switch (currentItem.tag)
       {
-        //CHECK IF QUANTITY >1 THEN OTHER THINGS HAPPEN
         case "Helmet":
           EquipItemByLocation(i, m_HelmetSlot);
           break;

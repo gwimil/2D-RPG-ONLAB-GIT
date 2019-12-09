@@ -31,30 +31,30 @@ public class NeuralNetworkBProp
     }
   }
 
-    public NeuralNetworkBProp(NeuralNetworkBProp copyNetwork)
+  public NeuralNetworkBProp(NeuralNetworkBProp copyNetwork)
+  {
+    //deep copy layers
+    this.layer = new int[copyNetwork.layer.Length];
+    for (int i = 0; i < copyNetwork.layer.Length; i++)
     {
-        //deep copy layers
-        this.layer = new int[copyNetwork.layer.Length];
-        for (int i = 0; i < copyNetwork.layer.Length; i++)
-        {
-            this.layer[i] = copyNetwork.layer[i];
-        }
-
-        //creates neural layers
-        layers = new Layer[copyNetwork.layer.Length - 1];
-
-        for (int i = 0; i < copyNetwork.layers.Length; i++)
-        {
-            layers[i] = new Layer(copyNetwork.layers[i]);
-        }
+      this.layer[i] = copyNetwork.layer[i];
     }
 
-    /// <summary>
-    /// High level feedforward for this network
-    /// </summary>
-    /// <param name="inputs">Inputs to be feed forwared</param>
-    /// <returns></returns>
-    public float[] FeedForward(float[] inputs)
+    //creates neural layers
+    layers = new Layer[copyNetwork.layer.Length - 1];
+
+    for (int i = 0; i < copyNetwork.layers.Length; i++)
+    {
+      layers[i] = new Layer(copyNetwork.layers[i]);
+    }
+  }
+
+  /// <summary>
+  /// High level feedforward for this network
+  /// </summary>
+  /// <param name="inputs">Inputs to be feed forwared</param>
+  /// <returns></returns>
+  public float[] FeedForward(float[] inputs)
   {
     //feed forward
     layers[0].FeedForward(inputs);
@@ -62,8 +62,6 @@ public class NeuralNetworkBProp
     {
       layers[i].FeedForward(layers[i - 1].outputs);
     }
-
-
     return layers[layers.Length - 1].outputs; //return output of last layer
   }
 
@@ -75,26 +73,21 @@ public class NeuralNetworkBProp
   /// <param name="expected">The expected output form the last feedforward</param>
   public void BackProp(float[] expected)
   {
-
-    // run over all layers backwards
     for (int i = layers.Length - 1; i >= 0; i--)
     {
       if (i == layers.Length - 1)
       {
-        layers[i].BackPropOutput(expected); //back prop output
+        layers[i].BackPropOutput(expected);
       }
       else
       {
-        layers[i].BackPropHidden(layers[i + 1].gamma, layers[i + 1].weights);//back prop hidden
+        layers[i].BackPropHidden(layers[i + 1].gamma, layers[i + 1].weights);
       }
     }
-
-    //Update weights
     for (int i = 0; i < layers.Length; i++)
     {
       layers[i].UpdateWeights();
     }
-
   }
 
 
@@ -105,17 +98,15 @@ public class NeuralNetworkBProp
   public class Layer
   {
 
-    float learningRate = 0.0392699f;
-
+    float learningRate = 0.0392699f; // learning rate
     int numberOfInputs;  //# of neurons in previous layer
     int numberOfOutputs; //# of neurons in the current layer
-
-    public float[] outputs;
-    public float[] inputs;
-    public float[,] weights;
-    public float[,] weightsDelta;
-    public float[] gamma;
-    public float[] error;
+    public float[] outputs; //last outputs of the layer
+    public float[] inputs; //last inputs of the layer
+    public float[,] weights; // current weights of the layer
+    public float[,] weightsDelta; // calculated weights we use calculate the new current weights
+    public float[] gamma; // gamma calculated from error and the gamma formula
+    public float[] error; // difference between expected output and output of the layer
 
 
     /// <summary>
@@ -140,17 +131,17 @@ public class NeuralNetworkBProp
 
     public Layer(Layer copyLayer)
     {
-        this.numberOfInputs = copyLayer.numberOfInputs;
-        this.numberOfOutputs = copyLayer.numberOfOutputs;
+      this.numberOfInputs = copyLayer.numberOfInputs;
+      this.numberOfOutputs = copyLayer.numberOfOutputs;
 
-        outputs = new float[numberOfOutputs];
-        inputs = new float[numberOfInputs];
-        weights = new float[numberOfOutputs, numberOfInputs];
-        weightsDelta = new float[numberOfOutputs, numberOfInputs];
-        gamma = new float[numberOfOutputs];
-        error = new float[numberOfOutputs];
-        CopyWeights(copyLayer);
-        InitilizeWeights();
+      outputs = new float[numberOfOutputs];
+      inputs = new float[numberOfInputs];
+      weights = new float[numberOfOutputs, numberOfInputs];
+      weightsDelta = new float[numberOfOutputs, numberOfInputs];
+      gamma = new float[numberOfOutputs];
+      error = new float[numberOfOutputs];
+      CopyWeights(copyLayer);
+      //InitilizeWeights();
     }
 
 
@@ -159,25 +150,25 @@ public class NeuralNetworkBProp
     /// </summary>
     public void InitilizeWeights()
     {
-            for (int i = 0; i < numberOfOutputs; i++)
-            {
-                for (int j = 0; j < numberOfInputs; j++)
-                {
-                    this.weights[i, j] = UnityEngine.Random.Range(-0.5f, 0.5f);
-                }
-            }
+      for (int i = 0; i < numberOfOutputs; i++)
+      {
+        for (int j = 0; j < numberOfInputs; j++)
+        {
+          this.weights[i, j] = UnityEngine.Random.Range(-0.5f, 0.5f);
+        }
+      }
     }
 
 
     public void CopyWeights(Layer copyLayer)
     {
-        for (int i = 0; i < numberOfOutputs; i++)
+      for (int i = 0; i < numberOfOutputs; i++)
+      {
+        for (int j = 0; j < numberOfInputs; j++)
         {
-            for (int j = 0; j < numberOfInputs; j++)
-            {
-                this.weights[i, j] = copyLayer.weights[i, j];
-            }
+          this.weights[i, j] = copyLayer.weights[i, j];
         }
+      }
     }
 
     /// <summary>
@@ -188,7 +179,6 @@ public class NeuralNetworkBProp
     public float[] FeedForward(float[] inputs)
     {
       this.inputs = inputs; // keep shallow copy which can be used for back propagation
-
       for (int i = 0; i < numberOfOutputs; i++)
       {
         outputs[i] = 0;
@@ -199,7 +189,6 @@ public class NeuralNetworkBProp
 
         outputs[i] = (float)Math.Tanh(outputs[i]);
       }
-
       return outputs;
     }
 
@@ -223,18 +212,14 @@ public class NeuralNetworkBProp
     /// <param name="expected">The expected output</param>
     public void BackPropOutput(float[] expected)
     {
-      //Error dervative of the cost function
       for (int i = 0; i < numberOfOutputs; i++)
       {
         error[i] = outputs[i] - expected[i];
       }
-      //Gamma calculation
       for (int i = 0; i < numberOfOutputs; i++)
       {
         gamma[i] = error[i] * TanHDer(outputs[i]); // gamma formula
       }
-
-      //Caluclating detla weights
       for (int i = 0; i < numberOfOutputs; i++)
       {
         for (int j = 0; j < numberOfInputs; j++)
@@ -242,7 +227,6 @@ public class NeuralNetworkBProp
           weightsDelta[i, j] = gamma[i] * inputs[j];
         }
       }
-
     }
 
     /// <summary>
@@ -252,8 +236,6 @@ public class NeuralNetworkBProp
     /// <param name="weightsFoward">the weights of the forward layer</param>
     public void BackPropHidden(float[] gammaForward, float[,] weightsForward)
     {
-
-      //Caluclate new gamma using gamma sums of the forward layer
       for (int i = 0; i < numberOfOutputs; i++)
       {
         gamma[i] = 0;
@@ -265,8 +247,6 @@ public class NeuralNetworkBProp
 
         gamma[i] *= TanHDer(outputs[i]);
       }
-
-      //Caluclating detla weights
       for (int i = 0; i < numberOfOutputs; i++)
       {
         for (int j = 0; j < numberOfInputs; j++)
