@@ -131,26 +131,31 @@ public class NeuralNetwork
         for (int k = 0; k < weights[i][j].Length; k++)
         {
           float weight = weights[i][j][k];
-
           float randomNumber = UnityEngine.Random.Range(0.0f, 1.0f) * 1000f;
-
-          if (randomNumber <= 2f)
+          float chanceToMutate = 10.0f;
+          if (randomNumber <= chanceToMutate)
           {
-            weight *= -1f;
-          }
-          else if (randomNumber <= 4f)
-          {
-            weight = UnityEngine.Random.Range(-0.5f, 0.5f);
-          }
-          else if (randomNumber <= 6f)
-          {
-            float factor = UnityEngine.Random.Range(0f, 1f) + 1f;
-            weight *= factor;
-          }
-          else if (randomNumber <= 8f)
-          {
-            float factor = UnityEngine.Random.Range(0f, 1f);
-            weight *= factor;
+            int mutateType = UnityEngine.Random.Range(0, 5);
+            switch (mutateType)
+            {
+              case 0:
+                weight *= -1f;
+                break;
+              case 1:
+                weight = UnityEngine.Random.Range(-0.5f, 0.5f);
+                break;
+              case 2:
+                float factor = UnityEngine.Random.Range(0f, 1.5f) + 1f;
+                weight *= factor;
+                break;
+              case 3:
+                float factor2 = UnityEngine.Random.Range(-0.5f, 1f);
+                weight *= factor2;
+                break;
+              case 4:
+                weight *= 1.392699f;
+                break;
+            }
           }
           weights[i][j][k] = weight;
         }
