@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 
 
-/// <summary>
-/// Neural Network C#
-/// </summary>
 public class NeuralNetwork
 {
 
@@ -54,9 +51,6 @@ public class NeuralNetwork
   }
 
 
-  /// <summary>
-  /// Create neuron matrix
-  /// </summary>
   private void InitNeurons()
   {
     // Neuron init
@@ -71,9 +65,6 @@ public class NeuralNetwork
   }
 
 
-  /// <summary>
-  /// Create weight matrix
-  /// </summary>
   private void InitWeights()
   {
     List<float[][]> weightList = new List<float[][]>();

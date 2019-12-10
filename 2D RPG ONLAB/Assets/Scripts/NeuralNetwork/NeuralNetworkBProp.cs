@@ -1,18 +1,11 @@
 ﻿using System;
 
-/// <summary>
-/// Simple MLP Neural Network
-/// </summary>
 public class NeuralNetworkBProp
 {
 
   int[] layer; //layer information
   Layer[] layers; //layers in the network
 
-  /// <summary>
-  /// Constructor setting up layers
-  /// </summary>
-  /// <param name="layer">Layers of this network</param>
   public NeuralNetworkBProp(int[] layer)
   {
     //deep copy layers
@@ -49,11 +42,6 @@ public class NeuralNetworkBProp
     }
   }
 
-  /// <summary>
-  /// High level feedforward for this network
-  /// </summary>
-  /// <param name="inputs">Inputs to be feed forwared</param>
-  /// <returns></returns>
   public float[] FeedForward(float[] inputs)
   {
     //feed forward
@@ -66,11 +54,6 @@ public class NeuralNetworkBProp
   }
 
 
-  /// <summary>
-  /// High level back porpagation
-  /// Note: It is expexted the one feed forward was done before this back prop.
-  /// </summary>
-  /// <param name="expected">The expected output form the last feedforward</param>
   public void BackProp(float[] expected)
   {
     for (int i = layers.Length - 1; i >= 0; i--)
@@ -91,14 +74,10 @@ public class NeuralNetworkBProp
   }
 
 
-
-  /// <summary>
-  /// Each individual layer in the ML{
-  /// </summary>
   public class Layer
   {
 
-    float learningRate = 0.0392699f; // learning rate
+    float learningRate = 0.05f; // learning rate
     int numberOfInputs;  //# of neurons in previous layer
     int numberOfOutputs; //# of neurons in the current layer
     public float[] outputs; //last outputs of the layer
@@ -109,11 +88,6 @@ public class NeuralNetworkBProp
     public float[] error; // difference between expected output and output of the layer
 
 
-    /// <summary>
-    /// Constructor initilizes vaiour data structures
-    /// </summary>
-    /// <param name="numberOfInputs">Number of neurons in the previous layer</param>
-    /// <param name="numberOfOuputs">Number of neurons in the current layer</param>
     public Layer(int numberOfInputs, int numberOfOutputs)
     {
       this.numberOfInputs = numberOfInputs;
@@ -145,9 +119,6 @@ public class NeuralNetworkBProp
     }
 
 
-    /// <summary>
-    /// Initilize weights between -0.5 and 0.5
-    /// </summary>
     public void InitilizeWeights()
     {
       for (int i = 0; i < numberOfOutputs; i++)
@@ -171,11 +142,6 @@ public class NeuralNetworkBProp
       }
     }
 
-    /// <summary>
-    /// Feedforward this layer with a given input
-    /// </summary>
-    /// <param name="inputs">The output values of the previous layer</param>
-    /// <returns></returns>
     public float[] FeedForward(float[] inputs)
     {
       this.inputs = inputs; // keep shallow copy which can be used for back propagation
@@ -193,23 +159,12 @@ public class NeuralNetworkBProp
     }
 
 
-    /// <summary>
-    /// Return the derived of the TanH of a value
-    /// </summary>
-    /// <param name="value"></param>
-    /// <returns></returns>
     public float TanHDer(float value)
     {
       return 1 - (value * value);
     }
 
 
-    /// <summary>
-    /// Back propagation for the output layer
-    /// If the layer is outputlayer we call this
-    /// If we care about only to train the outputlayer then we only run this
-    /// </summary>
-    /// <param name="expected">The expected output</param>
     public void BackPropOutput(float[] expected)
     {
       for (int i = 0; i < numberOfOutputs; i++)
@@ -229,11 +184,6 @@ public class NeuralNetworkBProp
       }
     }
 
-    /// <summary>
-    /// Back propagation for the hidden layers
-    /// </summary>
-    /// <param name="gammaForward">the gamma value of the forward layer</param>
-    /// <param name="weightsFoward">the weights of the forward layer</param>
     public void BackPropHidden(float[] gammaForward, float[,] weightsForward)
     {
       for (int i = 0; i < numberOfOutputs; i++)
@@ -257,9 +207,6 @@ public class NeuralNetworkBProp
     }
 
 
-    /// <summary>
-    /// Updating weights
-    /// </summary>
     public void UpdateWeights()
     {
       for (int i = 0; i < numberOfOutputs; i++)
